@@ -1,5 +1,7 @@
-﻿using Prism.Unity;
+﻿using MeetAndGoMobile.Modules.LoginModule;
+using Prism.Unity;
 using MeetAndGoMobile.Views;
+using Prism.Modularity;
 using Xamarin.Forms;
 
 namespace MeetAndGoMobile
@@ -19,6 +21,13 @@ namespace MeetAndGoMobile
         {
             Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
+        }
+
+        protected override void ConfigureModuleCatalog()
+        {
+            base.ConfigureModuleCatalog();
+
+            ModuleCatalog.AddModule(new ModuleInfo(nameof(LoginModule), typeof(LoginModule), InitializationMode.OnDemand));
         }
     }
 }
