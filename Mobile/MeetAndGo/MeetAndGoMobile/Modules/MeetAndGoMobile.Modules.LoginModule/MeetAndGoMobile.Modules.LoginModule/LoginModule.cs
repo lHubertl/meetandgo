@@ -19,6 +19,8 @@ namespace MeetAndGoMobile.Modules.LoginModule
         public void Initialize()
         {
             _unityContainer.RegisterTypeForNavigation<LoginPage>();
+            _unityContainer.RegisterTypeForNavigation<SignInPage>();
+            _unityContainer.RegisterTypeForNavigation<SignUpPage>();
 
             _unityContainer.RegisterType<ILoginManager, LoginManager>();
             _unityContainer.RegisterType<ILoginService, LoginService>();

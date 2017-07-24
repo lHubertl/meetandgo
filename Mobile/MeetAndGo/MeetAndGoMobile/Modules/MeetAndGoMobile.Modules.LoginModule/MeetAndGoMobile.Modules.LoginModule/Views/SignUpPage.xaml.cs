@@ -2,12 +2,11 @@
 
 namespace MeetAndGoMobile.Modules.LoginModule.Views
 {
-    public partial class LoginPage
+    public partial class SignUpPage
     {
-        public LoginPage()
+        public SignUpPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
