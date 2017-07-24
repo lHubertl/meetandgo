@@ -7,6 +7,7 @@ namespace MeetAndGoMobile.Modules.LoginModule.Views
         public LoginPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

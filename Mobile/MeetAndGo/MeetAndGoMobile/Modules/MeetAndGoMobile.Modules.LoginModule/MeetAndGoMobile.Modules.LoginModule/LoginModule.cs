@@ -1,4 +1,6 @@
-﻿using MeetAndGoMobile.Modules.LoginModule.Views;
+﻿using MeetAndGoMobile.Modules.LoginModule.Business.Managers;
+using MeetAndGoMobile.Modules.LoginModule.Business.Services;
+using MeetAndGoMobile.Modules.LoginModule.Views;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Unity;
@@ -17,6 +19,9 @@ namespace MeetAndGoMobile.Modules.LoginModule
         public void Initialize()
         {
             _unityContainer.RegisterTypeForNavigation<LoginPage>();
+
+            _unityContainer.RegisterType<ILoginManager, LoginManager>();
+            _unityContainer.RegisterType<ILoginService, LoginService>();
         }
     }
 }
