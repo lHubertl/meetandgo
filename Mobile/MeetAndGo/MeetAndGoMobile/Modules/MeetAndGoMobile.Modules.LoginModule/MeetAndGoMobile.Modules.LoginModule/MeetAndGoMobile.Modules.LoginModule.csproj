@@ -93,6 +93,12 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MeetAndGoMobile.Common\MeetAndGoMobile.Common\MeetAndGoMobile.Common.csproj">
+      <Project>{889087d9-b906-4125-8045-a3c55c69154e}</Project>
+      <Name>MeetAndGoMobile.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Views\SignInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>

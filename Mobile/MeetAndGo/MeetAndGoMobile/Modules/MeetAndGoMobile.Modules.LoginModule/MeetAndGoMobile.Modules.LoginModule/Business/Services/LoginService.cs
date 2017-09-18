@@ -1,4 +1,6 @@
-﻿namespace MeetAndGoMobile.Modules.LoginModule.Business.Services
+﻿using MeetAndGoMobile.Common;
+
+namespace MeetAndGoMobile.Modules.LoginModule.Business.Services
 {
     public class LoginService : ILoginService
     {
