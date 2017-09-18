@@ -94,10 +94,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MeetAndGoMobile.Common\MeetAndGoMobile.Common\MeetAndGoMobile.Common.csproj">
-      <Project>{889087d9-b906-4125-8045-a3c55c69154e}</Project>
-      <Name>MeetAndGoMobile.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Modules\MeetAndGoMobile.Modules.LoginModule\MeetAndGoMobile.Modules.LoginModule\MeetAndGoMobile.Modules.LoginModule.csproj">
       <Project>{da7cdfe8-366f-4b37-bb8f-57dd6cc83f38}</Project>
       <Name>MeetAndGoMobile.Modules.LoginModule</Name>
