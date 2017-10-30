@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace MeetAndGoMobile.Views
+namespace MeetAndGoMobile.Modules.MainModule.Views
 {
     public partial class MainPage : ContentPage
     {

@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dependencies\FileHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -128,6 +129,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MeetAndGoMobile.Common\MeetAndGoMobile.Common\MeetAndGoMobile.Common.csproj">
+      <Project>{889087D9-B906-4125-8045-A3C55C69154E}</Project>
+      <Name>MeetAndGoMobile.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeetAndGoMobile\MeetAndGoMobile.csproj">
       <Name>MeetAndGoMobile</Name>
     </ProjectReference>

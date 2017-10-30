@@ -21,7 +21,7 @@ namespace MeetAndGoMobile.Modules.LoginModule.ViewModels
         private async void ExecuteSignInCommand()
         {
             await _navigationService.NavigateAsync("SignUpPage");
-            //await _navigationService.NavigateAsync(new Uri("app:///SmartNavigationPage/MainPage", UriKind.Absolute));
+            await _navigationService.NavigateAsync(new Uri($"app:///SmartNavigationPage/MainPage", UriKind.Absolute));
         }
     }
 }

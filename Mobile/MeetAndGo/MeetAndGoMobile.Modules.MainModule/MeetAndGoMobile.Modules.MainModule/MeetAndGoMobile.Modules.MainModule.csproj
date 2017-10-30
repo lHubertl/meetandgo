@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F57D766B-B0C3-4FDE-AD74-8B4DF7BF123F}</ProjectGuid>
+    <ProjectGuid>{9FC444EB-BFE1-4712-A368-7CA4675632D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MeetAndGoMobile</RootNamespace>
-    <AssemblyName>MeetAndGoMobile</AssemblyName>
+    <RootNamespace>MeetAndGoMobile.Modules.MainModule</RootNamespace>
+    <AssemblyName>MeetAndGoMobile.Modules.MainModule</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -35,23 +35,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\SmartMasterDetailPageViewModel.cs" />
-    <Compile Include="ViewModels\SmartNavigationPageViewModel.cs" />
-    <Compile Include="Views\SmartMasterDetailPage.xaml.cs">
-      <DependentUpon>SmartMasterDetailPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SmartNavigationPage.xaml.cs">
-      <DependentUpon>SmartNavigationPage.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -83,24 +71,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\MeetAndGoMobile.Common\MeetAndGoMobile.Common\MeetAndGoMobile.Common.csproj">
-      <Project>{889087d9-b906-4125-8045-a3c55c69154e}</Project>
-      <Name>MeetAndGoMobile.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modules\MeetAndGoMobile.Modules.LoginModule\MeetAndGoMobile.Modules.LoginModule\MeetAndGoMobile.Modules.LoginModule.csproj">
-      <Project>{da7cdfe8-366f-4b37-bb8f-57dd6cc83f38}</Project>
-      <Name>MeetAndGoMobile.Modules.LoginModule</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\SmartNavigationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\SmartMasterDetailPage.xaml">
+    <EmbeddedResource Include="Views\MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
