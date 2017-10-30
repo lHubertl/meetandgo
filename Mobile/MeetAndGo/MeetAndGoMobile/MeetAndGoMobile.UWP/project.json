@@ -7,7 +7,7 @@
     "Prism.Unity.Forms": "6.3.0",
     "sqlite-net-pcl": "1.4.118",
     "Unity": "4.0.1",
-    "Xamarin.Forms": "2.3.3.193"
+    "Xamarin.Forms": "2.4.0.18342"
   },
   "frameworks": {
     "uap10.0.10586": {}

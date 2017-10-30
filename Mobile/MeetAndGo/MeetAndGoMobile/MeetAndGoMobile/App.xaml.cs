@@ -1,25 +1,31 @@
 ﻿using System.Threading.Tasks;
-using MeetAndGoMobile.Modules.LoginModule;
 using Prism.Unity;
 using MeetAndGoMobile.Views;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
-using Xamarin.Forms;
+using MeetAndGoMobile.Modules.LoginModule;
+using MeetAndGoMobile.Modules.LoginModule.Views;
+using MeetAndGoMobile.Modules.MeetingModule;
+using MeetAndGoMobile.Modules.MeetingModule.Views;
 
 namespace MeetAndGoMobile
 {
     public partial class App : PrismApplication
     {
+        private IModuleManager _moduleManager;
+
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             InitializeComponent();
+
+            _moduleManager = Container.Resolve<IModuleManager>();
+            await NavigateToLoginPageAsync();
         }
 
         protected override void RegisterTypes()
         {
-            Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<SmartNavigationPage>();
             Container.RegisterTypeForNavigation<SmartMasterDetailPage>();
         }
@@ -29,37 +35,19 @@ namespace MeetAndGoMobile
             base.ConfigureModuleCatalog();
 
             ModuleCatalog.AddModule(new ModuleInfo(nameof(LoginModule), typeof(LoginModule), InitializationMode.OnDemand));
-        }
-
-        protected override async void OnStart()
-        {
-            base.OnStart();
-
-            await NavigateToLoginPageAsync();
-
-            //await NavigateToMainPageAsync();
-        }
-
-        protected override void OnSleep()
-        {
-            base.OnSleep();
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
+            ModuleCatalog.AddModule(new ModuleInfo(nameof(MeetingModule), typeof(MeetingModule), InitializationMode.OnDemand));
         }
 
         private async Task NavigateToLoginPageAsync()
         {
-            Container.Resolve<IModuleManager>().LoadModule("LoginModule");
-            await NavigationService.NavigateAsync("SmartNavigationPage/LoginPage");
+            _moduleManager.LoadModule(nameof(LoginModule));
+            await NavigationService.NavigateAsync($"{nameof(SmartNavigationPage)}/{nameof(LoginPage)}");
         }
 
-        private async Task NavigateToMainPageAsync()
+        private async Task NavigateToMeetingPageAsync()
         {
-            Container.Resolve<IModuleManager>().LoadModule("MainModule");
-            await NavigationService.NavigateAsync("SmartNavigationPage/MainPage");
+            _moduleManager.LoadModule(nameof(MeetingModule));
+            await NavigationService.NavigateAsync($"{nameof(SmartNavigationPage)}/{nameof(MeetingPage)}");
         }
     }
 }

@@ -7,11 +7,11 @@ using Xamarin.Forms.Xaml;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MeetAndGoMobile.Modules.MainModule")]
+[assembly: AssemblyTitle("LoginModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MeetAndGoMobile.Modules.MainModule")]
+[assembly: AssemblyProduct("LoginModule")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
