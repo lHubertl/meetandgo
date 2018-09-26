@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace MeetAndGoApi.Controllers
     public class EventController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<EventModel> Get()
+        public IResponseData<IEnumerable<EventModel>> Get()
         {
-            return new[] {new EventModel {Transport = Transports.Taxi}};
+            return new ResponseData<IEnumerable<EventModel>>(new[] {new EventModel {Transport = Transports.Taxi}}, ResponseCode.Ok);
         }
     }
 }

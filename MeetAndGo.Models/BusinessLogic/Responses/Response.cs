@@ -4,13 +4,13 @@
     {
         public bool IsSuccess => Code == ResponseCode.Ok;
 
-        public string ErrorMessage { get; set; }
+        public string Message { get; set; }
 
         public ResponseCode Code { get; set; }
 
         public Response(ResponseCode code, string message = null)
         {
-            ErrorMessage = message;
+            Message = message;
             Code = code;
         }
     }
