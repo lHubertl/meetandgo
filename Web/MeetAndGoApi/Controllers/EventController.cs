@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using MeetAndGo.Shared.Enums;
+using MeetAndGo.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeetAndGoApi.Controllers
@@ -11,6 +9,10 @@ namespace MeetAndGoApi.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        public ActionResult<IEnumerable<>>
+        [HttpGet]
+        public IEnumerable<EventModel> Get()
+        {
+            return new[] {new EventModel {Transport = Transports.Taxi}};
+        }
     }
 }

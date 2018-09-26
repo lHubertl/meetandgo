@@ -1,4 +1,4 @@
-﻿namespace MeetAndGoApi.Enums
+﻿namespace MeetAndGo.Shared.Models
 {
     public class PointModel
     {
