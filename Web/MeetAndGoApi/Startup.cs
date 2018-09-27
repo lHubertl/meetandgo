@@ -1,8 +1,11 @@
-﻿using MeetAndGoApi.BusinessLayer.Contracts;
+﻿using System;
+using MeetAndGoApi.BusinessLayer.Contracts;
 using MeetAndGoApi.BusinessLayer.DataRepositories;
+using MeetAndGoApi.BusinessLayer.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -50,6 +53,13 @@ namespace MeetAndGoApi
         private void RegisterDependencyContainer(IServiceCollection services)
         {
             services.AddScoped<IEventRepository, EventRepository>();
+        }
+
+        private void ConfigureDatabaseContexts(IServiceCollection services)
+        {
+            var optionsAction = new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(Configuration.GetConnectionString("MeetAndGoDatabase")));
+
+            services.AddDbContext<MeetContext>(optionsAction);
         }
 
         #endregion
