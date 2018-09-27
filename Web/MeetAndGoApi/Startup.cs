@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MeetAndGoApi.BusinessLayer.Contracts;
+using MeetAndGoApi.BusinessLayer.DataRepositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,8 @@ namespace MeetAndGoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            RegisterDependencyContainer(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,5 +40,18 @@ namespace MeetAndGoApi
             app.UseHttpsRedirection();
             app.UseMvc();
         }
+
+        #region Private methods
+
+        /// <summary>
+        /// This method is for registering all dependency injection objects
+        /// </summary>
+        /// <param name="services">Dependency container service</param>
+        private void RegisterDependencyContainer(IServiceCollection services)
+        {
+            services.AddScoped<IEventRepository, EventRepository>();
+        }
+
+        #endregion
     }
 }
