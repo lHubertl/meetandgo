@@ -22,7 +22,7 @@ namespace MeetAndGoApi
                 {
                     var context = services.GetRequiredService<MeetAndGoContext>();
                     var seed = new MeetAndGoSeed();
-                    eseed.Initialize(context);
+                    seed.Initialize(context);
                 }
                 catch (Exception ex)
                 {
