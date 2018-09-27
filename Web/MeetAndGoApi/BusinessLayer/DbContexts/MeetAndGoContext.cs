@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MeetAndGoApi.BusinessLayer.DbContexts
 {
-    public class MeetContext : DbContext
+    public class MeetAndGoContext : DbContext
     {
         #region Constructor
 
-        public MeetContext(DbContextOptions<MeetContext> options) : base(options)
+        public MeetAndGoContext(DbContextOptions<MeetAndGoContext> options) : base(options)
         {
             
         }

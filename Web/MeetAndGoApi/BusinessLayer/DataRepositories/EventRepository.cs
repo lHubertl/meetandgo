@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Models;
 using MeetAndGoApi.BusinessLayer.Contracts;
+using MeetAndGoApi.BusinessLayer.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeetAndGoApi.BusinessLayer.DataRepositories
 {
@@ -10,15 +12,16 @@ namespace MeetAndGoApi.BusinessLayer.DataRepositories
     {
         #region Private fields
 
-        
+        private readonly MeetAndGoContext _dbContext;
+
 
         #endregion
 
         #region Constuctor
 
-        public EventRepository()
+        public EventRepository(MeetAndGoContext dbContext)
         {
-            
+            _dbContext = dbContext;
         }
 
         #endregion
@@ -33,16 +36,10 @@ namespace MeetAndGoApi.BusinessLayer.DataRepositories
 
         public async Task<IResponseData<IEnumerable<EventModel>>> ReadAsync(IEnumerable<PointModel> directions)
         {
-            // TODO: real data
+            // TODO Get real collection
+            var events = await _dbContext.Events.ToListAsync();
 
-            var mockedItems = new List<EventModel>
-            {
-                new EventModel(),
-                new EventModel(),
-                new EventModel(),
-            };
-
-            return new ResponseData<IEnumerable<EventModel>>(mockedItems, ResponseCode.Ok);
+            return new ResponseData<IEnumerable<EventModel>>(events, ResponseCode.Ok);
         }
 
         #endregion

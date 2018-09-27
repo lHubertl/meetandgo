@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
@@ -29,9 +30,9 @@ namespace MeetAndGoApi.Controllers
         #region Api methods
 
         [HttpGet]
-        public IResponseData<IEnumerable<EventModel>> Get()
+        public async Task<IResponseData<IEnumerable<EventModel>>> Get()
         {
-            return new ResponseData<IEnumerable<EventModel>>(new[] {new EventModel {Transport = Transports.Taxi}}, ResponseCode.Ok);
+            return await _eventRepository.ReadAsync(null);
         }
         
         #endregion

@@ -26,6 +26,7 @@ namespace MeetAndGoApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             RegisterDependencyContainer(services);
+            ConfigureDatabaseContexts(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +60,7 @@ namespace MeetAndGoApi
         {
             var optionsAction = new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(Configuration.GetConnectionString("MeetAndGoDatabase")));
 
-            services.AddDbContext<MeetContext>(optionsAction);
+            services.AddDbContext<MeetAndGoContext>(optionsAction);
         }
 
         #endregion
