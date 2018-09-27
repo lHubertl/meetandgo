@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using MeetAndGo.Shared.Enums;
+using MeetAndGo.Shared.Models;
 using MeetAndGoApi.BusinessLayer.DbContexts;
-using MeetAndGoApi.BusinessLayer.Dto;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace MeetAndGoApi.BusinessLayer.Seed
@@ -29,33 +30,33 @@ namespace MeetAndGoApi.BusinessLayer.Seed
 
             context.SaveChanges();
 
-
-            foreach (var eventDto in GetEvents())
+            foreach (var eventModel in GetEvents())
             {
-                context.Events.Add(eventDto);
+                context.Events.Add(eventModel);
             }
 
             context.SaveChanges();
         }
 
-        private UserDto[] GetUsers()
+        private UserModel[] GetUsers()
         {
             return new []
             {
-                new UserDto { Id = Guid.NewGuid(), FirstName = "Valerii", LastName = "Sovytskyi", DateOfBirth = new DateTime(1995, 4, 30), Email = "revanmvs2@gmail.com", LanguageCode = "EN", MemberRating = 4.9, OrganizerRating = 5.0, PhoneNumber = "+380938632760", Status = UserStatus.User}
+                new UserModel { UserModelId = Guid.NewGuid(), FirstName = "Valerii", LastName = "Sovytskyi", DateOfBirth = new DateTime(1995, 4, 30), Email = "revanmvs2@gmail.com", LanguageCode = "EN", MemberRating = 4.9, OrganizerRating = 5.0, PhoneNumber = "+380938632760", Status = UserStatus.User}
             };
         }
 
-        private EventDto[] GetEvents()
+        private List<EventModel> GetEvents()
         {
-            var points = new []
+            var points = new List<PointModel>
             {
-                new PointDto {Long = 24.040686, Lat = 49.809952},
-                new PointDto {Long = 24.032185, Lat = 49.829556}
+                new PointModel { PointModelId = Guid.NewGuid(), Long = 24.040686, Lat = 49.809952},
+                new PointModel { PointModelId = Guid.NewGuid(), Long = 24.032185, Lat = 49.829556}
             };
-            return new []
+
+            return new List<EventModel>
             {
-                new EventDto { Id = Guid.NewGuid(), CreatedTime = DateTimeOffset.Now, CurrencyCode = "USD", Transport = Transports.Car, Description = "My description", Direction = points, ExpectedRating = 1.0, MaxSeats = 4, StartTime = DateTimeOffset.Now, Name = "From work to home", TotalPrice = 100, EventState = EventStates.Formation}
+                new EventModel { Direction = points, EventModelId = Guid.NewGuid(), CreatedTime = DateTimeOffset.Now, CurrencyCode = "USD", Transport = Transports.Car, Description = "My description", ExpectedRating = 1.0, MaxSeats = 4, StartTime = DateTimeOffset.Now, Name = "From work to home", TotalPrice = 100, EventState = EventStates.Formation}
             };
         }
     }

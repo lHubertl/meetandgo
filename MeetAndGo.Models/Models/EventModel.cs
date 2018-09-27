@@ -6,11 +6,10 @@ namespace MeetAndGo.Shared.Models
 {
     public class EventModel
     {
+        public Guid EventModelId { get; set; }
         public string Name { get; set; }
         public EventStates EventState { get; set; }
-        public IEnumerable<PointModel> Direction { get; set; }
         public Transports Transport { get; set; }
-        public IEnumerable<MemberModel> Members { get; set; }
         public int MaxSeats { get; set; }
         public double TotalPrice { get; set; }
         public string CurrencyCode { get; set; }
@@ -18,6 +17,9 @@ namespace MeetAndGo.Shared.Models
         public DateTimeOffset StartTime { get; set; }
         public double ExpectedRating { get; set; }
         public string Description { get; set; }
-        public IEnumerable<CommentModel> Comments { get; set; }
+
+        public List<PointModel> Direction { get; set; }
+        public List<CommentModel> Comments { get; set; }
+        public List<MemberModel> Members { get; set; }
     }
 }

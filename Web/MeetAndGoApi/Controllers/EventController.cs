@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
-using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using MeetAndGoApi.BusinessLayer.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -30,9 +29,15 @@ namespace MeetAndGoApi.Controllers
         #region Api methods
 
         [HttpGet]
-        public async Task<IResponseData<IEnumerable<EventModel>>> Get()
+        public async Task<IResponseData<IEnumerable<EventModel>>> GetAsync()
         {
             return await _eventRepository.ReadAsync(null);
+        }
+
+        [HttpPost]
+        public async Task<IResponse> CreateAsync([FromBody] EventModel eventModel)
+        {
+            return await _eventRepository.CreateAsync(eventModel);
         }
         
         #endregion
