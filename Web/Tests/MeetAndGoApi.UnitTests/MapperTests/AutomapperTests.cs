@@ -208,6 +208,56 @@ namespace MeetAndGoApi.UnitTests.MapperTests
 
         #endregion
 
+        #region Test Event
+
+        [Test]
+        public void Mapper_MapEventModel_MappedEventDto()
+        {
+            // Arrange
+            var model = GetMockedEventModel();
+            var member = GetMockedMemberModel();
+            model.Members = new List<MemberModel> { member };
+            var point = GetMockedPointModel();
+            model.Direction = new List<PointModel> { point };
+            var comment = GetMockedCommentModel();
+            comment.Author = member;
+            model.Comments = new List<CommentModel> { comment };
+
+            // Act
+            var actual = _mockedMapper.Map<EventDto>(model);
+
+            // Assert
+            Assert.NotNull(actual);
+            Assert.NotNull(actual.CommentDtos);
+            Assert.NotNull(actual.PointDtos);
+            Assert.NotNull(actual.EventUsers);
+        }
+
+        [Test]
+        public void Mapper_MapEventDto_MappedEventModel()
+        {
+            // Arrange
+            var dto = GetMockedEventDto();
+            var user = GetMockedUserDto();
+            var eventUser = GetMockedEventUser();
+            eventUser.EventDto = dto;
+            eventUser.UserDto = user;
+            user.EventUsers = new List<EventUser> { eventUser };
+            dto.EventUsers = new List<EventUser> {eventUser};
+            
+            // Act
+            var actual = _mockedMapper.Map<EventModel>(dto);
+
+            // Assert
+            Assert.NotNull(actual);
+            Assert.NotNull(actual.Comments);
+            Assert.NotNull(actual.Direction);
+            Assert.NotNull(actual.Members);
+        }
+
+        #endregion
+
+
         #region Get Mocked Dto objects
 
         private CommentDto GetMockedCommentDto()
