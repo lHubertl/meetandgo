@@ -1,7 +1,10 @@
 ﻿using System;
-using MeetAndGoApi.BusinessLayer.Contracts;
-using MeetAndGoApi.BusinessLayer.DataRepositories;
-using MeetAndGoApi.BusinessLayer.DbContexts;
+using AutoMapper;
+using MeetAndGoApi.Domain.Services;
+using MeetAndGoApi.Infrastructure.Contracts.Repository;
+using MeetAndGoApi.Infrastructure.Contracts.Service;
+using MeetAndGoApi.Infrastructure.Dal.Context;
+using MeetAndGoApi.Infrastructure.Dal.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +26,7 @@ namespace MeetAndGoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             RegisterDependencyContainer(services);
@@ -53,14 +57,14 @@ namespace MeetAndGoApi
         /// <param name="services">Dependency container service</param>
         private void RegisterDependencyContainer(IServiceCollection services)
         {
+            services.AddScoped<IEventService, EventService>();
             services.AddScoped<IEventRepository, EventRepository>();
         }
 
         private void ConfigureDatabaseContexts(IServiceCollection services)
         {
             var optionsAction = new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(Configuration.GetConnectionString("MeetAndGoDatabase")));
-
-            services.AddDbContext<MeetAndGoContext>(optionsAction);
+            services.AddDbContext<DatabaseContext>(optionsAction);
         }
 
         #endregion

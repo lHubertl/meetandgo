@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Models;
-using MeetAndGoApi.BusinessLayer.Contracts;
+using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeetAndGoApi.Controllers
@@ -31,7 +31,7 @@ namespace MeetAndGoApi.Controllers
         [HttpGet]
         public async Task<IResponseData<IEnumerable<EventModel>>> GetAsync()
         {
-            return await _eventRepository.ReadAsync(null);
+            return await _eventRepository.ReadAsync();
         }
 
         [HttpPost]

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MeetAndGo.Models\MeetAndGo.Shared.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\MeetAndGoApi.Infrastructure.Contracts\MeetAndGoApi.Infrastructure.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

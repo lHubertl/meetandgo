@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using MeetAndGo.Shared.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
-using MeetAndGo.Shared.Models;
 
-namespace MeetAndGoApi.BusinessLayer.Contracts
+namespace MeetAndGoApi.Infrastructure.Contracts.Service
 {
-    public interface IEventRepository
+    public interface IEventService
     {
         Task<IResponse> CreateAsync(EventModel eventModel);
         Task<IResponseData<IEnumerable<EventModel>>> ReadAsync(IEnumerable<PointModel> directions);

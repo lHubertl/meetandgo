@@ -9,12 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MeetAndGo.Models\MeetAndGo.Shared.csproj" />
+    <ProjectReference Include="..\Domain\MeetAndGoApi.Domain.Services\MeetAndGoApi.Domain.Services.csproj" />
+    <ProjectReference Include="..\Infrastructure\MeetAndGoApi.Infrastructure.Contracts\MeetAndGoApi.Infrastructure.Contracts.csproj" />
+    <ProjectReference Include="..\Infrastructure\MeetAndGoApi.Infrastructure.Dal\MeetAndGoApi.Infrastructure.Dal.csproj" />
   </ItemGroup>
 
 </Project>
