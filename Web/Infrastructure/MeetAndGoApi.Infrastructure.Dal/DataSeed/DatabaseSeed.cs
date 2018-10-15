@@ -24,109 +24,122 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
                 return;
             }
 
-            UserDto mockedUser = null;
-            foreach (var user in GetUsers())
-            {
-                context.Users.Add(user);
-                mockedUser = user;
-            }
+            var comment = GetMockedCommentDto();
+            var eventDto = GetMockedEventDto();
+            var eventUser = GetMockedEventUser();
+            var point = GetMockedPointDto();
+            var user = GetMockedUserDto();
+            var anotherUser = GetMockedUserDto();
+            var vote = GetMockedVoteDto();
 
+            vote.TargetDto = user;
+            vote.UserDto = anotherUser;
+            user.VoteDtos = new List<VoteDto> {vote};
+
+            comment.UserDto = user;
+            comment.EventDto = eventDto;
+            user.CommentDtos = new List<CommentDto> {comment};
+
+            point.EventDto = eventDto;
+            eventDto.PointDtos = new List<PointDto> {point};
+
+            eventUser.EventDto = eventDto;
+            eventUser.UserDto = user;
+            user.EventUsers = new List<EventUser> {eventUser};
+            eventDto.EventUsers = user.EventUsers;
+
+            context.Comments.Add(comment);
             context.SaveChanges();
-
-            foreach (var eventDto in GetEvents())
-            {
-                eventDto.EventUsers = new List<EventUser>
-                {
-                    new EventUser
-                    {
-                        //EventUserId = Guid.NewGuid(),
-                        UserDto = mockedUser,
-                        EventDto = eventDto,
-                    }
-                };
-                context.Events.Add(eventDto);
-            }
-
+            context.Events.Add(eventDto);
             context.SaveChanges();
-
-            foreach (var vote in GetVotes())
-            {
-                vote.UserDto = mockedUser;
-                context.Votes.Add(vote);
-            }
-            
+            context.Points.Add(point);
+            context.SaveChanges();
+            context.Votes.Add(vote);
+            context.SaveChanges();
+            context.Users.Add(user);
+            context.SaveChanges();
+            context.Users.Add(anotherUser);
             context.SaveChanges();
         }
 
-        private UserDto[] GetUsers()
+        #region Get Mocked data
+
+        private CommentDto GetMockedCommentDto()
         {
-            return new[]
+            return new CommentDto
             {
-                new UserDto
-                {
-                    //UserDtoId = Guid.NewGuid(),
-                    FirstName = "Valerii",
-                    LastName = "Sovytskyi",
-                    DateOfBirth = new DateTime(1995, 4, 30),
-                    Email = "revanmvs2@gmail.com",
-                    LanguageCode = "EN",
-                    MemberRating = 4.9,
-                    OrganizerRating = 5.0,
-                    PhoneNumber = "+380938632760",
-                    Status = UserStatus.User
-                }
+                Text = "Mocked",
+                CommentedIn = DateTimeOffset.Now,
+                CommentDtoId = Guid.NewGuid()
             };
         }
 
-        private List<EventDto> GetEvents()
+        private EventDto GetMockedEventDto()
         {
-            var points = new List<PointDto>
+            return new EventDto
             {
-                new PointDto
-                {
-                    //PointDtoId = Guid.NewGuid(),
-                    Long = 24.040686,
-                    Lat = 49.809952
-                },
-                new PointDto
-                {
-                    //PointDtoId = Guid.NewGuid(),
-                    Long = 24.032185,
-                    Lat = 49.829556
-                }
-            };
-
-            return new List<EventDto>
-            {
-                new EventDto
-                {
-                    //EventDtoId = Guid.NewGuid(),
-                    PointDtos = points,
-                    CreatedTime = DateTimeOffset.Now,
-                    CurrencyCode = "USD",
-                    Transport = Transports.Car,
-                    Description = "My description",
-                    ExpectedRating = 1.0,
-                    MaxSeats = 4,
-                    StartTime = DateTimeOffset.Now,
-                    Name = "From work to home",
-                    TotalPrice = 100,
-                    EventState = EventStates.Formation
-                }
+                CreatedTime = DateTimeOffset.Now,
+                CurrencyCode = "USD",
+                Description = "Test description",
+                EventDtoId = Guid.NewGuid(),
+                EventState = EventStates.Formation,
+                ExpectedRating = 4,
+                MaxSeats = 4,
+                StartTime = DateTimeOffset.Now,
+                TotalPrice = 100,
+                Transport = Transports.Car,
+                Name = "Test event"
             };
         }
 
-        private List<VoteDto> GetVotes()
+        private UserDto GetMockedUserDto()
         {
-            return new List<VoteDto>
+            return new UserDto
             {
-                new VoteDto
-                {
-                    Comment = "Smth",
-                    Rating = 4,
-                    RatingType = UserStatus.Member,
-                }
+                Email = "test@gmail.com",
+                FirstName = "Peter",
+                DateOfBirth = DateTime.Now,
+                LanguageCode = "EN",
+                LastName = "Peterson",
+                MemberRating = 4.9,
+                OrganizerRating = 5,
+                PhoneNumber = "+39032155135",
+                Status = UserStatus.Organizer,
+                UserDtoId = Guid.NewGuid()
             };
         }
+
+        private VoteDto GetMockedVoteDto()
+        {
+            return new VoteDto
+            {
+                Comment = "Test vote",
+                Rating = 4,
+                RatingType = UserStatus.Organizer,
+                VoteDtoId = Guid.NewGuid()
+            };
+        }
+
+        private PointDto GetMockedPointDto()
+        {
+            return new PointDto
+            {
+                Lat = 4.523234234,
+                Long = 0.23553224,
+                Name = "TEst Point",
+                PointDtoId = Guid.NewGuid()
+            };
+        }
+
+        private EventUser GetMockedEventUser()
+        {
+            return new EventUser
+            {
+                EventUserId = Guid.NewGuid()
+            };
+        }
+
+        #endregion
+
     }
 }
