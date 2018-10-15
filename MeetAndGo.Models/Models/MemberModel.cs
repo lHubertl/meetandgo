@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace MeetAndGo.Shared.Models
+﻿namespace MeetAndGo.Shared.Models
 {
     public class MemberModel
     {
-        public Guid MemberModelId { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
