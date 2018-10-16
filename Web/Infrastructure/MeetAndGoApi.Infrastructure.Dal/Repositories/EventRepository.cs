@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MeetAndGo.Shared.BusinessLogic.Responses;
@@ -60,12 +61,12 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
         {
             var eventDtos = await _dbContext.Events.
                 Include(x => x.CommentDtos).
-                Include(x => x.EventUsers).
                 Include(x => x.PointDtos).
+                Include(x => x.EventUsers).
+                ThenInclude(x => x.UserDto).
                 ToListAsync();
-            
-            var eventModels = _mapper.Map<List<EventModel>>(eventDtos);
 
+            var eventModels = _mapper.Map<List<EventModel>>(eventDtos);
             return new ResponseData<IEnumerable<EventModel>>(eventModels, ResponseCode.Ok);
         }
 

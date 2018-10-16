@@ -4,6 +4,7 @@ using System.Linq;
 using MeetAndGo.Shared.Enums;
 using MeetAndGoApi.Infrastructure.Dal.Context;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
@@ -24,42 +25,75 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
                 return;
             }
 
-            var comment = GetMockedCommentDto();
-            var eventDto = GetMockedEventDto();
-            var eventUser = GetMockedEventUser();
-            var point = GetMockedPointDto();
-            var user = GetMockedUserDto();
-            var anotherUser = GetMockedUserDto();
-            var vote = GetMockedVoteDto();
+            #region Save two users
 
-            vote.TargetDto = user;
-            vote.UserDto = anotherUser;
-            user.VoteDtos = new List<VoteDto> {vote};
+            var user1 = GetMockedUserDto();
+            var user2 = GetMockedUserDto();
+            user2.FirstName = "User 2";
 
-            comment.UserDto = user;
-            comment.EventDto = eventDto;
-            user.CommentDtos = new List<CommentDto> {comment};
-
-            point.EventDto = eventDto;
-            eventDto.PointDtos = new List<PointDto> {point};
-
-            eventUser.EventDto = eventDto;
-            eventUser.UserDto = user;
-            user.EventUsers = new List<EventUser> {eventUser};
-            eventDto.EventUsers = user.EventUsers;
-
-            context.Comments.Add(comment);
+            context.Users.Add(user1);
             context.SaveChanges();
+            context.Users.Add(user2);
+            context.SaveChanges();
+
+            #endregion
+
+            #region Save event by user 1
+
+            var point1 = GetMockedPointDto();
+            var point2 = GetMockedPointDto();
+
+            user1 = context.Users.FirstOrDefault();
+            var eventDto = GetMockedEventDto();
+            eventDto.PointDtos = new List<PointDto> { point1, point2 };
+            var eventUser = GetMockedEventUser();
+            eventUser.UserDto = user1;
+            eventUser.EventDto = eventDto;
+            eventDto.EventUsers = new List<EventUser> {eventUser};
             context.Events.Add(eventDto);
             context.SaveChanges();
-            context.Points.Add(point);
+
+            #endregion
+
+            #region Add new member to event 
+
+            user2 = context.Users.LastOrDefault();
+
+            eventDto = context.Events.Include(x => x.EventUsers).FirstOrDefault();
+
+            var newEventUser = GetMockedEventUser();
+            newEventUser.UserDto = user2;
+            newEventUser.EventDto = eventDto;
+            
+            eventDto.EventUsers.Add(newEventUser);
+            context.Events.Update(eventDto);
+
+            #endregion
+
+            #region Save Comment by user1
+
+            eventDto = context.Events.FirstOrDefault();
+
+            user1 = context.Users.FirstOrDefault();
+            var comment = GetMockedCommentDto();
+            comment.UserDto = user1;
+            comment.EventDto = eventDto;
+            context.Comments.Add(comment);
             context.SaveChanges();
+
+            #endregion
+
+            #region Vote user2 for user1
+
+            user1 = context.Users.FirstOrDefault();
+            user2 = context.Users.FirstOrDefault();
+            var vote = GetMockedVoteDto();
+            vote.UserDto = user2;
+            vote.TargetDto = user1;
             context.Votes.Add(vote);
             context.SaveChanges();
-            context.Users.Add(user);
-            context.SaveChanges();
-            context.Users.Add(anotherUser);
-            context.SaveChanges();
+
+            #endregion
         }
 
         #region Get Mocked data
@@ -78,10 +112,10 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
         {
             return new EventDto
             {
+                EventDtoId = Guid.NewGuid(),
                 CreatedTime = DateTimeOffset.Now,
                 CurrencyCode = "USD",
                 Description = "Test description",
-                EventDtoId = Guid.NewGuid(),
                 EventState = EventStates.Formation,
                 ExpectedRating = 4,
                 MaxSeats = 4,
@@ -96,6 +130,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
         {
             return new UserDto
             {
+                UserDtoId = Guid.NewGuid(),
                 Email = "test@gmail.com",
                 FirstName = "Peter",
                 DateOfBirth = DateTime.Now,
@@ -104,8 +139,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
                 MemberRating = 4.9,
                 OrganizerRating = 5,
                 PhoneNumber = "+39032155135",
-                Status = UserStatus.Organizer,
-                UserDtoId = Guid.NewGuid()
+                Status = UserStatus.Organizer
             };
         }
 
@@ -113,10 +147,10 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
         {
             return new VoteDto
             {
+                VoteDtoId = Guid.NewGuid(),
                 Comment = "Test vote",
                 Rating = 4,
-                RatingType = UserStatus.Organizer,
-                VoteDtoId = Guid.NewGuid()
+                RatingType = UserStatus.Organizer
             };
         }
 
@@ -124,10 +158,10 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
         {
             return new PointDto
             {
+                PointDtoId = Guid.NewGuid(),
                 Lat = 4.523234234,
                 Long = 0.23553224,
-                Name = "TEst Point",
-                PointDtoId = Guid.NewGuid()
+                Name = "TEst Point"
             };
         }
 

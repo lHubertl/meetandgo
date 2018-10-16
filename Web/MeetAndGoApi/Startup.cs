@@ -3,6 +3,7 @@ using AutoMapper;
 using MeetAndGoApi.Domain.Services;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Contracts.Service;
+using MeetAndGoApi.Infrastructure.Dal;
 using MeetAndGoApi.Infrastructure.Dal.Context;
 using MeetAndGoApi.Infrastructure.Dal.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +27,7 @@ namespace MeetAndGoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper();
+            services.AddAutoMapper(config => config.AddProfile(new DomainProfile()));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             RegisterDependencyContainer(services);

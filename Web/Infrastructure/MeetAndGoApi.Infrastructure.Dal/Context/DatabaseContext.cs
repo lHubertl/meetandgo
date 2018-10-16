@@ -63,9 +63,6 @@ namespace MeetAndGoApi.Infrastructure.Dal.Context
             // Event User Many-to-Many
 
             modelBuilder.Entity<EventUser>()
-                .HasKey(t => new { t.EventDtoId, t.UserDtoId });
-
-            modelBuilder.Entity<EventUser>()
                 .HasOne(pt => pt.EventDto)
                 .WithMany(p => p.EventUsers)
                 .HasForeignKey(pt => pt.EventDtoId);

@@ -11,11 +11,11 @@ namespace MeetAndGoApi.Infrastructure.Dal.Dto
         [MapTo(nameof(UserModel.Id))]
         public Guid UserDtoId { get; set; }
         
-        public ICollection<EventUser> EventUsers { get; set; }
-        public ICollection<CommentDto> CommentDtos { get; set; }
+        public List<EventUser> EventUsers { get; set; }
+        public List<CommentDto> CommentDtos { get; set; }
 
         [MapTo(nameof(UserModel.Votes))]
-        public ICollection<VoteDto> VoteDtos { get; set; }
+        public List<VoteDto> VoteDtos { get; set; }
         
         public string Email { get; set; }
         public string FirstName { get; set; }

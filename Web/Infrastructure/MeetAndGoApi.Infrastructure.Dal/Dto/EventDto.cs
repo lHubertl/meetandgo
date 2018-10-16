@@ -12,13 +12,13 @@ namespace MeetAndGoApi.Infrastructure.Dal.Dto
         public Guid EventDtoId { get; set; }
 
         [MapTo(nameof(EventModel.Members))]
-        public ICollection<EventUser> EventUsers { get; set; }
+        public List<EventUser> EventUsers { get; set; }
 
         [MapTo(nameof(EventModel.Direction))]
-        public ICollection<PointDto> PointDtos { get; set; }
+        public List<PointDto> PointDtos { get; set; }
 
         [MapTo(nameof(EventModel.Comments))]
-        public ICollection<CommentDto> CommentDtos { get; set; }
+        public List<CommentDto> CommentDtos { get; set; }
         
         public string Name { get; set; }
         public EventStates EventState { get; set; }

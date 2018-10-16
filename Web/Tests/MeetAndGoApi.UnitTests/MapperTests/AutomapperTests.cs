@@ -231,6 +231,11 @@ namespace MeetAndGoApi.UnitTests.MapperTests
             Assert.NotNull(actual.CommentDtos);
             Assert.NotNull(actual.PointDtos);
             Assert.NotNull(actual.EventUsers);
+
+            foreach (var eventUser in actual.EventUsers)
+            {
+                Assert.NotNull(eventUser.UserDto);
+            }
         }
 
         [Test]
@@ -253,6 +258,10 @@ namespace MeetAndGoApi.UnitTests.MapperTests
             Assert.NotNull(actual.Comments);
             Assert.NotNull(actual.Direction);
             Assert.NotNull(actual.Members);
+            foreach (var member in actual.Members)
+            {
+                Assert.NotNull(member.Id);
+            }
         }
 
         #endregion
