@@ -38,20 +38,25 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 
         public async Task<IResponse> CreateAsync(EventModel model)
         {
-            var c = new CommentModel();
-            var res = _mapper.Map<CommentDto>(c);
-
-            var dto = _mapper.Map<EventDto>(model);
-            
-            // TODO: SHOULD BE REAL USER
-            var user = await _dbContext.Users.FirstOrDefaultAsync();
-            if (user != null)
+            if (model == null)
             {
-                dto.EventUsers = new List<EventUser>
-                    {new EventUser {UserDto = user, EventDtoId = user.UserDtoId}};
+                // TODO move message to language resource
+                return new Response(ResponseCode.ParameterIsNull, "Parameter can not be null");
             }
 
-            await _dbContext.Events.AddAsync(dto);
+            var resultUserDto = await GetCurrentUserAsync();
+            if (!resultUserDto.IsSuccess)
+            {
+                return resultUserDto;
+            }
+
+            var userDto = resultUserDto.Data;
+
+            var eventDto = _mapper.Map<EventDto>(model);
+
+            eventDto.EventUsers = new List<EventUser> {new EventUser {UserDto = userDto, EventDto = eventDto } };
+            
+            await _dbContext.Events.AddAsync(eventDto);
             await _dbContext.SaveChangesAsync();
             return new Response(ResponseCode.Ok);
 
@@ -73,6 +78,25 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
         public Task<IResponseData<IEnumerable<EventModel>>> ReadAsync(IEnumerable<PointModel> directions)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private async Task<IResponseData<UserDto>> GetCurrentUserAsync()
+        {
+            // TODO: rework it to get current user
+
+            // TODO: SHOULD BE REAL USER
+            var user = await _dbContext.Users.FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                return new ResponseData<UserDto>(user, ResponseCode.Ok);
+            }
+            //TODO GET ERROR MESSAGE FROM RESOURCE FILE
+            return new ResponseData<UserDto>(ResponseCode.ServerError, "Can not find the data");
         }
         
         #endregion

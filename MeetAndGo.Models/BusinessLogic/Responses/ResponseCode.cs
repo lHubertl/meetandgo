@@ -3,6 +3,7 @@
     public enum ResponseCode
     {
         Ok,
-        ServerError
+        ServerError,
+        ParameterIsNull
     }
 }
