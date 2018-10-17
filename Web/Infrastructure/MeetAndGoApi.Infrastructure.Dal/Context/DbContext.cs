@@ -1,26 +1,26 @@
 ﻿using MeetAndGoApi.Infrastructure.Dal.DataSeed;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeetAndGoApi.Infrastructure.Dal.Context
 {
-    public class DatabaseContext : DbContext
+    public class DbContext : IdentityDbContext<ApplicationUser>
     {
         #region Db sets
 
         public DbSet<CommentDto> Comments { get; set; }
         public DbSet<EventDto> Events { get; set; }
         public DbSet<PointDto> Points { get; set; }
-        public DbSet<UserDto> Users { get; set; }
         public DbSet<VoteDto> Votes { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        public DbContext(DbContextOptions<DbContext> options) : base(options)
         {
-            var dbSeed = new DatabaseSeed();
+            var dbSeed = new DbSeed();
             dbSeed.InitializeIfNeeded(this);
         }
 
@@ -35,16 +35,16 @@ namespace MeetAndGoApi.Infrastructure.Dal.Context
             // User - Vote One-to-Many
 
             modelBuilder.Entity<VoteDto>()
-                .HasOne(pt => pt.UserDto).
+                .HasOne(pt => pt.ApplicationUser).
                 WithMany(p => p.VoteDtos).
-                HasForeignKey(pt => pt.UserDtoId);
+                HasForeignKey(pt => pt.ApplicationUserId);
 
             // User - Comment One-to-Many
 
             modelBuilder.Entity<CommentDto>()
-                .HasOne(pt => pt.UserDto).
+                .HasOne(pt => pt.ApplicationUser).
                 WithMany(p => p.CommentDtos).
-                HasForeignKey(pt => pt.UserDtoId);
+                HasForeignKey(pt => pt.ApplicationUserId);
 
             // Comment - Event One-to-Many
 
@@ -68,9 +68,9 @@ namespace MeetAndGoApi.Infrastructure.Dal.Context
                 .HasForeignKey(pt => pt.EventDtoId);
 
             modelBuilder.Entity<EventUser>()
-                .HasOne(pt => pt.UserDto)
+                .HasOne(pt => pt.ApplicationUser)
                 .WithMany(t => t.EventUsers)
-                .HasForeignKey(pt => pt.UserDtoId);
+                .HasForeignKey(pt => pt.ApplicationUserId);
         }
 
         #endregion

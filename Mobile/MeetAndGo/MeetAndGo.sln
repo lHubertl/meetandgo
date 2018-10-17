@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E511D782
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetAndGoApi.UnitTests", "..\..\Web\Tests\MeetAndGoApi.UnitTests\MeetAndGoApi.UnitTests.csproj", "{A66F088E-6DF8-42EA-8E17-FEA6D625AB99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetAndGoApi.Infrastructure", "..\..\Web\Infrastructure\MeetAndGoApi.Infrastructure\MeetAndGoApi.Infrastructure.csproj", "{6C282316-A3BD-429C-AA2C-1DCE3CFC6606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetAndGoApi.Infrastructure", "..\..\Web\Infrastructure\MeetAndGoApi.Infrastructure\MeetAndGoApi.Infrastructure.csproj", "{6C282316-A3BD-429C-AA2C-1DCE3CFC6606}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

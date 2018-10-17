@@ -19,7 +19,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
         #region Private fields
 
         private readonly IStringLocalizer<Strings> _localizer;
-        private readonly DatabaseContext _dbContext;
+        private readonly Context.DbContext _dbContext;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
 
@@ -27,7 +27,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 
         #region Constructor
         
-        public EventRepository(DatabaseContext dbContext, ILogger<EventRepository> logger, IMapper mapper, IStringLocalizer<Strings> localizer)
+        public EventRepository(Context.DbContext dbContext, ILogger<EventRepository> logger, IMapper mapper, IStringLocalizer<Strings> localizer)
         {
             _localizer = localizer;
             _dbContext = dbContext;
@@ -46,17 +46,17 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
                 return new Response(ResponseCode.ParameterIsNull, _localizer.GetString(Strings.V_ParameterCanNotBeNull));
             }
 
-            var resultUserDto = await GetCurrentUserAsync();
-            if (!resultUserDto.IsSuccess)
+            var resultApplicationUser = await GetCurrentUserAsync();
+            if (!resultApplicationUser.IsSuccess)
             {
-                return resultUserDto;
+                return resultApplicationUser;
             }
 
-            var userDto = resultUserDto.Data;
+            var ApplicationUser = resultApplicationUser.Data;
 
             var eventDto = _mapper.Map<EventDto>(model);
 
-            eventDto.EventUsers = new List<EventUser> {new EventUser {UserDto = userDto, EventDto = eventDto } };
+            eventDto.EventUsers = new List<EventUser> {new EventUser {ApplicationUser = ApplicationUser, EventDto = eventDto } };
             
             await _dbContext.Events.AddAsync(eventDto);
             await _dbContext.SaveChangesAsync();
@@ -70,7 +70,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
                 Include(x => x.CommentDtos).
                 Include(x => x.PointDtos).
                 Include(x => x.EventUsers).
-                ThenInclude(x => x.UserDto).
+                ThenInclude(x => x.ApplicationUser).
                 ToListAsync();
 
             var eventModels = _mapper.Map<List<EventModel>>(eventDtos);
@@ -86,7 +86,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 
         #region Private methods
 
-        private async Task<IResponseData<UserDto>> GetCurrentUserAsync()
+        private async Task<IResponseData<ApplicationUser>> GetCurrentUserAsync()
         {
             // TODO: rework it to get current user
 
@@ -95,10 +95,10 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 
             if (user != null)
             {
-                return new ResponseData<UserDto>(user, ResponseCode.Ok);
+                return new ResponseData<ApplicationUser>(user, ResponseCode.Ok);
             }
 
-            return new ResponseData<UserDto>(ResponseCode.ServerError, _localizer.GetString(Strings.V_CanNotFindData));
+            return new ResponseData<ApplicationUser>(ResponseCode.ServerError, _localizer.GetString(Strings.V_CanNotFindData));
         }
         
         #endregion

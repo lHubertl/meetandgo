@@ -9,11 +9,11 @@ namespace MeetAndGoApi.Infrastructure.Dal.Dto
     {
         public Guid VoteDtoId { get; set; }
 
-        public UserDto UserDto { get; set; }
-        public Guid UserDtoId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
 
         [MapTo(nameof(VoteModel.VoteTarget))]
-        public UserDto TargetDto { get; set; }
+        public ApplicationUser TargetDto { get; set; }
         public Guid VoteTargetId { get; set; }
 
         public UserStatus RatingType { get; set; }

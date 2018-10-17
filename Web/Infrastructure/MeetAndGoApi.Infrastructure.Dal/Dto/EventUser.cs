@@ -9,7 +9,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Dto
         public EventDto EventDto { get; set; }
         public Guid EventDtoId { get; set; }
 
-        public UserDto UserDto { get; set; }
-        public Guid UserDtoId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
     }
 }

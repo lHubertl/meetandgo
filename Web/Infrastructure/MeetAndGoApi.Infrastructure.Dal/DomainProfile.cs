@@ -11,8 +11,8 @@ namespace MeetAndGoApi.Infrastructure.Dal
         public DomainProfile()
         {
             CreateMapForGuidAndString();
-            CreateMapForUserModelAndUserDto();
-            CreateMapForMemberModelAndUserDto();
+            CreateMapForUserModelAndApplicationUser();
+            CreateMapForMemberModelAndApplicationUser();
             CreateMapForPointModelAndPoindDto();
             CreateMapForCommentModelAndCommentDto();
             CreateMapForVoteModelAndVoteDto();
@@ -30,7 +30,7 @@ namespace MeetAndGoApi.Infrastructure.Dal
         private void CreateMapForEventModelAndEventDto()
         {
             CreateMap<MemberModel, EventUser>()
-                .ForMember(dto => dto.UserDto, model => model.MapFrom(src => src));
+                .ForMember(dto => dto.ApplicationUser, model => model.MapFrom(src => src));
 
             CreateMap<EventModel, EventUser>()
                 .ForMember(dto => dto.EventDto, member => member.MapFrom(src => src));
@@ -45,7 +45,7 @@ namespace MeetAndGoApi.Infrastructure.Dal
                 .ForMember(model => model.Direction, dto => dto.MapFrom(src => src.PointDtos))
                 .ForMember(model => model.Comments, dto => dto.MapFrom(src => src.CommentDtos))
                 .ForMember(model => model.Members,
-                    dto => dto.MapFrom(src => src.EventUsers.Select(x => x.UserDto).ToList()));
+                    dto => dto.MapFrom(src => src.EventUsers.Select(x => x.ApplicationUser).ToList()));
         }
 
         private void CreateMapForPointModelAndPoindDto()
@@ -57,7 +57,7 @@ namespace MeetAndGoApi.Infrastructure.Dal
         private void CreateMapForCommentModelAndCommentDto()
         {
             CreateMap<CommentModel, CommentDto>()
-                .ForMember(dto => dto.UserDto, model => model.MapFrom(src => src.Author));
+                .ForMember(dto => dto.ApplicationUser, model => model.MapFrom(src => src.Author));
 
             CreateMap<CommentDto, CommentModel>();
         }
@@ -70,17 +70,17 @@ namespace MeetAndGoApi.Infrastructure.Dal
             CreateMap<VoteDto, VoteModel>();
         }
 
-        private void CreateMapForUserModelAndUserDto()
+        private void CreateMapForUserModelAndApplicationUser()
         {
-            CreateMap<UserModel, UserDto>()
+            CreateMap<UserModel, ApplicationUser>()
                 .ForMember(dto => dto.VoteDtos, model => model.MapFrom(src => src.Votes));
-            CreateMap<UserDto, UserModel>();
+            CreateMap<ApplicationUser, UserModel>();
         }
 
-        private void CreateMapForMemberModelAndUserDto()
+        private void CreateMapForMemberModelAndApplicationUser()
         {
-            CreateMap<MemberModel, UserDto>();
-            CreateMap<UserDto, MemberModel>();
+            CreateMap<MemberModel, ApplicationUser>();
+            CreateMap<ApplicationUser, MemberModel>();
         }
     }
 }

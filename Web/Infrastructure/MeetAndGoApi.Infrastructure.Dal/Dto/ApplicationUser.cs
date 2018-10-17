@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using AutoMapper.Configuration.Conventions;
 using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MeetAndGoApi.Infrastructure.Dal.Dto
 {
-    public class UserDto
+    public class ApplicationUser : IdentityUser
     {
-        [MapTo(nameof(UserModel.Id))]
-        public Guid UserDtoId { get; set; }
-        
         public List<EventUser> EventUsers { get; set; }
         public List<CommentDto> CommentDtos { get; set; }
 
         [MapTo(nameof(UserModel.Votes))]
         public List<VoteDto> VoteDtos { get; set; }
         
-        public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
         public double OrganizerRating { get; set; }
         public double MemberRating { get; set; }
         public string CompressedPhotoUrl { get; set; }

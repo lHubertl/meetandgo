@@ -120,6 +120,9 @@
   <data name="V_CanNotFindData" xml:space="preserve">
     <value>Can not find the data</value>
   </data>
+  <data name="V_LoginCredentialFail" xml:space="preserve">
+    <value>Phone number or password incorrect</value>
+  </data>
   <data name="V_ParameterCanNotBeNull" xml:space="preserve">
     <value>Parameter can not be null</value>
   </data>

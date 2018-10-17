@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using MeetAndGo.Shared.Enums;
-using MeetAndGoApi.Infrastructure.Dal.Context;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
 {
-    internal class DatabaseSeed
+    internal class DbSeed
     {
-        public void InitializeIfNeeded(DatabaseContext context)
+        public void InitializeIfNeeded(Context.DbContext context)
         {
             var created = context.Database.EnsureCreated();
             if (!created)
@@ -27,8 +26,8 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
 
             #region Save two users
 
-            var user1 = GetMockedUserDto();
-            var user2 = GetMockedUserDto();
+            var user1 = GetMockedApplicationUser();
+            var user2 = GetMockedApplicationUser();
             user2.FirstName = "User 2";
 
             context.Users.Add(user1);
@@ -47,7 +46,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             var eventDto = GetMockedEventDto();
             eventDto.PointDtos = new List<PointDto> { point1, point2 };
             var eventUser = GetMockedEventUser();
-            eventUser.UserDto = user1;
+            eventUser.ApplicationUser = user1;
             eventUser.EventDto = eventDto;
             eventDto.EventUsers = new List<EventUser> {eventUser};
             context.Events.Add(eventDto);
@@ -62,7 +61,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             eventDto = context.Events.Include(x => x.EventUsers).FirstOrDefault();
 
             var newEventUser = GetMockedEventUser();
-            newEventUser.UserDto = user2;
+            newEventUser.ApplicationUser = user2;
             newEventUser.EventDto = eventDto;
             
             eventDto.EventUsers.Add(newEventUser);
@@ -76,7 +75,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
 
             user1 = context.Users.FirstOrDefault();
             var comment = GetMockedCommentDto();
-            comment.UserDto = user1;
+            comment.ApplicationUser = user1;
             comment.EventDto = eventDto;
             context.Comments.Add(comment);
             context.SaveChanges();
@@ -88,7 +87,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             user1 = context.Users.FirstOrDefault();
             user2 = context.Users.FirstOrDefault();
             var vote = GetMockedVoteDto();
-            vote.UserDto = user2;
+            vote.ApplicationUser = user2;
             vote.TargetDto = user1;
             context.Votes.Add(vote);
             context.SaveChanges();
@@ -126,11 +125,11 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             };
         }
 
-        private UserDto GetMockedUserDto()
+        private ApplicationUser GetMockedApplicationUser()
         {
-            return new UserDto
+            return new ApplicationUser
             {
-                UserDtoId = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 Email = "test@gmail.com",
                 FirstName = "Peter",
                 DateOfBirth = DateTime.Now,

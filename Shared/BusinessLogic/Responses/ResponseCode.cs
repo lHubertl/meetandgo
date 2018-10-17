@@ -4,6 +4,7 @@
     {
         Ok,
         ServerError,
-        ParameterIsNull
+        ParameterIsNull,
+        RequestError,
     }
 }

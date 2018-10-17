@@ -43,7 +43,7 @@ namespace MeetAndGoApi.UnitTests.MapperTests
 
             // Assert
             Assert.NotNull(actual);
-            Assert.NotNull(actual.UserDto);
+            Assert.NotNull(actual.ApplicationUser);
         }
 
         [Test]
@@ -51,12 +51,12 @@ namespace MeetAndGoApi.UnitTests.MapperTests
         {
             // Arrange
             var dto = GetMockedCommentDto();
-            dto.UserDto = GetMockedUserDto();
-            dto.UserDto.VoteDtos = new List<VoteDto> { GetMockedVoteDto() };
+            dto.ApplicationUser = GetMockedApplicationUser();
+            dto.ApplicationUser.VoteDtos = new List<VoteDto> { GetMockedVoteDto() };
             dto.EventDto = GetMockedEventDto();
             dto.EventDto.CommentDtos = new List<CommentDto> { dto };
             var eventDto = GetMockedEventUser();
-            eventDto.UserDto = dto.UserDto;
+            eventDto.ApplicationUser = dto.ApplicationUser;
             eventDto.EventDto = dto.EventDto;
             dto.EventDto.EventUsers = new List<EventUser> { eventDto };
 
@@ -93,9 +93,9 @@ namespace MeetAndGoApi.UnitTests.MapperTests
         {
             // Arrange
             var dto = GetMockedVoteDto();
-            dto.UserDto = GetMockedUserDto();
-            dto.UserDto.VoteDtos = new List<VoteDto>{dto};
-            dto.TargetDto = GetMockedUserDto();
+            dto.ApplicationUser = GetMockedApplicationUser();
+            dto.ApplicationUser.VoteDtos = new List<VoteDto>{dto};
+            dto.TargetDto = GetMockedApplicationUser();
 
             // Act
             var actual = _mockedMapper.Map<VoteModel>(dto);
@@ -142,7 +142,7 @@ namespace MeetAndGoApi.UnitTests.MapperTests
         #region Test User
 
         [Test]
-        public void Mapper_MapUserModel_MappedUserDto()
+        public void Mapper_MapUserModel_MappedApplicationUser()
         {
             // Arrange
             var model = GetMockedUserModel();
@@ -152,7 +152,7 @@ namespace MeetAndGoApi.UnitTests.MapperTests
             vote.VoteTarget = GetMockedUserModel();
 
             // Act
-            var actual = _mockedMapper.Map<UserDto>(model);
+            var actual = _mockedMapper.Map<ApplicationUser>(model);
 
             // Assert
             Assert.NotNull(actual);
@@ -160,10 +160,10 @@ namespace MeetAndGoApi.UnitTests.MapperTests
         }
 
         [Test]
-        public void Mapper_MapUserDto_MappedUserModel()
+        public void Mapper_MapApplicationUser_MappedUserModel()
         {
             // Arrange
-            var dto = GetMockedUserDto();
+            var dto = GetMockedApplicationUser();
             var vote = GetMockedVoteDto();
             vote.TargetDto = dto;
             dto.VoteDtos = new List<VoteDto>{vote};
@@ -181,23 +181,23 @@ namespace MeetAndGoApi.UnitTests.MapperTests
         #region Test Member
 
         [Test]
-        public void Mapper_MapMemberModel_MappedUserDto()
+        public void Mapper_MapMemberModel_MappedApplicationUser()
         {
             // Arrange
             var model = GetMockedMemberModel();
 
             // Act
-            var actual = _mockedMapper.Map<UserDto>(model);
+            var actual = _mockedMapper.Map<ApplicationUser>(model);
 
             // Assert
             Assert.NotNull(actual);
         }
 
         [Test]
-        public void Mapper_MapUserDto_MappedMemberModel()
+        public void Mapper_MapApplicationUser_MappedMemberModel()
         {
             // Arrange
-            var dto = GetMockedUserDto();
+            var dto = GetMockedApplicationUser();
 
             // Act
             var actual = _mockedMapper.Map<MemberModel>(dto);
@@ -234,7 +234,7 @@ namespace MeetAndGoApi.UnitTests.MapperTests
 
             foreach (var eventUser in actual.EventUsers)
             {
-                Assert.NotNull(eventUser.UserDto);
+                Assert.NotNull(eventUser.ApplicationUser);
             }
         }
 
@@ -243,10 +243,10 @@ namespace MeetAndGoApi.UnitTests.MapperTests
         {
             // Arrange
             var dto = GetMockedEventDto();
-            var user = GetMockedUserDto();
+            var user = GetMockedApplicationUser();
             var eventUser = GetMockedEventUser();
             eventUser.EventDto = dto;
-            eventUser.UserDto = user;
+            eventUser.ApplicationUser = user;
             user.EventUsers = new List<EventUser> { eventUser };
             dto.EventUsers = new List<EventUser> {eventUser};
             
@@ -297,20 +297,17 @@ namespace MeetAndGoApi.UnitTests.MapperTests
             };
         }
 
-        private UserDto GetMockedUserDto()
+        private ApplicationUser GetMockedApplicationUser()
         {
-            return new UserDto
+            return new ApplicationUser
             {
-                Email = "test@gmail.com",
                 FirstName = "Peter",
                 DateOfBirth = DateTime.Now,
                 LanguageCode = "EN",
                 LastName = "Peterson",
                 MemberRating = 4.9,
                 OrganizerRating = 5,
-                PhoneNumber = "+39032155135",
-                Status = UserStatus.Organizer,
-                UserDtoId = Guid.Empty
+                Status = UserStatus.Organizer
             };
         }
 

@@ -17,5 +17,6 @@ namespace MeetAndGoApi.Infrastructure.Resources
     {
         V_ParameterCanNotBeNull,
         V_CanNotFindData,
+        V_LoginCredentialFail,
     }
 }
