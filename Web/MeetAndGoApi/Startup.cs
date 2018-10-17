@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using AutoMapper;
 using MeetAndGoApi.Domain.Services;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
@@ -8,6 +9,7 @@ using MeetAndGoApi.Infrastructure.Dal.Context;
 using MeetAndGoApi.Infrastructure.Dal.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +29,7 @@ namespace MeetAndGoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalization();
             services.AddAutoMapper(config => config.AddProfile(new DomainProfile()));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -45,6 +48,8 @@ namespace MeetAndGoApi
             {
                 app.UseHsts();
             }
+
+            ConfigureLocalization(app);
 
             app.UseHttpsRedirection();
             app.UseMvc();
@@ -66,6 +71,22 @@ namespace MeetAndGoApi
         {
             var optionsAction = new Action<DbContextOptionsBuilder>(options => options.UseSqlServer(Configuration.GetConnectionString("MeetAndGoDatabase")));
             services.AddDbContext<DatabaseContext>(optionsAction);
+        }
+
+        private void ConfigureLocalization(IApplicationBuilder app)
+        {
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("fr"),
+            };
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
         }
 
         #endregion

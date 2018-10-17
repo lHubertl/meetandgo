@@ -15,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MeetAndGo.Models\MeetAndGo.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Shared\MeetAndGo.Shared.csproj" />
     <ProjectReference Include="..\MeetAndGoApi.Infrastructure.Contracts\MeetAndGoApi.Infrastructure.Contracts.csproj" />
+    <ProjectReference Include="..\MeetAndGoApi.Infrastructure\MeetAndGoApi.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,9 @@
     </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore.sqlserver\2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization.Abstractions">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.localization.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.logging.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>

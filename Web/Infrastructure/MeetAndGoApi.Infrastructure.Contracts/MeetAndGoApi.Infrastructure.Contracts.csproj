@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MeetAndGo.Models\MeetAndGo.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Shared\MeetAndGo.Shared.csproj" />
   </ItemGroup>
 
 </Project>

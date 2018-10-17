@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MeetAndGo.Shared.BusinessLogic.Responses;
@@ -8,7 +7,9 @@ using MeetAndGo.Shared.Models;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Dal.Context;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
+using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace MeetAndGoApi.Infrastructure.Dal.Repositories
@@ -16,7 +17,8 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
     public class EventRepository : IEventRepository
     {
         #region Private fields
-        
+
+        private readonly IStringLocalizer<Strings> _localizer;
         private readonly DatabaseContext _dbContext;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
@@ -25,8 +27,9 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 
         #region Constructor
         
-        public EventRepository(DatabaseContext dbContext, ILogger<EventRepository> logger, IMapper mapper)
+        public EventRepository(DatabaseContext dbContext, ILogger<EventRepository> logger, IMapper mapper, IStringLocalizer<Strings> localizer)
         {
+            _localizer = localizer;
             _dbContext = dbContext;
             _logger = logger;
             _mapper = mapper;
@@ -40,8 +43,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
         {
             if (model == null)
             {
-                // TODO move message to language resource
-                return new Response(ResponseCode.ParameterIsNull, "Parameter can not be null");
+                return new Response(ResponseCode.ParameterIsNull, _localizer.GetString(Strings.V_ParameterCanNotBeNull));
             }
 
             var resultUserDto = await GetCurrentUserAsync();
@@ -95,8 +97,8 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
             {
                 return new ResponseData<UserDto>(user, ResponseCode.Ok);
             }
-            //TODO GET ERROR MESSAGE FROM RESOURCE FILE
-            return new ResponseData<UserDto>(ResponseCode.ServerError, "Can not find the data");
+
+            return new ResponseData<UserDto>(ResponseCode.ServerError, _localizer.GetString(Strings.V_CanNotFindData));
         }
         
         #endregion

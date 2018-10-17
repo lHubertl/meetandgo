@@ -15,10 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MeetAndGo.Models\MeetAndGo.Shared.csproj" />
+    <ProjectReference Include="..\..\Shared\MeetAndGo.Shared.csproj" />
     <ProjectReference Include="..\Domain\MeetAndGoApi.Domain.Services\MeetAndGoApi.Domain.Services.csproj" />
     <ProjectReference Include="..\Infrastructure\MeetAndGoApi.Infrastructure.Contracts\MeetAndGoApi.Infrastructure.Contracts.csproj" />
     <ProjectReference Include="..\Infrastructure\MeetAndGoApi.Infrastructure.Dal\MeetAndGoApi.Infrastructure.Dal.csproj" />
+    <ProjectReference Include="..\Infrastructure\MeetAndGoApi.Infrastructure\MeetAndGoApi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
