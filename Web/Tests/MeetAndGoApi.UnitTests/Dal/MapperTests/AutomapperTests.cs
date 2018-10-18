@@ -7,7 +7,7 @@ using MeetAndGoApi.Infrastructure.Dal;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
 using NUnit.Framework;
 
-namespace MeetAndGoApi.UnitTests.MapperTests
+namespace MeetAndGoApi.UnitTests.Dal.MapperTests
 {
     [TestFixture]
     public class AutomapperTests

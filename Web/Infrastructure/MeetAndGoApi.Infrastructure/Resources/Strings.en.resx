@@ -126,4 +126,7 @@
   <data name="V_ParameterCanNotBeNull" xml:space="preserve">
     <value>Parameter can not be null</value>
   </data>
+  <data name="V_PhoneNumberInvalid" xml:space="preserve">
+    <value>Phone number incorrect</value>
+  </data>
 </root>

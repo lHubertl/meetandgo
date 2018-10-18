@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
+using MeetAndGo.Shared.Models;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
 using MeetAndGoApi.Infrastructure.Resources;
-using MeetAndGoApi.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,21 +46,20 @@ namespace MeetAndGoApi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IResponseData<string>> Register(RegisterViewModel model)
+        public async Task<IResponseData<string>> Register(RegisterModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Login) || string.IsNullOrWhiteSpace(model.Password))
+            if (string.IsNullOrWhiteSpace(model.PhoneNumber) || string.IsNullOrWhiteSpace(model.Password))
             {
                 return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.V_LoginCredentialFail));
             }
 
-
-            var user = new ApplicationUser {UserName = model.Login};
+            var user = new ApplicationUser {UserName = model.PhoneNumber};
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, isPersistent: false);
-                var tokenResult = GenerateJwtToken(model.Login, user);
+                var tokenResult = GenerateJwtToken(model.PhoneNumber, user);
 
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
             }
