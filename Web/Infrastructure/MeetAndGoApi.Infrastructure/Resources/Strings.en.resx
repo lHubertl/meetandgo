@@ -123,6 +123,15 @@
   <data name="V_Code" xml:space="preserve">
     <value>Wrong code format</value>
   </data>
+  <data name="V_DifferentPasswords" xml:space="preserve">
+    <value>Passwords does not matches</value>
+  </data>
+  <data name="V_FirstName" xml:space="preserve">
+    <value>First name can not be empty</value>
+  </data>
+  <data name="V_LastName" xml:space="preserve">
+    <value>Last name can not be empty</value>
+  </data>
   <data name="V_LoginCredentialFail" xml:space="preserve">
     <value>Phone number or password incorrect</value>
   </data>

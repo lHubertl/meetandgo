@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
+using MeetAndGo.Shared.Extensions;
 using MeetAndGo.Shared.Managers;
 using MeetAndGo.Shared.Models.Authorization;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
@@ -49,8 +50,6 @@ namespace MeetAndGoApi.Controllers
         /// <summary>
         /// Check if the user has not registered yet. Otherwise send SMS with a confirmation
         /// </summary>
-        /// <param name="phoneNumber"></param>
-        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IResponse> ConfirmPhoneNumber(MessageConfirmModel model)
@@ -62,7 +61,7 @@ namespace MeetAndGoApi.Controllers
             {
                 return new Response(ResponseCode.RequestError, validator.ToString());
             }
-            
+
             // TODO: implemet checking user and sending sms
 
             throw new NotImplementedException();
@@ -82,6 +81,14 @@ namespace MeetAndGoApi.Controllers
                 return new Response(ResponseCode.RequestError, validator.ToString());
             }
 
+            var phoneNumber = model.PhoneNumber.CleanPhoneNumber();
+
+            _userManager.Users.Any(user => user.PhoneNumber == phoneNumber);
+
+
+
+
+
             // TODO: implement checking sms code
             throw new NotImplementedException();
         }
@@ -92,20 +99,29 @@ namespace MeetAndGoApi.Controllers
         {
             var validator = ValidationManager.Create()
                 .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
+                .Validate(() => model?.FirstName.Length > 0, _localizer.GetString(Strings.V_FirstName))
+                .Validate(() => model?.LastName.Length > 0, _localizer.GetString(Strings.V_LastName))
                 .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber))
-                .ValidatePassword(model?.Password, _localizer.GetString(Strings.V_Password));
+                .ValidatePassword(model?.Password, _localizer.GetString(Strings.V_Password))
+                .Validate(() => model?.Password == model.ConfirmPassword,
+                    _localizer.GetString(Strings.V_DifferentPasswords));
 
             if (!validator.IsValid)
             {
                 return new ResponseData<string>(ResponseCode.RequestError, validator.ToString());
             }
 
-            if (string.IsNullOrWhiteSpace(model.PhoneNumber) || string.IsNullOrWhiteSpace(model.Password))
+            var phoneNumber = model.PhoneNumber.CleanPhoneNumber();
+            var user = new ApplicationUser
             {
-                return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.V_LoginCredentialFail));
-            }
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                UserName = phoneNumber,
+                PhoneNumber = phoneNumber,
+                
+            };
 
-            var user = new ApplicationUser {UserName = model.PhoneNumber};
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -116,7 +132,7 @@ namespace MeetAndGoApi.Controllers
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
             }
 
-            return new ResponseData<string>(ResponseCode.RequestError, result.Errors.FirstOrDefault().Description);
+            return new ResponseData<string>(ResponseCode.RequestError, result.Errors.FirstOrDefault()?.Description);
         }
 
         public async Task<IResponseData<string>> Login(LoginModel model)
@@ -151,7 +167,7 @@ namespace MeetAndGoApi.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        
+
         #endregion
     }
 }

@@ -20,6 +20,9 @@ namespace MeetAndGoApi.Infrastructure.Resources
         V_LoginCredentialFail,
         V_PhoneNumber,
         V_Password,
-        V_Code
+        V_Code,
+        V_DifferentPasswords,
+        V_FirstName,
+        V_LastName,
     }
 }
