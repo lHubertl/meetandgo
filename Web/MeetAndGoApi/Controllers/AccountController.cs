@@ -14,6 +14,7 @@ using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -55,25 +56,7 @@ namespace MeetAndGoApi.Controllers
         public async Task<IResponse> ConfirmPhoneNumber(MessageConfirmModel model)
         {
             var validator = ValidationManager.Create()
-                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
-
-            if (!validator.IsValid)
-            {
-                return new Response(ResponseCode.RequestError, validator.ToString());
-            }
-
-            // TODO: implemet checking user and sending sms
-
-            throw new NotImplementedException();
-        }
-
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IResponse> ConfirmMessageCode(MessageConfirmModel model)
-        {
-            var validator = ValidationManager.Create()
-                .ValidateSmsCode(model?.Code, _localizer.GetString(Strings.V_Code))
+                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
                 .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
 
             if (!validator.IsValid)
@@ -83,11 +66,40 @@ namespace MeetAndGoApi.Controllers
 
             var phoneNumber = model.PhoneNumber.CleanPhoneNumber();
 
-            _userManager.Users.Any(user => user.PhoneNumber == phoneNumber);
+            var result = await _userManager.Users.AnyAsync(user => user.PhoneNumber == phoneNumber);
+            if (result)
+            {
+                return new Response(ResponseCode.RequestError, _localizer.GetString(Strings.V_UserExist));
+            }
+
+            //
+            // TODO: implemet checking user and sending sms
+            //
+            throw new NotImplementedException();
+        }
 
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IResponse> ConfirmMessageCode(MessageConfirmModel model)
+        {
+            var validator = ValidationManager.Create()
+                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
+                .ValidateSmsCode(model?.Code, _localizer.GetString(Strings.V_Code))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
+
+            if (!validator.IsValid)
+            {
+                return new Response(ResponseCode.RequestError, validator.ToString());
+            }
+
+            var phoneNumber = model.PhoneNumber.CleanPhoneNumber();
+            var result = await _userManager.Users.AnyAsync(user => user.PhoneNumber == phoneNumber);
+            if (result)
+            {
 
 
+            }
 
             // TODO: implement checking sms code
             throw new NotImplementedException();
@@ -117,16 +129,14 @@ namespace MeetAndGoApi.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 UserName = phoneNumber,
-                PhoneNumber = phoneNumber,
-                
+                PhoneNumber = phoneNumber
             };
-
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                await _signInManager.SignInAsync(user, model.RememberMe);
                 var tokenResult = GenerateJwtToken(model.PhoneNumber, user);
 
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
@@ -135,9 +145,30 @@ namespace MeetAndGoApi.Controllers
             return new ResponseData<string>(ResponseCode.RequestError, result.Errors.FirstOrDefault()?.Description);
         }
 
-        public async Task<IResponseData<string>> Login(LoginModel model)
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IResponseData<string>> SignIn(LoginModel model)
         {
-            throw new NotImplementedException();
+            var validator = ValidationManager.Create()
+                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber))
+                .ValidatePassword(model?.Password, _localizer.GetString(Strings.V_Password));
+
+            if (!validator.IsValid)
+            {
+                return new ResponseData<string>(ResponseCode.RequestError, validator.ToString());
+            }
+
+            var phoneNumber = model.PhoneNumber.CleanPhoneNumber();
+
+            var result = await _signInManager.PasswordSignInAsync(phoneNumber, model.Password, model.RememberMe, true);
+            if (result.Succeeded)
+            {
+                var tokenResult = GenerateJwtToken(model.PhoneNumber, new ApplicationUser { UserName = phoneNumber});
+                return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
+            }
+            
+            return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.V_SignIn));
         }
 
         #endregion

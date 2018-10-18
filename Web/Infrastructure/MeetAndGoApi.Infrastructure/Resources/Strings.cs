@@ -24,5 +24,7 @@ namespace MeetAndGoApi.Infrastructure.Resources
         V_DifferentPasswords,
         V_FirstName,
         V_LastName,
+        V_UserExist,
+        V_SignIn,
     }
 }

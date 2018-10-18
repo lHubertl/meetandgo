@@ -144,4 +144,10 @@
   <data name="V_PhoneNumber" xml:space="preserve">
     <value>Wrong phone number format. Recommended +(380)93-1234567</value>
   </data>
+  <data name="V_SignIn" xml:space="preserve">
+    <value>Wrong credentials.</value>
+  </data>
+  <data name="V_UserExist" xml:space="preserve">
+    <value>This user name is already taken.</value>
+  </data>
 </root>
