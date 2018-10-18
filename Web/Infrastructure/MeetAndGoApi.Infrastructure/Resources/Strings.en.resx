@@ -120,13 +120,19 @@
   <data name="V_CanNotFindData" xml:space="preserve">
     <value>Can not find the data</value>
   </data>
+  <data name="V_Code" xml:space="preserve">
+    <value>Wrong code format</value>
+  </data>
   <data name="V_LoginCredentialFail" xml:space="preserve">
     <value>Phone number or password incorrect</value>
   </data>
   <data name="V_ParameterCanNotBeNull" xml:space="preserve">
     <value>Parameter can not be null</value>
   </data>
-  <data name="V_PhoneNumberInvalid" xml:space="preserve">
-    <value>Phone number incorrect</value>
+  <data name="V_Password" xml:space="preserve">
+    <value>Minimum six characters, at least one letter and one number, could be one special character</value>
+  </data>
+  <data name="V_PhoneNumber" xml:space="preserve">
+    <value>Wrong phone number format. Recommended +(380)93-1234567</value>
   </data>
 </root>

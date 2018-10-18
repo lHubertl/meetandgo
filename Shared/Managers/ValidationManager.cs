@@ -22,6 +22,13 @@ namespace MeetAndGo.Shared.Managers
 
         public ValidationManager Validate(Func<bool> expression, string error)
         {
+            if (expression is null)
+            {
+                Errors.Add(error);
+                IsValid = false;
+                return this;
+            }
+
             var result = expression.Invoke();
             if (!result)
             {
@@ -36,10 +43,46 @@ namespace MeetAndGo.Shared.Managers
             return this;
         }
 
-        public ValidationManager ValidatePhoneNumber(string phoneNumber, string error)
+        public ValidationManager ValidatePhoneNumber(string value, string error)
         {
+            if (value is null)
+            {
+                Errors.Add(error);
+                IsValid = false;
+                return this;
+            }
+
+            // TODO: check and update mask
             var mask = @"^[+]?[\\(]{0,1}([0-9]){3}[\\)]{0,1}[ ]?([^0-1]){1}([0-9]){2}[ ]?[-]?[ ]?([0-9]){4}[ ]*((x){0,1}([0-9]){1,5}){0,1}$";
-            return Validate(() => Regex.IsMatch(phoneNumber, mask), error);
+            return Validate(() => Regex.IsMatch(value, mask), error);
+        }
+
+        public ValidationManager ValidatePassword(string value, string error)
+        {
+            if (value is null)
+            {
+                Errors.Add(error);
+                IsValid = false;
+                return this;
+            }
+
+            // Minimum six characters, at least one letter and one number, could be one special character
+            var mask = @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&?]{6,}$";
+            return Validate(() => Regex.IsMatch(value, mask), error);
+        }
+
+        public ValidationManager ValidateSmsCode(string value, string error)
+        {
+            if (value is null)
+            {
+                Errors.Add(error);
+                IsValid = false;
+                return this;
+            }
+
+            // Only six digits
+            var mask = @"^[0-9]{6}$";
+            return Validate(() => Regex.IsMatch(value, mask), error);
         }
 
         public override string ToString()

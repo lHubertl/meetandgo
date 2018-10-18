@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
-using MeetAndGo.Shared.Models;
+using MeetAndGo.Shared.Managers;
+using MeetAndGo.Shared.Models.Authorization;
 using MeetAndGoApi.Infrastructure.Dal.Dto;
 using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.AspNetCore.Authorization;
@@ -20,7 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace MeetAndGoApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -44,10 +44,62 @@ namespace MeetAndGoApi.Controllers
             _configuration = configuration;
         }
 
+        #region Api implementation
+
+        /// <summary>
+        /// Check if the user has not registered yet. Otherwise send SMS with a confirmation
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IResponse> ConfirmPhoneNumber(MessageConfirmModel model)
+        {
+            var validator = ValidationManager.Create()
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
+
+            if (!validator.IsValid)
+            {
+                return new Response(ResponseCode.RequestError, validator.ToString());
+            }
+            
+            // TODO: implemet checking user and sending sms
+
+            throw new NotImplementedException();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IResponse> ConfirmMessageCode(MessageConfirmModel model)
+        {
+            var validator = ValidationManager.Create()
+                .ValidateSmsCode(model?.Code, _localizer.GetString(Strings.V_Code))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
+
+            if (!validator.IsValid)
+            {
+                return new Response(ResponseCode.RequestError, validator.ToString());
+            }
+
+            // TODO: implement checking sms code
+            throw new NotImplementedException();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IResponseData<string>> Register(RegisterModel model)
         {
+            var validator = ValidationManager.Create()
+                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber))
+                .ValidatePassword(model?.Password, _localizer.GetString(Strings.V_Password));
+
+            if (!validator.IsValid)
+            {
+                return new ResponseData<string>(ResponseCode.RequestError, validator.ToString());
+            }
+
             if (string.IsNullOrWhiteSpace(model.PhoneNumber) || string.IsNullOrWhiteSpace(model.Password))
             {
                 return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.V_LoginCredentialFail));
@@ -66,6 +118,15 @@ namespace MeetAndGoApi.Controllers
 
             return new ResponseData<string>(ResponseCode.RequestError, result.Errors.FirstOrDefault().Description);
         }
+
+        public async Task<IResponseData<string>> Login(LoginModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Private methods
 
         private object GenerateJwtToken(string email, IdentityUser user)
         {
@@ -90,5 +151,7 @@ namespace MeetAndGoApi.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        
+        #endregion
     }
 }

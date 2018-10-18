@@ -18,6 +18,8 @@ namespace MeetAndGoApi.Infrastructure.Resources
         V_ParameterCanNotBeNull,
         V_CanNotFindData,
         V_LoginCredentialFail,
-        V_PhoneNumberInvalid,
+        V_PhoneNumber,
+        V_Password,
+        V_Code
     }
 }
