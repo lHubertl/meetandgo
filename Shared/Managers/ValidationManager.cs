@@ -41,5 +41,15 @@ namespace MeetAndGo.Shared.Managers
             var mask = @"^[+]?[\\(]{0,1}([0-9]){3}[\\)]{0,1}[ ]?([^0-1]){1}([0-9]){2}[ ]?[-]?[ ]?([0-9]){4}[ ]*((x){0,1}([0-9]){1,5}){0,1}$";
             return Validate(() => Regex.IsMatch(phoneNumber, mask), error);
         }
+
+        public override string ToString()
+        {
+            if (Errors == null)
+            {
+                return string.Empty;
+            }
+
+            return string.Join("\n", Errors);
+        }
     }
 }
