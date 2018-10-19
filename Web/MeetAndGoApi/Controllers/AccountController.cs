@@ -136,7 +136,7 @@ namespace MeetAndGoApi.Controllers
             {
                 await _signInManager.SignInAsync(user, model.RememberMe);
                 var userAccount = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == phoneNumber);
-                var tokenResult = GenerateJwtToken(model.PhoneNumber, userAccount?.Id);
+                var tokenResult = GenerateJwtToken(userAccount?.Id);
 
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
             }
@@ -164,7 +164,7 @@ namespace MeetAndGoApi.Controllers
             if (result.Succeeded)
             {
                 var userAccount = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == phoneNumber);
-                var tokenResult = GenerateJwtToken(model.PhoneNumber, userAccount?.Id);
+                var tokenResult = GenerateJwtToken(userAccount?.Id);
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
             }
             
@@ -175,11 +175,10 @@ namespace MeetAndGoApi.Controllers
 
         #region Private methods
 
-        private object GenerateJwtToken(string identificator, string userId)
+        private object GenerateJwtToken(string userId)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, identificator),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, userId)
             };

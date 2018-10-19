@@ -2,7 +2,7 @@
 {
     public class Response : IResponse
     {
-        public bool IsSuccess => Code == ResponseCode.Ok;
+        public bool Success => Code == ResponseCode.Ok;
 
         public string Message { get; set; }
 

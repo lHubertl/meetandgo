@@ -1,6 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 namespace MeetAndGoApi.Extensions
 {
@@ -8,7 +6,7 @@ namespace MeetAndGoApi.Extensions
     {
         public static string CurrentUserId(this ClaimsPrincipal user)
         {
-            var userClaim = user.Claims.FirstOrDefault(x => x.ValueType == JwtRegisteredClaimNames.Sub);
+            var userClaim = user.FindFirst(ClaimTypes.NameIdentifier);
             return userClaim?.Value;
         }
     }

@@ -52,7 +52,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
             }
 
             var userResult = await _userRepository.GetUserAsync(userId);
-            if (!userResult.IsSuccess)
+            if (!userResult.Success)
             {
                 return userResult;
             }

@@ -137,7 +137,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
                 LastName = "Peterson",
                 MemberRating = 4.9,
                 OrganizerRating = 5,
-                PhoneNumber = "+39032155135",
+                PhoneNumber = "39032155135",
                 Status = UserStatus.Organizer
             };
         }

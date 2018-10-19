@@ -2,7 +2,7 @@
 {
     public interface IResponse
     {
-        bool IsSuccess { get; }
+        bool Success { get; }
         string Message { get; set; }
         ResponseCode Code { get; set; }
     }

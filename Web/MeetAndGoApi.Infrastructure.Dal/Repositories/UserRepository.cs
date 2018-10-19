@@ -3,6 +3,7 @@ using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Dto;
 using MeetAndGoApi.Infrastructure.Resources;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 namespace MeetAndGoApi.Infrastructure.Dal.Repositories
@@ -23,14 +24,14 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
         public async Task<IResponseData<ApplicationUser>> GetUserAsync(string userId)
         {
             // TODO: check it
-            var result = await _dbContext.Users.FindAsync(userId);
+            var userResult = await _dbContext.Users.FindAsync(userId);
 
-            if (result is null)
+            if (userResult is null)
             {
-                new Response(ResponseCode.RequestError, _localizer.GetString(Strings.UserNotFound));
+                return new ResponseData<ApplicationUser>(ResponseCode.RequestError, _localizer.GetString(Strings.UserNotFound));
             }
 
-            return new ResponseData<ApplicationUser>(result);
+            return new ResponseData<ApplicationUser>(userResult);
         }
     }
 }
