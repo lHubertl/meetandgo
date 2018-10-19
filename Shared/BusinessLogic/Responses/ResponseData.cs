@@ -4,7 +4,7 @@
     {
         public T Data { get; set; }
 
-        public ResponseData(T data, ResponseCode code, string message = null)
+        public ResponseData(T data, ResponseCode code = ResponseCode.Ok, string message = null)
             : base(code, message)
         {
             Data = data;

@@ -4,7 +4,7 @@ using AutoMapper;
 using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using MeetAndGoApi.Infrastructure.Dal;
-using MeetAndGoApi.Infrastructure.Dal.Dto;
+using MeetAndGoApi.Infrastructure.Dto;
 using NUnit.Framework;
 
 namespace MeetAndGoApi.UnitTests.Dal.MapperTests

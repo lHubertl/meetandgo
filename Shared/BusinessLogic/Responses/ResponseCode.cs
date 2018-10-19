@@ -6,5 +6,6 @@
         ServerError,
         ParameterIsNull,
         RequestError,
+        ValidationError,
     }
 }

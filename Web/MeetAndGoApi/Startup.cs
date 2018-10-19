@@ -2,13 +2,13 @@
 using System.Globalization;
 using System.Text;
 using AutoMapper;
-using MeetAndGoApi.Domain.Services;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Contracts.Service;
 using MeetAndGoApi.Infrastructure.Dal;
-using MeetAndGoApi.Infrastructure.Dal.Context;
-using MeetAndGoApi.Infrastructure.Dal.Dto;
 using MeetAndGoApi.Infrastructure.Dal.Repositories;
+using MeetAndGoApi.Infrastructure.Domain.Services;
+using MeetAndGoApi.Infrastructure.Dto;
+using MeetAndGoApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -71,7 +71,10 @@ namespace MeetAndGoApi
         private void RegisterDependencyContainer(IServiceCollection services)
         {
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         private void ConfigureDbContexts(IServiceCollection services)

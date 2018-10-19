@@ -9,7 +9,7 @@ using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Extensions;
 using MeetAndGo.Shared.Managers;
 using MeetAndGo.Shared.Models.Authorization;
-using MeetAndGoApi.Infrastructure.Dal.Dto;
+using MeetAndGoApi.Infrastructure.Dto;
 using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -56,8 +56,8 @@ namespace MeetAndGoApi.Controllers
         public async Task<IResponse> ConfirmPhoneNumber(MessageConfirmModel model)
         {
             var validator = ValidationManager.Create()
-                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
-                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
+                .Validate(() => model != null, _localizer.GetString(Strings.ParameterCanNotBeNull))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.PhoneNumber));
 
             if (!validator.IsValid)
             {
@@ -69,7 +69,7 @@ namespace MeetAndGoApi.Controllers
             var result = await _userManager.Users.AnyAsync(user => user.PhoneNumber == phoneNumber);
             if (result)
             {
-                return new Response(ResponseCode.RequestError, _localizer.GetString(Strings.V_UserExist));
+                return new Response(ResponseCode.RequestError, _localizer.GetString(Strings.UserExist));
             }
 
             //
@@ -78,15 +78,14 @@ namespace MeetAndGoApi.Controllers
             throw new NotImplementedException();
         }
 
-
         [HttpPost]
         [AllowAnonymous]
         public async Task<IResponse> ConfirmMessageCode(MessageConfirmModel model)
         {
             var validator = ValidationManager.Create()
-                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
-                .ValidateSmsCode(model?.Code, _localizer.GetString(Strings.V_Code))
-                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber));
+                .Validate(() => model != null, _localizer.GetString(Strings.ParameterCanNotBeNull))
+                .ValidateSmsCode(model?.Code, _localizer.GetString(Strings.Code))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.PhoneNumber));
 
             if (!validator.IsValid)
             {
@@ -97,7 +96,6 @@ namespace MeetAndGoApi.Controllers
             var result = await _userManager.Users.AnyAsync(user => user.PhoneNumber == phoneNumber);
             if (result)
             {
-
 
             }
 
@@ -110,13 +108,13 @@ namespace MeetAndGoApi.Controllers
         public async Task<IResponseData<string>> Register(RegisterModel model)
         {
             var validator = ValidationManager.Create()
-                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
-                .Validate(() => model?.FirstName.Length > 0, _localizer.GetString(Strings.V_FirstName))
-                .Validate(() => model?.LastName.Length > 0, _localizer.GetString(Strings.V_LastName))
-                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber))
-                .ValidatePassword(model?.Password, _localizer.GetString(Strings.V_Password))
+                .Validate(() => model != null, _localizer.GetString(Strings.ParameterCanNotBeNull))
+                .Validate(() => model?.FirstName.Length > 0, _localizer.GetString(Strings.FirstName))
+                .Validate(() => model?.LastName.Length > 0, _localizer.GetString(Strings.LastName))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.PhoneNumber))
+                .ValidatePassword(model?.Password, _localizer.GetString(Strings.Password))
                 .Validate(() => model?.Password == model.ConfirmPassword,
-                    _localizer.GetString(Strings.V_DifferentPasswords));
+                    _localizer.GetString(Strings.DifferentPasswords));
 
             if (!validator.IsValid)
             {
@@ -137,7 +135,8 @@ namespace MeetAndGoApi.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, model.RememberMe);
-                var tokenResult = GenerateJwtToken(model.PhoneNumber, user);
+                var userAccount = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == phoneNumber);
+                var tokenResult = GenerateJwtToken(model.PhoneNumber, userAccount?.Id);
 
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
             }
@@ -150,9 +149,9 @@ namespace MeetAndGoApi.Controllers
         public async Task<IResponseData<string>> SignIn(LoginModel model)
         {
             var validator = ValidationManager.Create()
-                .Validate(() => model != null, _localizer.GetString(Strings.V_ParameterCanNotBeNull))
-                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.V_PhoneNumber))
-                .ValidatePassword(model?.Password, _localizer.GetString(Strings.V_Password));
+                .Validate(() => model != null, _localizer.GetString(Strings.ParameterCanNotBeNull))
+                .ValidatePhoneNumber(model?.PhoneNumber, _localizer.GetString(Strings.PhoneNumber))
+                .ValidatePassword(model?.Password, _localizer.GetString(Strings.Password));
 
             if (!validator.IsValid)
             {
@@ -164,24 +163,25 @@ namespace MeetAndGoApi.Controllers
             var result = await _signInManager.PasswordSignInAsync(phoneNumber, model.Password, model.RememberMe, true);
             if (result.Succeeded)
             {
-                var tokenResult = GenerateJwtToken(model.PhoneNumber, new ApplicationUser { UserName = phoneNumber});
+                var userAccount = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == phoneNumber);
+                var tokenResult = GenerateJwtToken(model.PhoneNumber, userAccount?.Id);
                 return new ResponseData<string>(tokenResult.ToString(), ResponseCode.Ok);
             }
             
-            return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.V_SignIn));
+            return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.SignIn));
         }
 
         #endregion
 
         #region Private methods
 
-        private object GenerateJwtToken(string email, IdentityUser user)
+        private object GenerateJwtToken(string identificator, string userId)
         {
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
+                new Claim(JwtRegisteredClaimNames.Sub, identificator),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, userId)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));

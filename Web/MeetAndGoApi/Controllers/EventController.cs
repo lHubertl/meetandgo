@@ -1,46 +1,56 @@
 ﻿using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Models;
-using MeetAndGoApi.Infrastructure.Contracts.Repository;
+using MeetAndGoApi.Extensions;
+using MeetAndGoApi.Infrastructure.Contracts.Service;
+using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 
 namespace MeetAndGoApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [Authorize]
     [ApiController]
     public class EventController : ControllerBase
     {
         #region Private fields
 
-        private readonly IEventRepository _eventRepository;
+        private readonly IStringLocalizer<Strings> _localizer;
+        private readonly IEventService _service;
+        private readonly ILogger _logger;
 
         #endregion
 
         #region Constructor
 
-        public EventController(IEventRepository eventRepository)
+        public EventController(
+            IEventService service,
+            IStringLocalizer<Strings> localizer,
+            ILogger<AccountController> logger)
         {
-            _eventRepository = eventRepository;
+            _service = service;
+            _logger = logger;
+            _localizer = localizer;
         }
 
         #endregion
 
         #region Api methods
 
-        [HttpGet]
-        public async Task<IResponseData<IEnumerable<EventModel>>> GetAsync()
+        [HttpPost]
+        public Task<IResponseData<IEnumerable<EventModel>>> GetNearestEvents(IEnumerable<PointModel> directions)
         {
-            return await _eventRepository.ReadAsync();
+            return _service.ReadAsync(directions);
         }
 
         [HttpPost]
-        public async Task<IResponse> CreateAsync([FromBody] EventModel eventModel)
+        public Task<IResponse> Create([FromBody] EventModel eventModel)
         {
-            return await _eventRepository.CreateAsync(eventModel);
+            return _service.CreateAsync(eventModel, User.CurrentUserId());
         }
         
         #endregion
