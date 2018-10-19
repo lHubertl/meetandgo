@@ -70,6 +70,8 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 
         public async Task<IResponseData<IEnumerable<EventModel>>> ReadAsync(IEnumerable<PointModel> directions)
         {
+            // TODO: need to impelemt finding only near 1 km events
+
             var eventDtos = await _dbContext.Events.
                 Include(x => x.CommentDtos).
                 Include(x => x.PointDtos).
