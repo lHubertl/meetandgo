@@ -39,8 +39,8 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
 
             #region Save event by user 1
 
-            var point1 = GetMockedPointDto();
-            var point2 = GetMockedPointDto();
+            var point1 = GetMockedPointDto(49.809711, 24.040235);
+            var point2 = GetMockedPointDto(49.839282, 24.033116);
 
             user1 = context.Users.FirstOrDefault();
             var eventDto = GetMockedEventDto();
@@ -153,13 +153,13 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             };
         }
 
-        private PointDto GetMockedPointDto()
+        private PointDto GetMockedPointDto(double lat, double longi)
         {
             return new PointDto
             {
                 PointDtoId = Guid.NewGuid(),
-                Lat = 4.523234234,
-                Long = 0.23553224,
+                Lat = lat,
+                Long = longi,
                 Name = "TEst Point"
             };
         }
