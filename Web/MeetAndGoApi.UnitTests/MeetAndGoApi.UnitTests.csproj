@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MeetAndGoApi.Infrastructure.Dal\MeetAndGoApi.Infrastructure.Dal.csproj" />
+    <ProjectReference Include="..\MeetAndGoApi.Infrastructure.Dal\MeetAndGoApi.Infrastructure.Dal.csproj" />
   </ItemGroup>
 
 </Project>
