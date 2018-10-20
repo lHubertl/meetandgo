@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
 using Prism;
 using Prism.Ioc;
 
@@ -19,6 +20,12 @@ namespace MeetAndGoMobile.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
+            {
+                // Full screen with visible status bar
+                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+            }
 
             base.OnCreate(bundle);
 
