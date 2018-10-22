@@ -2,8 +2,9 @@
 using Prism.Ioc;
 using MeetAndGoMobile.ViewModels;
 using MeetAndGoMobile.Views;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MeetAndGoMobile.Infrastructure.Resources;
+using Plugin.Multilingual;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MeetAndGoMobile
@@ -23,13 +24,16 @@ namespace MeetAndGoMobile
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            // Set current device language to application
+            Strings.Culture = CrossMultilingual.Current.CurrentCultureInfo;
+
+            await NavigationService.NavigateAsync($"{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
         }
     }
 }

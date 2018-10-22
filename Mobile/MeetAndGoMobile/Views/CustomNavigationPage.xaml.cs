@@ -2,9 +2,9 @@
 
 namespace MeetAndGoMobile.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class CustomNavigationPage : NavigationPage
     {
-        public MainPage()
+        public CustomNavigationPage()
         {
             InitializeComponent();
         }
