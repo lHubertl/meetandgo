@@ -46,6 +46,12 @@
       <string>Icon-Small@2x</string>
       <string>Icon-Small@3x</string>
     </array>
+    <key>UIAppFonts</key>
+    <array>
+      <string>Resources/Fonts/Nunito-Bold.ttf</string>
+      <string>Resources/Fonts/Nunito-Light.ttf</string>
+      <string>Resources/Fonts/Nunito-Regular.ttf</string>
+    </array>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
   </dict>

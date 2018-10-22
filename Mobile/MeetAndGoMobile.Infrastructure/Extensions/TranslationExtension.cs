@@ -1,5 +1,6 @@
 ﻿using MeetAndGoMobile.Infrastructure.Resources;
 using System;
+using System.Reflection;
 using System.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

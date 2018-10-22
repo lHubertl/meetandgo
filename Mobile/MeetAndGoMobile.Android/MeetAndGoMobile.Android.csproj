@@ -72,6 +72,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Nunito-Bold.ttf" />
+    <AndroidAsset Include="Assets\Nunito-Light.ttf" />
+    <AndroidAsset Include="Assets\Nunito-Regular.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

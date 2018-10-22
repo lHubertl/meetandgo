@@ -139,6 +139,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Fonts\Nunito-Bold.ttf" />
+    <Content Include="Assets\Fonts\Nunito-Light.ttf" />
+    <Content Include="Assets\Fonts\Nunito-Regular.ttf" />
     <None Include="MeetAndGoMobile.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

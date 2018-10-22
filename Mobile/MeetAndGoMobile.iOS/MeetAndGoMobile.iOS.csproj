@@ -91,11 +91,16 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
-    <None Include="Info.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork@1x.png" />
     <ITunesArtwork Include="iTunesArtwork@2x.png" />
     <ITunesArtwork Include="iTunesArtwork@3x.png" />
+    <BundleResource Include="Resources\Fonts\Nunito-Bold.ttf" />
+    <BundleResource Include="Resources\Fonts\Nunito-Light.ttf" />
+    <BundleResource Include="Resources\Fonts\Nunito-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
