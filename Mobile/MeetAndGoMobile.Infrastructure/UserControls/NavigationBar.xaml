@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="MeetAndGoMobile.Infrastructure.UserControls.NavigationBar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants"
+    ColumnSpacing="0">
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
+                <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.Default}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+
+    <StackLayout
+        x:Name="LeftStackLayout"
+        Grid.Column="0"
+        Padding="10,0"
+        Orientation="Horizontal"
+        Spacing="5"
+        VerticalOptions="FillAndExpand">
+        <Image
+            x:Name="LeftImage"
+            IsVisible="False"
+            VerticalOptions="Center" />
+        <Label
+            x:Name="LeftLabel"
+            LineBreakMode="TailTruncation"
+            Style="{StaticResource LabelStyle}" />
+    </StackLayout>
+
+    <!--  Title  -->
+    <Label
+        x:Name="TitleLabel"
+        Grid.Column="1"
+        HorizontalOptions="FillAndExpand"
+        HorizontalTextAlignment="Center"
+        Style="{StaticResource LabelStyle}" />
+
+    <StackLayout
+        x:Name="RightStackLayout"
+        Grid.Column="2"
+        Padding="0,0,10,0"
+        HorizontalOptions="End"
+        Orientation="Horizontal"
+        Spacing="5"
+        VerticalOptions="FillAndExpand">
+        <Label
+            x:Name="RightLabel"
+            LineBreakMode="TailTruncation"
+            Style="{StaticResource LabelStyle}" />
+        <Image
+            x:Name="RightImage"
+            IsVisible="False"
+            VerticalOptions="Center" />
+    </StackLayout>
+
+</Grid>

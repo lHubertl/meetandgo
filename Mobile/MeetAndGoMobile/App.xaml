@@ -3,10 +3,20 @@
     x:Class="MeetAndGoMobile.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms">
+    xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+    xmlns:userControls="clr-namespace:MeetAndGoMobile.Infrastructure.UserControls;assembly=MeetAndGoMobile.Infrastructure">
     <Application.Resources>
 
         <!--  Application resource dictionary  -->
+        <ResourceDictionary>
 
+            <ControlTemplate x:Key="BaseContentTemplate">
+                <userControls:BaseContentTemplate
+                    BindingContext="{TemplateBinding BindingContext}"
+                    HasNavigationBar="False"
+                    NavigationBar="{Binding NavigationBar}" />
+            </ControlTemplate>
+
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using MeetAndGoMobile.Infrastructure.UserControls.ViewModels;
+using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace MeetAndGoMobile.ViewModels
@@ -7,11 +8,11 @@ namespace MeetAndGoMobile.ViewModels
     {
         protected INavigationService NavigationService { get; private set; }
 
-        private string _title;
-        public string Title
+        private NavigationBarViewModel _navigationBar;
+        public NavigationBarViewModel NavigationBar
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get { return _navigationBar; }
+            set { SetProperty(ref _navigationBar, value); }
         }
 
         public ViewModelBase(INavigationService navigationService)

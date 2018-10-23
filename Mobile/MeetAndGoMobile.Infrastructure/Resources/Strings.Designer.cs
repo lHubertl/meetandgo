@@ -59,5 +59,23 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meet &amp; Go.
+        /// </summary>
+        public static string MeetAndGo {
+            get {
+                return ResourceManager.GetString("MeetAndGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MEET &amp; GO.
+        /// </summary>
+        public static string U_MeetAndGo {
+            get {
+                return ResourceManager.GetString("U_MeetAndGo", resourceCulture);
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace MeetAndGoMobile.ViewModels
         public SignUpPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Main Page";
         }
     }
 }

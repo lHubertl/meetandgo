@@ -113,6 +113,8 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="scale-100\mg_pin.png" />
+    <Content Include="scale-200\mg_pin.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -143,6 +145,10 @@
     <Content Include="Assets\Fonts\Nunito-Light.ttf" />
     <Content Include="Assets\Fonts\Nunito-Regular.ttf" />
     <None Include="MeetAndGoMobile.UWP_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scale-125\" />
+    <Folder Include="scale-400\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -3,20 +3,18 @@
     x:Class="MeetAndGoMobile.Views.SignUpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}">
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:userControls="clr-namespace:MeetAndGoMobile.Infrastructure.UserControls;assembly=MeetAndGoMobile.Infrastructure"
+    BackgroundColor="{x:Static constants:Colors.BgrBrown}"
+    ControlTemplate="{StaticResource BaseContentTemplate}"
+    NavigationPage.HasNavigationBar="False">
 
-    <NavigationPage.TitleView>
-        <StackLayout
-            BackgroundColor="Red"
-            HeightRequest="100"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand">
-            <Button Text="Click" />
-        </StackLayout>
-    </NavigationPage.TitleView>
+    <FlexLayout Direction="Row">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
-    </StackLayout>
+        <Image Source="mg_pin.png" />
+        <Label Text="{extensions:Translation U_MeetAndGo}" />
+
+    </FlexLayout>
 
 </ContentPage>
