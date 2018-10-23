@@ -2,20 +2,4 @@
     x:Class="MeetAndGoMobile.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:userControls="clr-namespace:MeetAndGoMobile.Infrastructure.UserControls;assembly=MeetAndGoMobile.Infrastructure"
-    RequestedTheme="Light">
-
-    <Application.Resources>
-        <ResourceDictionary>
-
-            <ControlTemplate x:Key="BaseContentTemplate">
-                <userControls:BaseContentTemplate
-                    BindingContext="{TemplateBinding BindingContext}"
-                    HasNavigationBar="False"
-                    NavigationBar="{Binding NavigationBar}" />
-            </ControlTemplate>
-
-        </ResourceDictionary>
-    </Application.Resources>
-
-</Application>
+    RequestedTheme="Light" />
