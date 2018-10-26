@@ -61,11 +61,65 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already have and Account?.
+        /// </summary>
+        public static string AlreadyHaveAccount {
+            get {
+                return ResourceManager.GetString("AlreadyHaveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By signing up You agree to out.
+        /// </summary>
+        public static string BySigningYourAgree {
+            get {
+                return ResourceManager.GetString("BySigningYourAgree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        public static string Continue {
+            get {
+                return ResourceManager.GetString("Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entry Your Phone Number.
+        /// </summary>
+        public static string EntryYourPhoneNumber {
+            get {
+                return ResourceManager.GetString("EntryYourPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meet &amp; Go.
         /// </summary>
         public static string MeetAndGo {
             get {
                 return ResourceManager.GetString("MeetAndGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign In.
+        /// </summary>
+        public static string SignIn {
+            get {
+                return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terms &amp; Privacy Policy.
+        /// </summary>
+        public static string TermsAndPolicy {
+            get {
+                return ResourceManager.GetString("TermsAndPolicy", resourceCulture);
             }
         }
         

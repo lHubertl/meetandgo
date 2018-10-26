@@ -7,6 +7,8 @@
         public static readonly double Medium;
         public static readonly double Large;
         public static readonly double ExtraLarge;
+        public static readonly double XxLarge;
+        public static readonly double XxxLarge;
 
         static FontSize()
         {
@@ -15,6 +17,8 @@
             Medium = 12;
             Large = 14;
             ExtraLarge = 16;
+            XxLarge = 18;
+            XxxLarge = 20;
         }
     }
 }
