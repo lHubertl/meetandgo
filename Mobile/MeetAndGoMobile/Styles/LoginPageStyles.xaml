@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="MeetAndGoMobile.Styles.LoginPageStyles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure">
+
+    <x:Double x:Key="ContentWidth">200</x:Double>
+
+    <!--  Label Logo style  -->
+
+    <Style x:Key="LabelLogoStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.XxxLarge}" />
+        <Setter Property="Text" Value="{extensions:Translation U_MeetAndGo}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <!--  Button style  -->
+
+    <Style x:Key="ButtonGreenStyle" TargetType="{x:Type controls:ExtendedButton}">
+        <Setter Property="BorderColor" Value="{x:Static constants:Colors.Green}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="TextColor" Value="{x:Static constants:Colors.Green}" />
+        <Setter Property="RoundedHorizontally" Value="true" />
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
+    </Style>
+
+    <!--  Entry Label Info style  -->
+
+    <Style x:Key="EntryLabelInfoStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{x:Static constants:Colors.Gray}" />
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.Large}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+
+    <!--  Entry style  -->
+
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="Keyboard" Value="Telephone" />
+    </Style>
+
+</ResourceDictionary>
+
