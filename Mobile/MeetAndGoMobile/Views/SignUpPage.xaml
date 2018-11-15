@@ -3,8 +3,8 @@
     x:Class="MeetAndGoMobile.Views.SignUpPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behaviours="clr-namespace:MeetAndGoMobile.Infrastructure.Behaviours;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
     BackgroundColor="{x:Static constants:Colors.BgrBrown}"
@@ -14,8 +14,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-
-            <x:Double x:Key="ContentWidth">250</x:Double>
+            <x:Double x:Key="ContentWidth">200</x:Double>
 
             <!--  Flex Layout style  -->
 
@@ -31,23 +30,18 @@
                 <Setter Property="FontSize" Value="{x:Static constants:FontSize.XxxLarge}" />
                 <Setter Property="Text" Value="{extensions:Translation U_MeetAndGo}" />
                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
-            <!--  Button frame style  -->
+            <!--  Button style  -->
 
-            <Style x:Key="ButtonFrameGreenStyle" TargetType="Frame">
+            <Style x:Key="ButtonGreenStyle" TargetType="{x:Type controls:ExtendedButton}">
                 <Setter Property="BorderColor" Value="{x:Static constants:Colors.Green}" />
+                <Setter Property="BorderWidth" Value="1" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="HasShadow" Value="False" />
-                <Setter Property="WidthRequest" Value="{StaticResource ContentWidth}" />
                 <Setter Property="Padding" Value="15" />
-            </Style>
-
-            <!--  Button Label style  -->
-
-            <Style x:Key="ButtonLabelGreenStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{x:Static constants:Colors.Green}" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="RoundedHorizontally" Value="true" />
                 <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
             </Style>
 
@@ -56,7 +50,6 @@
             <Style x:Key="EntryLabelInfoStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{x:Static constants:Colors.Gray}" />
                 <Setter Property="FontSize" Value="{x:Static constants:FontSize.Large}" />
-                <Setter Property="WidthRequest" Value="{StaticResource ContentWidth}" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>
 
@@ -64,18 +57,23 @@
 
             <Style x:Key="EntryStyle" TargetType="Entry">
                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="WidthRequest" Value="{StaticResource ContentWidth}" />
+                <Setter Property="Keyboard" Value="Telephone" />
             </Style>
 
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <FlexLayout>
+    <StackLayout
+        Margin="0,40"
+        HorizontalOptions="Center"
+        WidthRequest="{StaticResource ContentWidth}">
 
-        <Image Source="mg_pin.png" />
-
-        <Label Style="{StaticResource LabelLogoStyle}" />
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="mg_pin.png" />
+            <Label Style="{StaticResource LabelLogoStyle}" />
+        </StackLayout>
 
         <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EntryYourPhoneNumber}" />
 
@@ -88,23 +86,17 @@
             </Entry.Effects>
         </Entry>
 
-        <Frame Style="{StaticResource ButtonFrameGreenStyle}">
-
-            <Frame.Behaviors>
-                <behaviours:FrameHorizontalRoundingBehavior />
-            </Frame.Behaviors>
-
-            <Frame.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ContinueCommand}" />
-            </Frame.GestureRecognizers>
-
-            <Label Style="{StaticResource ButtonLabelGreenStyle}" Text="{extensions:Translation Continue}" />
-
-        </Frame>
+        <controls:ExtendedButton
+            Margin="0,30"
+            Style="{StaticResource ButtonGreenStyle}"
+            Text="{extensions:Translation Continue}" />
 
         <!--  Terms  -->
 
-        <Label FontSize="{x:Static constants:FontSize.Medium}" HorizontalTextAlignment="Center">
+        <Label
+            FontSize="{x:Static constants:FontSize.Medium}"
+            HorizontalTextAlignment="Center"
+            VerticalOptions="StartAndExpand">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{extensions:Translation BySigningYourAgree}" TextColor="{x:Static constants:Colors.DarkGray}" />
@@ -126,7 +118,7 @@
                 <FormattedString>
                     <Span Text="{extensions:Translation AlreadyHaveAccount}" TextColor="{x:Static constants:Colors.DarkGray}" />
                     <Span Text="&#x0a;" />
-                    <Span Text="{extensions:Translation SignInCommand}" TextColor="{x:Static constants:Colors.Green}" />
+                    <Span Text="{extensions:Translation SignIn}" TextColor="{x:Static constants:Colors.Green}" />
                 </FormattedString>
             </Label.FormattedText>
 
@@ -136,6 +128,6 @@
 
         </Label>
 
-    </FlexLayout>
+    </StackLayout>
 
 </ContentPage>

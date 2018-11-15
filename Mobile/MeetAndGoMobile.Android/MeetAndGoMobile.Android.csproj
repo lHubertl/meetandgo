@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Effects\SimplifyEntryEffect.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\ExtendedButtonRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,6 +98,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MeetAndGoMobile.Infrastructure\MeetAndGoMobile.Infrastructure.csproj">
+      <Project>{34E05337-1EAE-4E99-ACD4-98DFA8F733AC}</Project>
+      <Name>MeetAndGoMobile.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeetAndGoMobile\MeetAndGoMobile.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>MeetAndGoMobile</Name>
