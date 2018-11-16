@@ -79,11 +79,47 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
         public static string Continue {
             get {
                 return ResourceManager.GetString("Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Account.
+        /// </summary>
+        public static string CreateAccount {
+            get {
+                return ResourceManager.GetString("CreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Password.
+        /// </summary>
+        public static string CreatePassword {
+            get {
+                return ResourceManager.GetString("CreatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Confirmation Core.
+        /// </summary>
+        public static string EnterConfirmationCode {
+            get {
+                return ResourceManager.GetString("EnterConfirmationCode", resourceCulture);
             }
         }
         
@@ -129,6 +165,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string U_MeetAndGo {
             get {
                 return ResourceManager.GetString("U_MeetAndGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Name.
+        /// </summary>
+        public static string YourName {
+            get {
+                return ResourceManager.GetString("YourName", resourceCulture);
             }
         }
     }

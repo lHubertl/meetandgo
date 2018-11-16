@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MeetAndGoMobile.Views.ConfirmPhonePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{x:Static constants:Colors.BgrBrown}"
+    ControlTemplate="{StaticResource BaseContentTemplate}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/LoginPageStyles.xaml" />
+    </ContentPage.Resources>
+
+    <StackLayout
+        Margin="0,40"
+        HorizontalOptions="Center"
+        WidthRequest="{StaticResource ContentWidth}">
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="mg_pin.png" />
+            <Label Style="{StaticResource LabelLogoStyle}" />
+        </StackLayout>
+
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EnterConfirmationCode}" />
+
+            <Entry
+                Margin="0"
+                Style="{StaticResource EntryStyle}"
+                Text="{Binding ConfirmationCode}">
+                <Entry.Effects>
+                    <effects:SimplifyEntryEffect />
+                </Entry.Effects>
+            </Entry>
+
+            <controls:ExtendedButton
+                Margin="0,30"
+                Command="{Binding ContinueCommand}"
+                Style="{StaticResource ButtonGreenStyle}"
+                Text="{extensions:Translation Continue}" />
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

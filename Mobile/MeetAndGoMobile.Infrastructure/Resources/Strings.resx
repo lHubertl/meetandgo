@@ -123,8 +123,20 @@
   <data name="BySigningYourAgree" xml:space="preserve">
     <value>By signing up You agree to out</value>
   </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="CreatePassword" xml:space="preserve">
+    <value>Create Password</value>
+  </data>
+  <data name="EnterConfirmationCode" xml:space="preserve">
+    <value>Enter Confirmation Core</value>
   </data>
   <data name="EntryYourPhoneNumber" xml:space="preserve">
     <value>Entry Your Phone Number</value>
@@ -140,5 +152,8 @@
   </data>
   <data name="U_MeetAndGo" xml:space="preserve">
     <value>MEET &amp; GO</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Your Name</value>
   </data>
 </root>

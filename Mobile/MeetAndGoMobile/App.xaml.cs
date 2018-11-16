@@ -34,6 +34,8 @@ namespace MeetAndGoMobile
         {
             containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
+            containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
         }
     }
 }

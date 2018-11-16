@@ -21,49 +21,58 @@
         WidthRequest="{StaticResource ContentWidth}">
 
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Image Source="mg_pin.png" />
-            <Label Style="{StaticResource LabelLogoStyle}" />
+            <Image Source="mg_pin.png" VerticalOptions="End" />
+            <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
         </StackLayout>
 
-        <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EntryYourPhoneNumber}" />
+        <StackLayout VerticalOptions="Center">
+            <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EntryYourPhoneNumber}" />
 
-        <Entry
-            Margin="0"
-            Style="{StaticResource EntryStyle}"
-            Text="{Binding PhoneNumberText}">
-            <Entry.Effects>
-                <effects:SimplifyEntryEffect />
-            </Entry.Effects>
-        </Entry>
+            <Entry
+                Margin="0"
+                Style="{StaticResource EntryStyle}"
+                Text="{Binding PhoneNumberText}">
+                <Entry.Effects>
+                    <effects:SimplifyEntryEffect />
+                </Entry.Effects>
+            </Entry>
 
-        <controls:ExtendedButton
-            Margin="0,30"
-            Style="{StaticResource ButtonGreenStyle}"
-            Text="{extensions:Translation Continue}" />
+            <controls:ExtendedButton
+                Margin="0,30"
+                Command="{Binding ContinueCommand}"
+                Style="{StaticResource ButtonGreenStyle}"
+                Text="{extensions:Translation Continue}"
+                VerticalOptions="Center" />
 
-        <!--  Terms  -->
+            <!--  Terms  -->
 
-        <Label
-            FontSize="{x:Static constants:FontSize.Medium}"
-            HorizontalTextAlignment="Center"
-            VerticalOptions="StartAndExpand">
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span Text="{extensions:Translation BySigningYourAgree}" TextColor="{x:Static constants:Colors.DarkGray}" />
-                    <Span Text="&#x0a;" />
-                    <Span Text="{extensions:Translation TermsAndPolicy}" TextColor="{x:Static constants:Colors.Gray}" />
-                </FormattedString>
-            </Label.FormattedText>
+            <Label
+                FontSize="{x:Static constants:FontSize.Medium}"
+                HorizontalTextAlignment="Center"
+                VerticalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{extensions:Translation BySigningYourAgree}" TextColor="{x:Static constants:Colors.DarkGray}" />
+                        <Span Text="&#x0a;" />
+                        <Span Text="{extensions:Translation TermsAndPolicy}" TextColor="{x:Static constants:Colors.Gray}" />
+                    </FormattedString>
+                </Label.FormattedText>
 
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding TermCommand}" />
-            </Label.GestureRecognizers>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TermCommand}" />
+                </Label.GestureRecognizers>
 
-        </Label>
+            </Label>
+
+
+        </StackLayout>
 
         <!--  Sign In  -->
 
-        <Label FontSize="{x:Static constants:FontSize.Large}" HorizontalTextAlignment="Center">
+        <Label
+            FontSize="{x:Static constants:FontSize.Large}"
+            HorizontalTextAlignment="Center"
+            VerticalOptions="EndAndExpand">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{extensions:Translation AlreadyHaveAccount}" TextColor="{x:Static constants:Colors.DarkGray}" />

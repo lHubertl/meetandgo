@@ -1,8 +1,8 @@
 ﻿using Prism.Navigation;
 using System.Windows.Input;
-using Prism.Commands;
 using System.Threading.Tasks;
-using System;
+using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Views;
 
 namespace MeetAndGoMobile.ViewModels
 {
@@ -11,15 +11,15 @@ namespace MeetAndGoMobile.ViewModels
         private string _phoneNumberText;
         public string PhoneNumberText
         {
-            get { return _phoneNumberText; }
-            set { SetProperty(ref _phoneNumberText, value); }
+            get => _phoneNumberText;
+            set => SetProperty(ref _phoneNumberText, value);
         }
         
-        public ICommand SignInCommand => new DelegateCommand(async () => await ExecuteSignInCommandAsync());
+        public ICommand SignInCommand => new SingleExecutionCommand(async () => await ExecuteSignInCommandAsync());
         
-        public ICommand TermCommand => new DelegateCommand(async() => await ExecuteTermCommandAsync());
+        public ICommand TermCommand => new SingleExecutionCommand(async() => await ExecuteTermCommandAsync());
 
-        public ICommand ContinueCommand => new DelegateCommand(async () => await ExecuteContinueCommandAsync());
+        public ICommand ContinueCommand => new SingleExecutionCommand(async () => await ExecuteContinueCommandAsync());
 
         public SignUpPageViewModel(INavigationService navigationService)
             : base(navigationService)
@@ -28,17 +28,17 @@ namespace MeetAndGoMobile.ViewModels
 
         private Task ExecuteContinueCommandAsync()
         {
-            throw new NotImplementedException();
+            return NavigationService.NavigateAsync(nameof(ConfirmPhonePage));
         }
 
-        private Task ExecuteSignInCommandAsync()
+        private async Task ExecuteSignInCommandAsync()
         {
-            throw new NotImplementedException();
+
         }
 
-        private Task ExecuteTermCommandAsync()
+        private async Task ExecuteTermCommandAsync()
         {
-            throw new NotImplementedException();
+
         }
 
     }

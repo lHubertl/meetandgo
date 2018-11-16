@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace MeetAndGoMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SignUpPage : ContentPage
+    public partial class ConfirmPhonePage : ContentPage
     {
-        public SignUpPage()
+        public ConfirmPhonePage()
         {
             InitializeComponent();
         }
