@@ -115,7 +115,6 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="scale-100\mg_pin.png" />
-    <Content Include="scale-200\mg_pin.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -149,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scale-125\" />
+    <Folder Include="scale-200\" />
     <Folder Include="scale-400\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
