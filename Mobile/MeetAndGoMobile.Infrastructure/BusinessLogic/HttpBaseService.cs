@@ -138,7 +138,7 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
             }
         }
 
-        protected IResponseData<T> GetValueFromJson<T>(string json, string property)
+        protected IResponseData<T> GetResponseDataFromJson<T>(string json)
         {
             if (string.IsNullOrEmpty(json))
             {
@@ -147,51 +147,8 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
 
             try
             {
-                var jsonObject = (JObject)JsonConvert.DeserializeObject(json);
-
-                if (jsonObject.TryGetValue(property, out var contentObject))
-                {
-                    T tObject;
-
-                    try
-                    {
-                        tObject = contentObject.ToObject<T>();
-                    }
-                    catch (JsonReaderException e)
-                    {
-                        //_logger.Fatal(e.Message, e);
-                        return new ResponseData<T>(ResponseCode.JsonFail, e.Message);
-                    }
-
-                    return new ResponseData<T>(tObject, ResponseCode.Ok);
-                }
-                return new ResponseData<T>(ResponseCode.ServerError, $"{Strings.E_CanNotFindPropertyInJson}\n \"{property}\"");
-            }
-
-            catch (NullReferenceException e)
-            {
-                //_logger.Error(string.Empty, e);
-                return new ResponseData<T>(ResponseCode.Exception, e.Message);
-            }
-
-            catch (Exception e)
-            {
-                //_logger.Fatal(string.Empty, e);
-                return new ResponseData<T>(ResponseCode.Unknown, e.Message);
-            }
-        }
-
-        protected IResponseData<T> GetValueFromJson<T>(string json)
-        {
-            if (string.IsNullOrEmpty(json))
-            {
-                return new ResponseData<T>(ResponseCode.JsonFail, Strings.E_JsonCanNotBeEmpy);
-            }
-
-            try
-            {
-                var tValue = JsonConvert.DeserializeObject<T>(json);
-                return new ResponseData<T>(tValue, ResponseCode.Ok);
+                var tValue = JsonConvert.DeserializeObject<IResponseData<T>>(json);
+                return tValue;
             }
 
             catch (NullReferenceException e)
@@ -204,6 +161,32 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
             {
                 //_logger.Fatal(e, string.Empty);
                 return new ResponseData<T>(ResponseCode.Unknown, e.Message);
+            }
+        }
+
+        protected IResponse GetResponseFromJson<T>(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+            {
+                return new ResponseData<T>(ResponseCode.JsonFail, Strings.E_JsonCanNotBeEmpy);
+            }
+
+            try
+            {
+                var tValue = JsonConvert.DeserializeObject<IResponse>(json);
+                return tValue;
+            }
+
+            catch (NullReferenceException e)
+            {
+                //_logger.Error(e, string.Empty);
+                return new Response(ResponseCode.Exception, e.Message);
+            }
+
+            catch (Exception e)
+            {
+                //_logger.Fatal(e, string.Empty);
+                return new Response(ResponseCode.Unknown, e.Message);
             }
         }
 

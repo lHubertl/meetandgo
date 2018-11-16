@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\MeetAndGo.Shared.csproj" />
     <ProjectReference Include="..\MeetAndGoMobile.Infrastructure\MeetAndGoMobile.Infrastructure.csproj" />
   </ItemGroup>
 
