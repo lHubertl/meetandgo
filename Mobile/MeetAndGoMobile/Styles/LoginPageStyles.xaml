@@ -44,7 +44,6 @@
         <Setter Property="TextColor" Value="White" />
         <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="Keyboard" Value="Telephone" />
     </Style>
 
 </ResourceDictionary>
