@@ -115,6 +115,33 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can not find property in json.
+        /// </summary>
+        public static string E_CanNotFindPropertyInJson {
+            get {
+                return ResourceManager.GetString("E_CanNotFindPropertyInJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection failed.
+        /// </summary>
+        public static string E_ConnectionFailed {
+            get {
+                return ResourceManager.GetString("E_ConnectionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Json can not be empty.
+        /// </summary>
+        public static string E_JsonCanNotBeEmpy {
+            get {
+                return ResourceManager.GetString("E_JsonCanNotBeEmpy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Confirmation Core.
         /// </summary>
         public static string EnterConfirmationCode {

@@ -141,6 +141,15 @@
   <data name="EntryYourPhoneNumber" xml:space="preserve">
     <value>Entry Your Phone Number</value>
   </data>
+  <data name="E_CanNotFindPropertyInJson" xml:space="preserve">
+    <value>Can not find property in json</value>
+  </data>
+  <data name="E_ConnectionFailed" xml:space="preserve">
+    <value>Connection failed</value>
+  </data>
+  <data name="E_JsonCanNotBeEmpy" xml:space="preserve">
+    <value>Json can not be empty</value>
+  </data>
   <data name="MeetAndGo" xml:space="preserve">
     <value>Meet &amp; Go</value>
   </data>
