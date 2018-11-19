@@ -165,4 +165,40 @@
   <data name="YourName" xml:space="preserve">
     <value>Your Name</value>
   </data>
+  <data name="V_PhoneNumber" xml:space="preserve">
+    <value>Phone number is invalid</value>
+  </data>
+  <data name="Validation" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="E_ServerError" xml:space="preserve">
+    <value>Service Error</value>
+  </data>
+  <data name="U_Cancel" xml:space="preserve">
+    <value>CANCEL</value>
+  </data>
+  <data name="U_Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="U_Retry" xml:space="preserve">
+    <value>RETRY</value>
+  </data>
+  <data name="NotImplemented" xml:space="preserve">
+    <value>This feature currenty not implemented</value>
+  </data>
+  <data name="V_ConfirmationCode" xml:space="preserve">
+    <value>Confirmation code is invalid</value>
+  </data>
+  <data name="V_ConfirmPassword" xml:space="preserve">
+    <value>Confirmation password is not matchingc</value>
+  </data>
+  <data name="V_Password" xml:space="preserve">
+    <value>Password is not valid</value>
+  </data>
+  <data name="V_UserName" xml:space="preserve">
+    <value>User name is not valid</value>
+  </data>
 </root>

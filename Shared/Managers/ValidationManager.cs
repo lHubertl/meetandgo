@@ -53,7 +53,7 @@ namespace MeetAndGo.Shared.Managers
             }
 
             // TODO: check and update mask
-            var mask = @"^[+]?[\\(]{0,1}([0-9]){3}[\\)]{0,1}[ ]?([^0-1]){1}([0-9]){2}[ ]?[-]?[ ]?([0-9]){4}[ ]*((x){0,1}([0-9]){1,5}){0,1}$";
+            var mask = @"^[+]?([0-9]){3}[ ]?([0-9]){4}[ ]?([0-9]){2}[ ]?([0-9]){3}$";
             return Validate(() => Regex.IsMatch(value, mask), error);
         }
 
@@ -81,7 +81,7 @@ namespace MeetAndGo.Shared.Managers
             }
 
             // Only six digits
-            var mask = @"^[0-9]{6}$";
+            var mask = @"^[0-9, ]{6,11}$";
             return Validate(() => Regex.IsMatch(value, mask), error);
         }
 

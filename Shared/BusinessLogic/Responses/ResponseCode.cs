@@ -7,5 +7,11 @@
         ParameterIsNull,
         RequestError,
         ValidationError,
+        NoConnection,
+        Unauthorized,
+        Exception,
+        Unknown,
+        JsonFail,
+        InvalidCredentials
     }
 }

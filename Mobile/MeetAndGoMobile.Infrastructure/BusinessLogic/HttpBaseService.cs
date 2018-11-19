@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using MeetAndGoMobile.Infrastructure.BusinessLogic.Responses;
+using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGoMobile.Infrastructure.Resources;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
 

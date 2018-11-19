@@ -1,13 +1,23 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using MeetAndGo.Shared.Managers;
+using MeetAndGo.Shared.Models.Authorization;
+using MeetAndGoMobile.Constants;
 using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Infrastructure.Resources;
+using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Views;
 using Prism.Navigation;
+using Prism.Services;
 
 namespace MeetAndGoMobile.ViewModels
 {
 	public class ConfirmPhonePageViewModel : ViewModelBase
 	{
+        private readonly IAccountService _accountService;
+	    private MessageConfirmModel _model;
+
         private string _confirmationCode;
         public string ConfirmationCode
         {
@@ -17,13 +27,47 @@ namespace MeetAndGoMobile.ViewModels
 
 	    public ICommand ContinueCommand => new SingleExecutionCommand(async () => await ExecuteContinueCommandAsync());
 
-	    public ConfirmPhonePageViewModel(INavigationService navigationService) : base(navigationService)
-        {
+	    public ConfirmPhonePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IAccountService accountService) 
+	        : base(navigationService, dialogService)
+	    {
+	        _accountService = accountService;
         }
 
-	    private async Task ExecuteContinueCommandAsync()
+        public override void OnNavigatingTo(INavigationParameters parameters)
+        {
+            base.OnNavigatingTo(parameters);
+
+            if (parameters != null)
+            {
+                if (parameters.TryGetValue(NavParamConstants.MessageConfirmModel, out MessageConfirmModel model))
+                {
+                    _model = model;
+                }
+            }
+        }
+
+        private async Task ExecuteContinueCommandAsync()
 	    {
-	        await NavigationService.NavigateAsync(nameof(CreateAccountPage));
+	        var validationManager = ValidationManager.Create();
+	        if (!validationManager.ValidateSmsCode(ConfirmationCode, Strings.V_ConfirmationCode).IsValid)
+	        {
+	            await UserNotificationAsync(validationManager.ToString(), Strings.Validation);
+	            return;
+            }
+
+	        _model.Code = ConfirmationCode;
+            
+	        var result = await PerformDataRequestAsync(() => _accountService.ConfirmSmsCodeAsync(_model, CancellationToken.None));
+
+	        if (result)
+	        {
+	            var navigationParameters = new NavigationParameters
+	            {
+	                { NavParamConstants.MessageConfirmModel, _model }
+	            };
+
+                await NavigationService.NavigateAsync(nameof(CreateAccountPage), navigationParameters);
+	        }
 	    }
     }
 }

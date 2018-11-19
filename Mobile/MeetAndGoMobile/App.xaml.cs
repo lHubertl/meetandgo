@@ -4,6 +4,7 @@ using MeetAndGoMobile.ViewModels;
 using MeetAndGoMobile.Views;
 using Xamarin.Forms.Xaml;
 using MeetAndGoMobile.Infrastructure.Resources;
+using MeetAndGoMobile.Services;
 using Plugin.Multilingual;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -36,6 +37,8 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
+
+            containerRegistry.Register<IAccountService, AccountService>();
         }
     }
 }

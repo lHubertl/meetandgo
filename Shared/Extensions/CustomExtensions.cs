@@ -11,7 +11,7 @@ namespace MeetAndGo.Shared.Extensions
                 return phoneNumber;
             }
 
-            return new string(phoneNumber.Where(x => char.IsDigit(x)).ToArray());
+            return new string(phoneNumber.Where(char.IsDigit).ToArray());
         }
     }
 }

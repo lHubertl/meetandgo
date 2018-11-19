@@ -142,6 +142,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Service Error.
+        /// </summary>
+        public static string E_ServerError {
+            get {
+                return ResourceManager.GetString("E_ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Confirmation Core.
         /// </summary>
         public static string EnterConfirmationCode {
@@ -160,11 +169,29 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Meet &amp; Go.
         /// </summary>
         public static string MeetAndGo {
             get {
                 return ResourceManager.GetString("MeetAndGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This feature currenty not implemented.
+        /// </summary>
+        public static string NotImplemented {
+            get {
+                return ResourceManager.GetString("NotImplemented", resourceCulture);
             }
         }
         
@@ -187,11 +214,92 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CANCEL.
+        /// </summary>
+        public static string U_Cancel {
+            get {
+                return ResourceManager.GetString("U_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MEET &amp; GO.
         /// </summary>
         public static string U_MeetAndGo {
             get {
                 return ResourceManager.GetString("U_MeetAndGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string U_Ok {
+            get {
+                return ResourceManager.GetString("U_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RETRY.
+        /// </summary>
+        public static string U_Retry {
+            get {
+                return ResourceManager.GetString("U_Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation code is invalid.
+        /// </summary>
+        public static string V_ConfirmationCode {
+            get {
+                return ResourceManager.GetString("V_ConfirmationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation password is not matchingc.
+        /// </summary>
+        public static string V_ConfirmPassword {
+            get {
+                return ResourceManager.GetString("V_ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is not valid.
+        /// </summary>
+        public static string V_Password {
+            get {
+                return ResourceManager.GetString("V_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number is invalid.
+        /// </summary>
+        public static string V_PhoneNumber {
+            get {
+                return ResourceManager.GetString("V_PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name is not valid.
+        /// </summary>
+        public static string V_UserName {
+            get {
+                return ResourceManager.GetString("V_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation.
+        /// </summary>
+        public static string Validation {
+            get {
+                return ResourceManager.GetString("Validation", resourceCulture);
             }
         }
         
