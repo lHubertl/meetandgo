@@ -3,7 +3,7 @@
     internal static class WebApiConstants
     {
         internal static readonly string UrlScheme = "https";
-        internal static readonly string ServerAddress = "localhost:44388/api";
+        internal static readonly string ServerAddress = "localhost:5001/api";
         internal static readonly string Url = $"{UrlScheme}://{ServerAddress}";
 
         internal static readonly string AccountRegister = $"{Url}/account/Register";
