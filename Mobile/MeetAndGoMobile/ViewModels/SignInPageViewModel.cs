@@ -1,21 +1,26 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MeetAndGo.Shared.Managers;
 using MeetAndGo.Shared.Models.Authorization;
 using MeetAndGoMobile.Constants;
+using MeetAndGoMobile.Infrastructure.BusinessLogic.Repositories;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Views;
 using Prism.Ioc;
 using Prism.Navigation;
+using Xamarin.Essentials;
 
 namespace MeetAndGoMobile.ViewModels
 {
 	public class SignInPageViewModel : ViewModelBase
 	{
 	    private readonly IAccountService _accountService;
+	    private readonly IDataRepository _dataRepository;
+
 
         private string _phoneNumber;
         public string PhoneNumber
@@ -25,7 +30,7 @@ namespace MeetAndGoMobile.ViewModels
         }
 
         private string _password;
-        public string Password
+	    public string Password
         {
             get => _password;
             set => SetProperty(ref _password, value);
@@ -37,10 +42,11 @@ namespace MeetAndGoMobile.ViewModels
 
 	    public ICommand TermCommand => new SingleExecutionCommand(async () => await ExecuteTermCommandAsync());
 
-        public SignInPageViewModel(INavigationService navigationService, IContainerProvider container, IAccountService accountService) 
+        public SignInPageViewModel(INavigationService navigationService, IContainerProvider container, IAccountService accountService, IDataRepository dataRepository) 
             : base(navigationService, container)
-	    {
-	        _accountService = accountService;
+        {
+            _dataRepository = dataRepository;
+            _accountService = accountService;
 	    }
 
 	    public override void OnNavigatingTo(INavigationParameters parameters)
@@ -52,7 +58,7 @@ namespace MeetAndGoMobile.ViewModels
                 return;
 	        }
 
-	        if (parameters.TryGetValue(NavParamConstants.PhoneNumber, out string phoneNumber))
+	        if (parameters.TryGetValue(StringConstants.PhoneNumber, out string phoneNumber))
 	        {
 	            PhoneNumber = phoneNumber;
 	        }
@@ -77,10 +83,22 @@ namespace MeetAndGoMobile.ViewModels
 	            RememberMe = true
 	        };
 
-	        var result = await PerformDataRequestAsync(() => _accountService.SignInAsync(loginModel, CancellationToken.None));
-	        if (result != null)
+	        var token = await PerformDataRequestAsync(() => _accountService.SignInAsync(loginModel, CancellationToken.None));
+	        if (token != null)
 	        {
-	            // TODO: SAVE TOKEN
+	            _dataRepository.Set(DataType.Token, token);
+
+                try
+	            {
+	                await SecureStorage.SetAsync(StringConstants.Token, token);
+                }
+	            catch (Exception ex)
+	            {
+                    // Possible that device doesn't support secure storage on device.
+	                // TODO: LOG IT
+                }
+
+                // TODO: Navigate to map page
             }
         }
 
@@ -88,7 +106,7 @@ namespace MeetAndGoMobile.ViewModels
 	    {
 	        var navParams = new NavigationParameters
 	        {
-	            { NavParamConstants.PhoneNumber, PhoneNumber }
+	            { StringConstants.PhoneNumber, PhoneNumber }
 	        };
 
 	        return NavigationService.NavigateAsync(nameof(SignUpPage), navParams);

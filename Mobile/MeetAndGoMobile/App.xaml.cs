@@ -1,4 +1,8 @@
-﻿using Prism;
+﻿using System;
+using System.Threading.Tasks;
+using MeetAndGoMobile.Constants;
+using MeetAndGoMobile.Infrastructure.BusinessLogic.Repositories;
+using Prism;
 using Prism.Ioc;
 using MeetAndGoMobile.ViewModels;
 using MeetAndGoMobile.Views;
@@ -7,6 +11,7 @@ using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Services.FakeServices;
 using Plugin.Multilingual;
+using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MeetAndGoMobile
@@ -29,7 +34,15 @@ namespace MeetAndGoMobile
             // Set current device language to application
             Strings.Culture = CrossMultilingual.Current.CurrentCultureInfo;
 
-            await NavigationService.NavigateAsync($"{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}");
+            if (await CheckIfTokenExist())
+            {
+                // TODO: TO MAP PAGE
+                await NavigationService.NavigateAsync($"{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync($"{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -42,7 +55,29 @@ namespace MeetAndGoMobile
 
             containerRegistry.Register<IAccountService, FakeAccountService>();
 
+            containerRegistry.RegisterSingleton<IDataRepository, DataRepository>();
+
             containerRegistry.RegisterInstance(Container);
+        }
+
+        private async Task<bool> CheckIfTokenExist()
+        {
+            try
+            {
+                var token = await SecureStorage.GetAsync(StringConstants.Token);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    var dataRepository = Container.Resolve<IDataRepository>();
+                    dataRepository.Set(DataType.Token, token);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO: log it
+            }
+
+            return false;
         }
     }
 }

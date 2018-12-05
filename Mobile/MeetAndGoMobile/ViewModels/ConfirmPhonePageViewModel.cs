@@ -39,7 +39,7 @@ namespace MeetAndGoMobile.ViewModels
 
             if (parameters != null)
             {
-                if (parameters.TryGetValue(NavParamConstants.MessageConfirmModel, out MessageConfirmModel model))
+                if (parameters.TryGetValue(StringConstants.MessageConfirmModel, out MessageConfirmModel model))
                 {
                     _model = model;
                 }
@@ -63,7 +63,7 @@ namespace MeetAndGoMobile.ViewModels
 	        {
 	            var navigationParameters = new NavigationParameters
 	            {
-	                { NavParamConstants.MessageConfirmModel, _model }
+	                { StringConstants.MessageConfirmModel, _model }
 	            };
 
                 await NavigationService.NavigateAsync(nameof(CreateAccountPage), navigationParameters);

@@ -45,7 +45,7 @@ namespace MeetAndGoMobile.ViewModels
                 return;
             }
 
-            if (parameters.TryGetValue(NavParamConstants.PhoneNumber, out string phoneNumber))
+            if (parameters.TryGetValue(StringConstants.PhoneNumber, out string phoneNumber))
             {
                 PhoneNumber = phoneNumber;
             }
@@ -55,7 +55,7 @@ namespace MeetAndGoMobile.ViewModels
         {
             var navParams = new NavigationParameters
             {
-                { NavParamConstants.PhoneNumber, PhoneNumber }
+                { StringConstants.PhoneNumber, PhoneNumber }
             };
 
             return NavigationService.NavigateAsync(nameof(SignInPage), navParams);
@@ -83,7 +83,7 @@ namespace MeetAndGoMobile.ViewModels
             {
                 var navigationParameters = new NavigationParameters
                 {
-                    { NavParamConstants.MessageConfirmModel, model }
+                    { StringConstants.MessageConfirmModel, model }
                 };
 
                 await NavigationService.NavigateAsync(nameof(ConfirmPhonePage), navigationParameters);
