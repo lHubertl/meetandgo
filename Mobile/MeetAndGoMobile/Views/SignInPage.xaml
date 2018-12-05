@@ -11,7 +11,6 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{x:Static constants:Colors.BgrBrown}"
-    ControlTemplate="{StaticResource BaseContentTemplate}"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary Source="/Styles/LoginPageStyles.xaml" />

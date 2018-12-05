@@ -9,6 +9,7 @@ using MeetAndGoMobile.Infrastructure.BusinessLogic.Repositories;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Views;
 using Prism.Ioc;
 using Prism.Navigation;
 using Xamarin.Essentials;
@@ -18,7 +19,7 @@ namespace MeetAndGoMobile.ViewModels
 	public class CreateAccountPageViewModel : ViewModelBase
 	{
 	    private readonly IAccountService _accountService;
-	    private IDataRepository _dataRepository;
+	    private readonly IDataRepository _dataRepository;
         private MessageConfirmModel _messageConfirmModel;
 
         private string _yourName;
@@ -101,7 +102,7 @@ namespace MeetAndGoMobile.ViewModels
 	                // TODO: LOG IT
 	            }
 
-	            // TODO: NAVIGATE TO MAP PAGE
+	            await NavigationService.NavigateAsync(nameof(HomePage));
 	        }
 	    }
     }

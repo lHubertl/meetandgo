@@ -52,6 +52,7 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
+            containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
 
             containerRegistry.Register<IAccountService, FakeAccountService>();
 

@@ -98,7 +98,7 @@ namespace MeetAndGoMobile.ViewModels
 	                // TODO: LOG IT
                 }
 
-                // TODO: Navigate to map page
+	            await NavigationService.NavigateAsync(nameof(HomePage));
             }
         }
 

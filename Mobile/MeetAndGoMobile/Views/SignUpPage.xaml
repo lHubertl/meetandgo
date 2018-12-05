@@ -9,7 +9,6 @@
     xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
     BackgroundColor="{x:Static constants:Colors.BgrBrown}"
-    ControlTemplate="{StaticResource BaseContentTemplate}"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
