@@ -5,6 +5,7 @@ using MeetAndGoMobile.Views;
 using Xamarin.Forms.Xaml;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Services.FakeServices;
 using Plugin.Multilingual;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -34,11 +35,14 @@ namespace MeetAndGoMobile
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
-            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
-            containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
+            containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
 
-            containerRegistry.Register<IAccountService, AccountService>();
+            containerRegistry.Register<IAccountService, FakeAccountService>();
+
+            containerRegistry.RegisterInstance(Container);
         }
     }
 }

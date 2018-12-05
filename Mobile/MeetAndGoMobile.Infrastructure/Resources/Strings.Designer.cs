@@ -61,7 +61,7 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already have and Account?.
+        ///   Looks up a localized string similar to Already have an Account?.
         /// </summary>
         public static string AlreadyHaveAccount {
             get {
@@ -115,6 +115,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do not have an Account?.
+        /// </summary>
+        public static string DoNotHaveAccount {
+            get {
+                return ResourceManager.GetString("DoNotHaveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not find property in json.
         /// </summary>
         public static string E_CanNotFindPropertyInJson {
@@ -151,11 +160,20 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Confirmation Core.
+        ///   Looks up a localized string similar to Enter Confirmation Code.
         /// </summary>
         public static string EnterConfirmationCode {
             get {
                 return ResourceManager.GetString("EnterConfirmationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Your Password.
+        /// </summary>
+        public static string EnterPassword {
+            get {
+                return ResourceManager.GetString("EnterPassword", resourceCulture);
             }
         }
         
@@ -187,7 +205,7 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This feature currenty not implemented.
+        ///   Looks up a localized string similar to This feature currently is not implemented.
         /// </summary>
         public static string NotImplemented {
             get {
@@ -201,6 +219,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string SignIn {
             get {
                 return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign Up.
+        /// </summary>
+        public static string SignUp {
+            get {
+                return ResourceManager.GetString("SignUp", resourceCulture);
             }
         }
         
@@ -259,7 +286,7 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirmation password is not matchingc.
+        ///   Looks up a localized string similar to Confirmation password is not matching.
         /// </summary>
         public static string V_ConfirmPassword {
             get {

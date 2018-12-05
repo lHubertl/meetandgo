@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGoMobile.Infrastructure.Resources;
+using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -21,12 +22,10 @@ namespace MeetAndGoMobile.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        public ViewModelBase(
-            INavigationService navigationService,
-            IPageDialogService dialogService)
+        public ViewModelBase(INavigationService navigationService, IContainerProvider container)
         {
             NavigationService = navigationService;
-            DialogService = dialogService;
+            DialogService = container.Resolve<IPageDialogService>();
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)

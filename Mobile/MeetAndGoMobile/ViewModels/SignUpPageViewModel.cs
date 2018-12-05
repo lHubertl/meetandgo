@@ -9,7 +9,7 @@ using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Views;
-using Prism.Services;
+using Prism.Ioc;
 
 namespace MeetAndGoMobile.ViewModels
 {
@@ -17,11 +17,11 @@ namespace MeetAndGoMobile.ViewModels
     {
         private readonly IAccountService _accountService;
 
-        private string _phoneNumberText;
-        public string PhoneNumberText
+        private string _phoneNumber;
+        public string PhoneNumber
         {
-            get => _phoneNumberText;
-            set => SetProperty(ref _phoneNumberText, value);
+            get => _phoneNumber;
+            set => SetProperty(ref _phoneNumber, value);
         }
         
         public ICommand SignInCommand => new SingleExecutionCommand(async () => await ExecuteSignInCommandAsync());
@@ -30,14 +30,35 @@ namespace MeetAndGoMobile.ViewModels
 
         public ICommand ContinueCommand => new SingleExecutionCommand(async () => await ExecuteContinueCommandAsync());
 
-        public SignUpPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IAccountService accountService) : base(navigationService, dialogService)
+        public SignUpPageViewModel(INavigationService navigationService, IContainerProvider container, IAccountService accountService)
+            : base(navigationService, container)
         {
             _accountService = accountService;
         }
 
-        private async Task ExecuteSignInCommandAsync()
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
-            await UserNotificationAsync(Strings.NotImplemented);
+            base.OnNavigatingTo(parameters);
+
+            if (parameters == null)
+            {
+                return;
+            }
+
+            if (parameters.TryGetValue(NavParamConstants.PhoneNumber, out string phoneNumber))
+            {
+                PhoneNumber = phoneNumber;
+            }
+        }
+
+        private Task ExecuteSignInCommandAsync()
+        {
+            var navParams = new NavigationParameters
+            {
+                { NavParamConstants.PhoneNumber, PhoneNumber }
+            };
+
+            return NavigationService.NavigateAsync(nameof(SignInPage), navParams);
         }
 
         private async Task ExecuteTermCommandAsync()
@@ -48,13 +69,13 @@ namespace MeetAndGoMobile.ViewModels
         private async Task ExecuteContinueCommandAsync()
         {
             var validationManager = ValidationManager.Create();
-            if (!validationManager.ValidatePhoneNumber(PhoneNumberText, Strings.V_PhoneNumber).IsValid)
+            if (!validationManager.ValidatePhoneNumber(PhoneNumber, Strings.V_PhoneNumber).IsValid)
             {
                 await UserNotificationAsync(validationManager.ToString(), Strings.Validation);
                 return;
             }
 
-            var model = new MessageConfirmModel { PhoneNumber = PhoneNumberText };
+            var model = new MessageConfirmModel { PhoneNumber = PhoneNumber };
 
             var result = await PerformDataRequestAsync(() => _accountService.ConfirmPhoneNumberAsync(model, CancellationToken.None));
 

@@ -1,0 +1,102 @@
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using MeetAndGo.Shared.Managers;
+using MeetAndGo.Shared.Models.Authorization;
+using MeetAndGoMobile.Constants;
+using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Infrastructure.Resources;
+using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Views;
+using Prism.Ioc;
+using Prism.Navigation;
+
+namespace MeetAndGoMobile.ViewModels
+{
+	public class SignInPageViewModel : ViewModelBase
+	{
+	    private readonly IAccountService _accountService;
+
+        private string _phoneNumber;
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set => SetProperty(ref _phoneNumber, value);
+        }
+
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+
+        public ICommand SignInCommand => new SingleExecutionCommand(ExecuteSignInCommand);
+
+	    public ICommand SignUpCommand => new SingleExecutionCommand(ExecuteSignUpCommand);
+
+	    public ICommand TermCommand => new SingleExecutionCommand(async () => await ExecuteTermCommandAsync());
+
+        public SignInPageViewModel(INavigationService navigationService, IContainerProvider container, IAccountService accountService) 
+            : base(navigationService, container)
+	    {
+	        _accountService = accountService;
+	    }
+
+	    public override void OnNavigatingTo(INavigationParameters parameters)
+	    {
+	        base.OnNavigatingTo(parameters);
+
+	        if (parameters == null)
+	        {
+                return;
+	        }
+
+	        if (parameters.TryGetValue(NavParamConstants.PhoneNumber, out string phoneNumber))
+	        {
+	            PhoneNumber = phoneNumber;
+	        }
+	    }
+
+	    private async Task ExecuteSignInCommand()
+	    {
+	        var validation = ValidationManager.Create()
+	            .ValidatePhoneNumber(PhoneNumber, Strings.V_PhoneNumber)
+	            .ValidatePassword(Password, Strings.V_Password);
+
+	        if (!validation.IsValid)
+	        {
+	            await UserNotificationAsync(validation.ToString(), Strings.Validation);
+                return;
+	        }
+
+	        var loginModel = new LoginModel
+	        {
+	            PhoneNumber = PhoneNumber,
+	            Password = Password,
+	            RememberMe = true
+	        };
+
+	        var result = await PerformDataRequestAsync(() => _accountService.SignInAsync(loginModel, CancellationToken.None));
+	        if (result != null)
+	        {
+	            // TODO: SAVE TOKEN
+            }
+        }
+
+	    private Task ExecuteSignUpCommand()
+	    {
+	        var navParams = new NavigationParameters
+	        {
+	            { NavParamConstants.PhoneNumber, PhoneNumber }
+	        };
+
+	        return NavigationService.NavigateAsync(nameof(SignUpPage), navParams);
+        }
+
+	    private async Task ExecuteTermCommandAsync()
+	    {
+	        await UserNotificationAsync(Strings.NotImplemented);
+	    }
+    }
+}

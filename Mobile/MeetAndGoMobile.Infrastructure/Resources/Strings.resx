@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlreadyHaveAccount" xml:space="preserve">
-    <value>Already have and Account?</value>
+    <value>Already have an Account?</value>
   </data>
   <data name="BySigningYourAgree" xml:space="preserve">
     <value>By signing up You agree to out</value>
@@ -136,7 +136,7 @@
     <value>Create Password</value>
   </data>
   <data name="EnterConfirmationCode" xml:space="preserve">
-    <value>Enter Confirmation Core</value>
+    <value>Enter Confirmation Code</value>
   </data>
   <data name="EntryYourPhoneNumber" xml:space="preserve">
     <value>Entry Your Phone Number</value>
@@ -187,18 +187,27 @@
     <value>RETRY</value>
   </data>
   <data name="NotImplemented" xml:space="preserve">
-    <value>This feature currenty not implemented</value>
+    <value>This feature currently is not implemented</value>
   </data>
   <data name="V_ConfirmationCode" xml:space="preserve">
     <value>Confirmation code is invalid</value>
   </data>
   <data name="V_ConfirmPassword" xml:space="preserve">
-    <value>Confirmation password is not matchingc</value>
+    <value>Confirmation password is not matching</value>
   </data>
   <data name="V_Password" xml:space="preserve">
     <value>Password is not valid</value>
   </data>
   <data name="V_UserName" xml:space="preserve">
     <value>User name is not valid</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Enter Your Password</value>
+  </data>
+  <data name="DoNotHaveAccount" xml:space="preserve">
+    <value>Do not have an Account?</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
   </data>
 </root>

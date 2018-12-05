@@ -8,8 +8,8 @@ using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Views;
+using Prism.Ioc;
 using Prism.Navigation;
-using Prism.Services;
 
 namespace MeetAndGoMobile.ViewModels
 {
@@ -27,8 +27,8 @@ namespace MeetAndGoMobile.ViewModels
 
 	    public ICommand ContinueCommand => new SingleExecutionCommand(async () => await ExecuteContinueCommandAsync());
 
-	    public ConfirmPhonePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IAccountService accountService) 
-	        : base(navigationService, dialogService)
+	    public ConfirmPhonePageViewModel(INavigationService navigationService, IContainerProvider container, IAccountService accountService) 
+	        : base(navigationService, container)
 	    {
 	        _accountService = accountService;
         }

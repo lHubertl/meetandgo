@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace MeetAndGoMobile.Infrastructure.Behaviours
+namespace MeetAndGoMobile.Infrastructure.Behaviors
 {
     public class FrameHorizontalRoundingBehavior : Behavior<Frame>
     {

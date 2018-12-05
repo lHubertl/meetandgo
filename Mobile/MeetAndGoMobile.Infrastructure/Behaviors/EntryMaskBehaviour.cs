@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace MeetAndGoMobile.Infrastructure.Behaviours
+namespace MeetAndGoMobile.Infrastructure.Behaviors
 {
     public class EntryMaskBehaviour : Behavior<Entry>
     {

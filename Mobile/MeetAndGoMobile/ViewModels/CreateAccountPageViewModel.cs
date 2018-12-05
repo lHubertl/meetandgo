@@ -7,8 +7,8 @@ using MeetAndGoMobile.Constants;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
+using Prism.Ioc;
 using Prism.Navigation;
-using Prism.Services;
 
 namespace MeetAndGoMobile.ViewModels
 {
@@ -40,9 +40,9 @@ namespace MeetAndGoMobile.ViewModels
 
         public ICommand CreateAccountCommand => new SingleExecutionCommand(ExecuteCreateAccountCommand);
 
-	    public CreateAccountPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IAccountService accountService) 
-	        : base(navigationService, dialogService)
-	    {
+	    public CreateAccountPageViewModel(INavigationService navigationService, IContainerProvider container, IAccountService accountService)
+	        : base(navigationService, container)
+        {
 	        _accountService = accountService;
         }
 
@@ -84,7 +84,7 @@ namespace MeetAndGoMobile.ViewModels
 	        var resultToken = await PerformDataRequestAsync(() => _accountService.RegisterAsync(model, CancellationToken.None));
 	        if (!string.IsNullOrEmpty(resultToken))
 	        {
-                
+                // TODO: SAVE TOKEN
 	        }
         }
     }

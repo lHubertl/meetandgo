@@ -3,7 +3,7 @@
     x:Class="MeetAndGoMobile.Views.ConfirmPhonePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behaviours="clr-namespace:MeetAndGoMobile.Infrastructure.Behaviours;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:behaviors="clr-namespace:MeetAndGoMobile.Infrastructure.Behaviors;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
@@ -41,7 +41,7 @@
                 </Entry.Effects>
 
                 <Entry.Behaviors>
-                    <behaviours:EntryMaskBehaviour Mask="___ ___" />
+                    <behaviors:EntryMaskBehaviour Mask="___ ___" />
                 </Entry.Behaviors>
 
             </Entry>
