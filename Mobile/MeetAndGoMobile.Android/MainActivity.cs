@@ -12,7 +12,8 @@ namespace MeetAndGoMobile.Droid
         Label = "Meet & Go", 
         Icon = "@mipmap/ic_launcher", 
         Theme = "@style/MainTheme", 
-        MainLauncher = true, 
+        MainLauncher = true,
+        WindowSoftInputMode = SoftInput.AdjustResize,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
@@ -25,7 +26,7 @@ namespace MeetAndGoMobile.Droid
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
             {
                 // Full screen with visible status bar
-                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+                Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
             }
 
             base.OnCreate(bundle);

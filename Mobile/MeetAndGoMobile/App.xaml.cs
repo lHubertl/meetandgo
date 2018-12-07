@@ -12,6 +12,7 @@ using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Services.FakeServices;
 using Plugin.Multilingual;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MeetAndGoMobile
@@ -33,11 +34,12 @@ namespace MeetAndGoMobile
 
             // Set current device language to application
             Strings.Culture = CrossMultilingual.Current.CurrentCultureInfo;
+            VersionTracking.Track();
 
             if (await CheckIfTokenExist())
             {
                 // TODO: TO MAP PAGE
-                await NavigationService.NavigateAsync($"{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}");
+                await NavigationService.NavigateAsync($"{nameof(MasterPage)}/{nameof(HomePage)}");
             }
             else
             {
@@ -50,11 +52,20 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
+            containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
 
-            containerRegistry.Register<IAccountService, AccountService>();
+            // TODO: Rework it before release
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                containerRegistry.Register<IAccountService, FakeAccountService>();
+            }
+            else
+            {
+                containerRegistry.Register<IAccountService, AccountService>();
+            }
 
             containerRegistry.RegisterSingleton<IDataRepository, DataRepository>();
 
@@ -73,7 +84,7 @@ namespace MeetAndGoMobile
                     return true;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // TODO: log it
             }

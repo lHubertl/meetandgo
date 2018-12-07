@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  BackgroundColor="{x:Static constants:Colors.StatusBarBrown}"
+                  xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+                  xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+                  x:Class="MeetAndGoMobile.Views.MasterPage">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu" BackgroundColor="{x:Static constants:Colors.StatusBarBrown}">
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Label" x:Key="MenuItem">
+                        <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
+                        <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="HeightRequest" Value="50" />
+                        <Setter Property="VerticalTextAlignment" Value="Center" />
+                    </Style>
+
+                    <Style TargetType="BoxView">
+                        <Setter Property="HeightRequest" Value="1" />
+                        <Setter Property="BackgroundColor" Value="{x:Static constants:Colors.DarkGray}" />
+                    </Style>
+
+                </ResourceDictionary>
+            </ContentPage.Resources>
+            
+            <StackLayout Padding="16" Spacing="0">
+                
+                <!-- TODO: User Info  -->
+                
+                <BoxView />
+                
+                <!--  Events History  -->
+                
+                <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation EventsHistory}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="EventsHistroyPage" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView />
+
+                <!--  Payment  -->
+
+                <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Payment}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="PaymentPage" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView />
+
+                <!--  Settings  -->
+
+                <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Settings}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="SettingsPage" />
+                    </Label.GestureRecognizers>
+                </Label>
+                
+                <BoxView />
+
+                <!--  Help  -->
+
+                <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Help}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="HelpPage" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <BoxView />
+
+                <!-- Legal -->
+
+                <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,16" Orientation="Horizontal">
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="LegacyPage" />
+                    </StackLayout.GestureRecognizers>
+
+                    <Label 
+                        Style="{StaticResource MenuItem}" 
+                        HeightRequest="20" 
+                        Text="{extensions:Translation Legal}" />
+
+                    <Label 
+                        Opacity="0.4" 
+                        Style="{StaticResource MenuItem}" 
+                        HorizontalOptions="EndAndExpand" 
+                        HeightRequest="30" 
+                        Text="{Binding Version}" />
+
+                </StackLayout>
+
+                <BoxView Margin="0, 0, 0, 20" />
+
+            </StackLayout>
+            
+            
+        </ContentPage>
+    </MasterDetailPage.Master>
+    
+</MasterDetailPage>
