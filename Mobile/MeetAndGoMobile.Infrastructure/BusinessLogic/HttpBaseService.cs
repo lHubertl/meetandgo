@@ -126,13 +126,13 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
                 {
                     var innermostException = httpRequestException.GetBaseException();
                     //_logger.Error(innermostException.Message, httpRequestException);
-                    return new ResponseData<string>(ResponseCode.Exception, innermostException.Message);
+                    return new ResponseData<string>(ResponseCode.ServerError, innermostException.Message);
                 }
 
                 catch (Exception exception)
                 {
                     //_logger.Error(exception, exception.Message);
-                    return new ResponseData<string>(ResponseCode.Unknown, exception.Message);
+                    return new ResponseData<string>(ResponseCode.ServerError, exception.Message);
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
 
             try
             {
-                var tValue = JsonConvert.DeserializeObject<IResponseData<T>>(json);
+                var tValue = JsonConvert.DeserializeObject<ResponseData<T>>(json);
                 return tValue;
             }
 
@@ -172,7 +172,7 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
 
             try
             {
-                var tValue = JsonConvert.DeserializeObject<IResponse>(json);
+                var tValue = JsonConvert.DeserializeObject<Response>(json);
                 return tValue;
             }
 

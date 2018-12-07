@@ -13,5 +13,10 @@
             Message = message;
             Code = code;
         }
+
+        public Response()
+        {
+
+        }
     }
 }

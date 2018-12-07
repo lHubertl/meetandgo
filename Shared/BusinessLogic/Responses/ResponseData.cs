@@ -15,5 +15,10 @@
         {
 
         }
+
+        public ResponseData()
+        {
+
+        }
     }
 }

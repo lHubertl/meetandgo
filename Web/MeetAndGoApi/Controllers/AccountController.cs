@@ -122,8 +122,7 @@ namespace MeetAndGoApi.Controllers
             }
 
             var validator = ValidationManager.Create()
-                .Validate(() => model.FirstName.Length > 0, _localizer.GetString(Strings.FirstName))
-                .Validate(() => model.LastName.Length > 0, _localizer.GetString(Strings.LastName))
+                .Validate(() => model.FirstName?.Length > 0, _localizer.GetString(Strings.FirstName))
                 .ValidatePhoneNumber(model.PhoneNumber, _localizer.GetString(Strings.PhoneNumber))
                 .ValidatePassword(model.Password, _localizer.GetString(Strings.Password))
                 .Validate(() => model.Password == model.ConfirmPassword,
