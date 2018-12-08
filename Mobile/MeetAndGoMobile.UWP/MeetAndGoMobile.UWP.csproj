@@ -115,6 +115,16 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="scale-100\mg_pin.png" />
+    <Content Include="scale-100\small_empty_star.png" />
+    <Content Include="scale-100\small_star.png" />
+    <Content Include="scale-125\small_empty_star.png" />
+    <Content Include="scale-125\small_star.png" />
+    <Content Include="scale-150\small_empty_star.png" />
+    <Content Include="scale-150\small_star.png" />
+    <Content Include="scale-175\small_empty_star.png" />
+    <Content Include="scale-175\small_star.png" />
+    <Content Include="scale-200\small_empty_star.png" />
+    <Content Include="scale-200\small_star.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -146,11 +156,7 @@
     <Content Include="Assets\Fonts\Nunito-Regular.ttf" />
     <None Include="MeetAndGoMobile.UWP_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scale-125\" />
-    <Folder Include="scale-200\" />
-    <Folder Include="scale-400\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
