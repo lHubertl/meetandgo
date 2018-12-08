@@ -2,10 +2,11 @@
 using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
+using MeetAndGoMobile.Services;
 using Prism.Ioc;
 using Prism.Navigation;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -14,6 +15,8 @@ namespace MeetAndGoMobile.ViewModels
 {
     public class MasterPageViewModel : ViewModelBase
     {
+        private readonly IAccountService _accountService;
+
         public string Version => $"v{VersionTracking.CurrentVersion}";
 
         private string _userName;
@@ -53,31 +56,24 @@ namespace MeetAndGoMobile.ViewModels
 
         public ICommand NavigateCommand => new SingleExecutionCommand(ExecuteNavigateCommand);
 
-        public MasterPageViewModel(INavigationService navigationService, IContainerProvider container) : base(navigationService, container)
+        public MasterPageViewModel(
+            INavigationService navigationService, 
+            IContainerProvider container,
+            IAccountService accountService) : base(navigationService, container)
         {
+            _accountService = accountService;
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
+            
+            var userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
 
-            // TODO: SET REAL DATA
-            var userModel = new UserModel
+            if (userModel != null)
             {
-                CompressedPhotoUrl = @"https://cdn1.iconfinder.com/data/icons/hawcons/32/698838-icon-111-search-128.png",
-                FirstName = "Valerii Sovytskyi",
-                LastName = null,
-                Votes = new List<VoteModel>
-                {
-                    new VoteModel { Rating = 2, RatingType = UserStatus.Member },
-                    new VoteModel { Rating = 3, RatingType = UserStatus.Member },
-                    new VoteModel { Rating = 5, RatingType = UserStatus.Member }
-                },
-                OrganizerRating = 4,
-                MemberRating = 2
-            };
-
-            SetUpUserInfo(userModel);
+                SetUpUserInfo(userModel);
+            }
         }
 
         private async Task ExecuteNavigateCommand(object pageNameObj)

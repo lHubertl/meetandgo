@@ -10,7 +10,9 @@
         internal static readonly string AccountConfirmPhone = $"{Url}/account/ConfirmPhoneNumber";
         internal static readonly string AccountConfirmCode = $"{Url}/account/ConfirmMessageCode";
         internal static readonly string AccountSignIn = $"{Url}/account/SignIn";
+        internal static readonly string AccountUserModel = $"{Url}/account/GetUserModel";
 
         internal static readonly string ContentTypeJson = "application/json";
+        internal static readonly string Authorization = "Authorization";
     }
 }

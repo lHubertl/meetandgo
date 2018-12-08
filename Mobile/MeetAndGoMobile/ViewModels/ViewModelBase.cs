@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGoMobile.Infrastructure.Resources;
+using MeetAndGoMobile.Views;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -65,6 +66,12 @@ namespace MeetAndGoMobile.ViewModels
                 return response.Data;
             }
 
+            if(response.Code == ResponseCode.Unauthorized)
+            {
+                await NavigationService.NavigateAsync(new Uri($"app:///{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}", UriKind.Absolute));
+                return default(T);
+            }
+
             // TODO: Update it to deny retrying
             var uselessToReload = response.Code == ResponseCode.NoConnection;
 
@@ -106,6 +113,12 @@ namespace MeetAndGoMobile.ViewModels
             if (response.Success)
             {
                 return response.Success;
+            }
+
+            if (response.Code == ResponseCode.Unauthorized)
+            {
+                await NavigationService.NavigateAsync(new Uri($"app:///{nameof(CustomNavigationPage)}/{nameof(SignUpPage)}", UriKind.Absolute));
+                return false;
             }
 
             // TODO: Update it to deny retrying
