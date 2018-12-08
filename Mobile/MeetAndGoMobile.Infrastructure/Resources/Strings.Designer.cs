@@ -214,6 +214,24 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to event.
+        /// </summary>
+        public static string L_event {
+            get {
+                return ResourceManager.GetString("L_event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to events.
+        /// </summary>
+        public static string L_events {
+            get {
+                return ResourceManager.GetString("L_events", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Legal.
         /// </summary>
         public static string Legal {
@@ -232,11 +250,29 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member.
+        /// </summary>
+        public static string Member {
+            get {
+                return ResourceManager.GetString("Member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This feature currently is not implemented.
         /// </summary>
         public static string NotImplemented {
             get {
                 return ResourceManager.GetString("NotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organizer.
+        /// </summary>
+        public static string Organizer {
+            get {
+                return ResourceManager.GetString("Organizer", resourceCulture);
             }
         }
         

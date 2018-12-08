@@ -6,6 +6,7 @@
                   BackgroundColor="{x:Static constants:Colors.StatusBarBrown}"
                   xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
                   xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+                  xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
                   x:Class="MeetAndGoMobile.Views.MasterPage">
 
     <MasterDetailPage.Master>
@@ -28,9 +29,54 @@
                 </ResourceDictionary>
             </ContentPage.Resources>
             
-            <StackLayout Padding="16" Spacing="0">
+            <StackLayout Padding="16, 50, 16, 30" Spacing="0">
                 
-                <!-- TODO: User Info  -->
+                <!-- User Info  -->
+
+                <StackLayout Orientation="Horizontal" Spacing="20">
+                    
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="PersonalInfoPage" />
+                    </StackLayout.GestureRecognizers>
+                    
+                    <Image WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
+
+                    <Label Style="{StaticResource MenuItem}" VerticalOptions="Center"  Text="{Binding UserName}"/>
+
+                </StackLayout>
+
+                <!-- User Rating  -->
+                
+                <Grid Margin="5, 15, 5, 40" RowSpacing="5" HorizontalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Label">
+                                <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
+                                <Setter Property="FontSize" Value="{x:Static constants:FontSize.Large}" />
+                                <Setter Property="TextColor" Value="White" />
+                                <Setter Property="Opacity" Value="0.4" />
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+
+                    <Label Text="{extensions:Translation Member}"  Grid.Row="0" Grid.Column="0" />
+                    <Label Text="{extensions:Translation Organizer}"  Grid.Row="1" Grid.Column="0" />
+
+                    <controls:StarStaticControl Grid.Row="0" Grid.Column="1" Grade="{Binding MemberRating}" />
+                    <controls:StarStaticControl Grid.Row="1" Grid.Column="1" Grade="{Binding OrganizerRating}" />
+
+                    <Label HorizontalTextAlignment="Center" Text="{Binding OrganizerVotesText}" Grid.Row="1" Grid.Column="2" />
+
+                </Grid>
                 
                 <BoxView />
                 
@@ -96,7 +142,7 @@
 
                 </StackLayout>
 
-                <BoxView Margin="0, 0, 0, 20" />
+                <BoxView  />
 
             </StackLayout>
             

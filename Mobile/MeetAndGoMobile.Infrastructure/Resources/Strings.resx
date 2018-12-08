@@ -225,4 +225,16 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="L_event" xml:space="preserve">
+    <value>event</value>
+  </data>
+  <data name="L_events" xml:space="preserve">
+    <value>events</value>
+  </data>
+  <data name="Member" xml:space="preserve">
+    <value>Member</value>
+  </data>
+  <data name="Organizer" xml:space="preserve">
+    <value>Organizer</value>
+  </data>
 </root>
