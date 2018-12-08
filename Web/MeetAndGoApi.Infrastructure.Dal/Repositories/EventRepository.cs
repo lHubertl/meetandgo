@@ -54,7 +54,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
                 return new Response(ResponseCode.ParameterIsNull, _localizer.GetString(Strings.ParameterCanNotBeNull));
             }
 
-            var userResult = await _userRepository.GetUserAsync(userId);
+            var userResult = await _userRepository.GetAppUserAsync(userId);
             if (!userResult.Success)
             {
                 return userResult;

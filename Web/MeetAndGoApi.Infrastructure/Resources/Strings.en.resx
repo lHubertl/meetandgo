@@ -148,7 +148,7 @@
     <value>Minimum six characters, at least one letter and one number, could be one special character</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
-    <value>Wrong phone number format. Recommended +(380)93-1234567</value>
+    <value>Wrong phone number format. Recommended +380 93 12 34 567</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>Wrong credentials.</value>

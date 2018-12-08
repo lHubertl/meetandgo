@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Extensions;
 using MeetAndGo.Shared.Managers;
+using MeetAndGo.Shared.Models;
 using MeetAndGo.Shared.Models.Authorization;
+using MeetAndGoApi.Extensions;
+using MeetAndGoApi.Infrastructure.Contracts.Service;
 using MeetAndGoApi.Infrastructure.Dto;
 using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.AspNetCore.Authorization;
@@ -30,6 +33,7 @@ namespace MeetAndGoApi.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IStringLocalizer<Strings> _localizer;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
         private readonly ILogger _logger;
 
         public AccountController(
@@ -37,13 +41,15 @@ namespace MeetAndGoApi.Controllers
             UserManager<ApplicationUser> userManager,
             IStringLocalizer<Strings> localizer,
             ILogger<AccountController> logger,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _localizer = localizer;
             _configuration = configuration;
+            _userService = userService;
         }
 
         #region Api implementation
@@ -185,6 +191,14 @@ namespace MeetAndGoApi.Controllers
             }
             
             return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.SignIn));
+        }
+
+        [HttpGet]
+        [Authorize]
+        public Task<IResponseData<UserModel>> GetUserModel()
+        {
+            var userId = User.CurrentUserId();
+            return _userService.GetUserModelAsync(userId);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
+using MeetAndGo.Shared.Models;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Contracts.Service;
 using MeetAndGoApi.Infrastructure.Dto;
@@ -18,9 +19,14 @@ namespace MeetAndGoApi.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public Task<IResponseData<ApplicationUser>> GetUserAsync(string userId)
+        public Task<IResponseData<ApplicationUser>> GetAppUserAsync(string userId)
         {
-            return _userRepository.GetUserAsync(userId);
+            return _userRepository.GetAppUserAsync(userId);
+        }
+
+        public Task<IResponseData<UserModel>> GetUserModelAsync(string userId)
+        {
+            return _userRepository.GetUserModelAsync(userId);
         }
     }
 }
