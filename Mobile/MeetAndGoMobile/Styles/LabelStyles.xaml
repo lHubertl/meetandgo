@@ -7,7 +7,7 @@
     <Style TargetType="Label" x:Key="NavBarLabel">
         <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
         <Setter Property="FontSize" Value="{x:Static constants:FontSize.XxLarge}" />
-        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="HeightRequest" Value="25" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="White" />
     </Style>
@@ -17,6 +17,7 @@
             <Setter.Value>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="0, 0, 16, 0" />
+                    <On Platform="UWP" Value="0, 0, 16, 0" />
                 </OnPlatform>
             </Setter.Value>
         </Setter>

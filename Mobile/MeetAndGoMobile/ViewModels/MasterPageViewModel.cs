@@ -1,5 +1,4 @@
-﻿using System;
-using MeetAndGo.Shared.Enums;
+﻿using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;

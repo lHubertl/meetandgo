@@ -40,8 +40,10 @@ namespace MeetAndGoMobile.Views
                 {
                     if (e is TappedEventArgs tappedEventArgs)
                     {
-                        ToggleMaster();
-                        viewModelBase.NavigationService.NavigateAsync(tappedEventArgs.Parameter.ToString());
+                        IsPresented = false;
+
+                        // TODO: CHECK NAVIGATION TO PAGE A THEN PAGE A + 1 THEN PAGE B THEN GO BACK
+                        viewModelBase.NavigateAsync(tappedEventArgs.Parameter.ToString());
 
                         DependencyService.Get<IStatusBarController>()?.SetVisibility(true);
                     }
