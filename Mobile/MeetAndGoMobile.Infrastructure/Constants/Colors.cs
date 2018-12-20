@@ -28,5 +28,15 @@ namespace MeetAndGoMobile.Infrastructure.Constants
         /// 91 91 91
         /// </summary>
         public static readonly Color DarkGray = Color.FromHex("#5B5B5B");
+
+        /// <summary>
+        /// 171 171 171
+        /// </summary>
+        public static readonly Color WhiteGray = Color.FromHex("#ABABAB");
+
+        /// <summary>
+        /// 7 200 115
+        /// </summary>
+        public static readonly Color LiteGreen = Color.FromHex("#07C873");
     }
 }

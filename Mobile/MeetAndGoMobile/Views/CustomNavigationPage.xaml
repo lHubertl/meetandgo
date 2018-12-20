@@ -4,6 +4,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
     prism:ViewModelLocator.AutowireViewModel="True"
-    BarTextColor="White"
-    NavigationPage.HasNavigationBar="False" />
+    ios:Page.UseSafeArea="true" 
+    BarBackgroundColor="{x:Static constants:Colors.StatusBarBrown}"
+    BarTextColor="{x:Static constants:Colors.WhiteGray}"
+    NavigationPage.BackButtonTitle="{extensions:Translation Back}" />

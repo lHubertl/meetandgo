@@ -13,7 +13,7 @@ namespace MeetAndGoMobile.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected INavigationService NavigationService { get; }
+        public INavigationService NavigationService { get; }
         protected IPageDialogService DialogService { get; }
 
         private bool _isBusy;

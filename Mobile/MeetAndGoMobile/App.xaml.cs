@@ -39,7 +39,7 @@ namespace MeetAndGoMobile
             if (await CheckIfTokenExist())
             {
                 // TODO: TO MAP PAGE
-                await NavigationService.NavigateAsync($"{nameof(MasterPage)}/{nameof(HomePage)}");
+                await NavigationService.NavigateAsync($"{nameof(MasterPage)}/{nameof(CustomNavigationPage)}/{nameof(HomePage)}");
             }
             else
             {
@@ -52,6 +52,7 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
+            containerRegistry.RegisterForNavigation<PersonalInfoPage, PersonalInfoPageViewModel>();
             containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
@@ -68,6 +69,7 @@ namespace MeetAndGoMobile
             }
 
             containerRegistry.RegisterSingleton<IDataRepository, DataRepository>();
+            containerRegistry.RegisterSingleton<IMasterPageService, MasterPageService>();
 
             containerRegistry.RegisterInstance(Container);
         }

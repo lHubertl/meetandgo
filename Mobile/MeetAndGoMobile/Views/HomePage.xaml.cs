@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MeetAndGoMobile.Infrastructure.DependencyServices;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MeetAndGoMobile.Views
@@ -9,6 +10,12 @@ namespace MeetAndGoMobile.Views
         public HomePage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            DependencyService.Get<IStatusBarController>()?.SetVisibility(false);
         }
     }
 }

@@ -5,4 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
-    NavigationPage.HasNavigationBar="False" />
+    NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Button Text="toggle" WidthRequest="70" HeightRequest="30" Command="{Binding ToggleMasterCommand}"></Button>
+    </Grid>
+</ContentPage>

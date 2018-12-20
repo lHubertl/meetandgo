@@ -3,6 +3,8 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   prism:ViewModelLocator.AutowireViewModel="True"
+                  MasterBehavior="Popover"
+                  IsGestureEnabled="True"
                   BackgroundColor="{x:Static constants:Colors.StatusBarBrown}"
                   xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
                   xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
@@ -10,7 +12,7 @@
                   x:Class="MeetAndGoMobile.Views.MasterPage">
 
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu" BackgroundColor="{x:Static constants:Colors.StatusBarBrown}">
+        <ContentPage Title="{extensions:Translation MeetAndGo}" BackgroundColor="{x:Static constants:Colors.StatusBarBrown}">
             <ContentPage.Resources>
                 <ResourceDictionary>
                     <Style TargetType="Label" x:Key="MenuItem">
@@ -29,14 +31,14 @@
                 </ResourceDictionary>
             </ContentPage.Resources>
             
-            <StackLayout Padding="16, 50, 16, 30" Spacing="0">
+            <StackLayout Padding="16, 25, 16, 30" Spacing="0">
                 
                 <!-- User Info  -->
 
-                <StackLayout Orientation="Horizontal" Spacing="20">
+                <StackLayout HeightRequest="60" VerticalOptions="Center" Orientation="Horizontal" Spacing="20">
                     
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="PersonalInfoPage" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="PersonalInfoPage" />
                     </StackLayout.GestureRecognizers>
                     
                     <Image WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
@@ -47,15 +49,15 @@
 
                 <!-- User Rating  -->
                 
-                <Grid Margin="5, 15, 5, 40" RowSpacing="5" HorizontalOptions="Start">
+                <Grid HeightRequest="80" RowSpacing="5" HorizontalOptions="Start">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
                     <Grid.Resources>
                         <ResourceDictionary>
@@ -84,7 +86,7 @@
                 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation EventsHistory}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="EventsHistroyPage" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="EventsHistoryPage" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -94,7 +96,7 @@
 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Payment}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="PaymentPage" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="PaymentPage" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -104,7 +106,7 @@
 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Settings}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="SettingsPage" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="SettingsPage" />
                     </Label.GestureRecognizers>
                 </Label>
                 
@@ -114,7 +116,7 @@
 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Help}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="HelpPage" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="HelpPage" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -122,18 +124,20 @@
 
                 <!-- Legal -->
 
-                <StackLayout VerticalOptions="EndAndExpand" Margin="0,0,0,16" Orientation="Horizontal">
+                <StackLayout Margin="0, 5, 0 ,0" VerticalOptions="EndAndExpand" HeightRequest="32" Orientation="Horizontal">
 
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavigateCommand}"  CommandParameter="LegacyPage" />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="LegacyPage" />
                     </StackLayout.GestureRecognizers>
 
                     <Label 
+                        VerticalTextAlignment="Start"
                         Style="{StaticResource MenuItem}" 
                         HeightRequest="20" 
                         Text="{extensions:Translation Legal}" />
 
                     <Label 
+                        VerticalTextAlignment="Start"
                         Opacity="0.4" 
                         Style="{StaticResource MenuItem}" 
                         HorizontalOptions="EndAndExpand" 

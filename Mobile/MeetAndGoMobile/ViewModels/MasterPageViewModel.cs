@@ -1,4 +1,5 @@
-﻿using MeetAndGo.Shared.Enums;
+﻿using System;
+using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
@@ -94,10 +95,11 @@ namespace MeetAndGoMobile.ViewModels
             UserName = string.Join(" ", userModel.FirstName, userModel.LastName);
             UserImageSource = userModel.CompressedPhotoUrl;
             
+            // TODO: TEST THIS CASE BECAUSE SERVER CAN NOT UPDATE THIS FIELDS
             MemberRating = (int)userModel.MemberRating;
             OrganizerRating = (int)userModel.OrganizerRating;
 
-            var asOrganizerVoteCount = userModel?.Votes.Where(x => x.RatingType == UserStatus.Organizer).Count();
+            var asOrganizerVoteCount = userModel.Votes.Count(x => x.RatingType == UserStatus.Organizer);
             var eventsText = asOrganizerVoteCount == 1 ? Strings.L_event : Strings.L_events;
             OrganizerVotesText = $"({asOrganizerVoteCount} {eventsText})";
         }

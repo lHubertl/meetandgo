@@ -70,6 +70,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By signing up You agree to out.
         /// </summary>
         public static string BySigningYourAgree {
@@ -282,6 +291,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string Payments {
             get {
                 return ResourceManager.GetString("Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChanges", resourceCulture);
             }
         }
         

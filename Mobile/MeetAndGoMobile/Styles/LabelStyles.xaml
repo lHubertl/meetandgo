@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+             x:Class="MeetAndGoMobile.Styles.LabelStyles">
+
+    <Style TargetType="Label" x:Key="NavBarLabel">
+        <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.XxLarge}" />
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="White" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="NavBarMarginOnPlatformLabel" BasedOn="{StaticResource NavBarLabel}">
+        <Setter Property="Margin">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0, 0, 16, 0" />
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

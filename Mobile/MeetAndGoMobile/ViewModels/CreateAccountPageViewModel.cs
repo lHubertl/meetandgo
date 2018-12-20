@@ -102,7 +102,7 @@ namespace MeetAndGoMobile.ViewModels
 	                // TODO: LOG IT
 	            }
 
-                await NavigationService.NavigateAsync(new Uri($"app:///{nameof(MasterPage)}/{nameof(HomePage)}", UriKind.Absolute));
+                await NavigationService.NavigateAsync(new Uri($"app:///{nameof(MasterPage)}/{nameof(CustomNavigationPage)}/{nameof(HomePage)}", UriKind.Absolute));
             }
 	    }
     }

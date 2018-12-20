@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+             xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="True"
+             BackgroundColor="{x:Static constants:Colors.BgrBrown}"
+             x:Class="MeetAndGoMobile.Views.PersonalInfoPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/LabelStyles.xaml" />
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+
+            <Label TextColor="{x:Static constants:Colors.LiteGreen}" 
+                   Style="{StaticResource NavBarMarginOnPlatformLabel}" 
+                   Text="{extensions:Translation SaveChanges}"
+                   HorizontalOptions="End">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SaveChangesCommand}" />
+                </Label.GestureRecognizers>
+
+            </Label>
+
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Hello"></Label>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

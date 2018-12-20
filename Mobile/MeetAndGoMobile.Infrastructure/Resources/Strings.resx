@@ -237,4 +237,10 @@
   <data name="Organizer" xml:space="preserve">
     <value>Organizer</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
 </root>
