@@ -17,18 +17,19 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <ContentView HorizontalOptions="Fill">
-            <StackLayout
-                Margin="0,20,0,40"
-                HorizontalOptions="Center"
-                WidthRequest="{StaticResource ContentWidth}">
+        <StackLayout Margin="0,0,0,10" HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-                <StackLayout VerticalOptions="CenterAndExpand">
-                    <Image Source="mg_pin.png" />
-                    <Label Style="{StaticResource LabelLogoStyle}" />
-                </StackLayout>
+                <Grid HeightRequest="280">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="mg_pin.png" VerticalOptions="End" />
+                    <Label Grid.Row="1" Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
+                </Grid>
 
-                <StackLayout VerticalOptions="StartAndExpand">
+                <StackLayout>
+
                     <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation YourName}" />
 
                     <Entry Style="{StaticResource EntryStyle}" Text="{Binding YourName}">
@@ -66,13 +67,12 @@
                     </Entry>
 
                     <controls:ExtendedButton
-                        Margin="0,30"
+                        Margin="0,30,0,0"
                         Command="{Binding CreateAccountCommand}"
                         Style="{StaticResource ButtonGreenStyle}"
                         Text="{extensions:Translation CreateAccount}" />
                 </StackLayout>
 
             </StackLayout>
-        </ContentView>
     </ScrollView>
 </ContentPage>

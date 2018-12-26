@@ -16,17 +16,18 @@
         <ResourceDictionary Source="/Styles/LoginPageStyles.xaml" />
     </ContentPage.Resources>
 
-    <StackLayout
-        Margin="0,20,0,40"
-        HorizontalOptions="Center"
-        WidthRequest="{StaticResource ContentWidth}">
+    <StackLayout HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-        <StackLayout VerticalOptions="CenterAndExpand">
-            <Image Source="mg_pin.png" VerticalOptions="End" />
-            <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
-        </StackLayout>
+        <Grid HeightRequest="280">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="mg_pin.png" VerticalOptions="End" />
+            <Label Grid.Row="1" Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
+        </Grid>
 
-        <StackLayout VerticalOptions="Center">
+        <StackLayout>
 
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EntryYourPhoneNumber}" />
 
@@ -60,7 +61,7 @@
             </Entry>
 
             <controls:ExtendedButton
-                Margin="0,30"
+                Margin="0,30,0,0"
                 Command="{Binding SignInCommand}"
                 Style="{StaticResource ButtonGreenStyle}"
                 Text="{extensions:Translation SignIn}"
@@ -69,9 +70,10 @@
             <!--  Terms  -->
 
             <Label
+                HeightRequest="75"
                 FontSize="{x:Static constants:FontSize.Medium}"
                 HorizontalTextAlignment="Center"
-                VerticalOptions="Start">
+                VerticalTextAlignment="Center">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="{extensions:Translation BySigningYourAgree}" TextColor="{x:Static constants:Colors.DarkGray}" />
@@ -92,6 +94,8 @@
         <!--  Sign Up  -->
 
         <Label
+            HeightRequest="100"
+            VerticalTextAlignment="Start"
             FontSize="{x:Static constants:FontSize.Large}"
             HorizontalTextAlignment="Center"
             VerticalOptions="EndAndExpand">

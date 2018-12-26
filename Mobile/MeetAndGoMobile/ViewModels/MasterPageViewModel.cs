@@ -7,7 +7,6 @@ using Prism.Ioc;
 using Prism.Navigation;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 
@@ -53,9 +52,7 @@ namespace MeetAndGoMobile.ViewModels
             get => _organizerVotesText;
             set => SetProperty(ref _organizerVotesText, value);
         }
-
-        public ICommand NavigateCommand => new SingleExecutionCommand(ExecuteNavigateCommand);
-
+        
         public MasterPageViewModel(
             INavigationService navigationService, 
             IContainerProvider container,
@@ -75,15 +72,7 @@ namespace MeetAndGoMobile.ViewModels
                 SetUpUserInfo(userModel);
             }
         }
-
-        private async Task ExecuteNavigateCommand(object pageNameObj)
-        {
-            if(pageNameObj is string pageName)
-            {
-                await NavigationService.NavigateAsync(pageName);
-            }
-        }
-
+        
         private void SetUpUserInfo(UserModel userModel)
         {
             if(userModel is null)

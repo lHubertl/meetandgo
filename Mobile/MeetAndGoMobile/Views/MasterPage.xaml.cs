@@ -42,10 +42,10 @@ namespace MeetAndGoMobile.Views
                     {
                         IsPresented = false;
 
+                        DependencyService.Get<IStatusBarController>()?.SetVisibility(true);
+
                         // TODO: CHECK NAVIGATION TO PAGE A THEN PAGE A + 1 THEN PAGE B THEN GO BACK
                         viewModelBase.NavigateAsync(tappedEventArgs.Parameter.ToString());
-
-                        DependencyService.Get<IStatusBarController>()?.SetVisibility(true);
                     }
                 }
             }
