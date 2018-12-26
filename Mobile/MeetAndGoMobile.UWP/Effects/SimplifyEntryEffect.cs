@@ -2,8 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
-using Windows.UI.Xaml.Media;
-using Color = Windows.UI.Color;
+using Application = Windows.UI.Xaml.Application;
 
 [assembly: ResolutionGroupName(nameof(MeetAndGoMobile))]
 [assembly: ExportEffect(typeof(SimplifyEntryEffect), nameof(SimplifyEntryEffect))]
@@ -25,11 +24,18 @@ namespace MeetAndGoMobile.UWP.Effects
 
             if (Control is TextBox textBox)
             {
-                textBox.BorderThickness = new Windows.UI.Xaml.Thickness(0, 0, 0, 2);
-                textBox.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 91, 91, 91));
+                var fontFamily = textBox.FontFamily;
+                var fontSize = textBox.FontSize;
+
+                var style = (Windows.UI.Xaml.Style) Application.Current.Resources["SimplifyEntryEffectStyle"];
+                textBox.Style = style;
+
+                textBox.FontFamily = fontFamily;
+                textBox.FontSize = fontSize;
+
             }
         }
-
+        
         protected override void OnDetached()
         {
 

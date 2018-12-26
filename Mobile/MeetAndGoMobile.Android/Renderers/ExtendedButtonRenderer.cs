@@ -29,7 +29,6 @@ namespace MeetAndGoMobile.Droid.Renderers
             {
                 ConfigureGradient(element);
             }
-
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

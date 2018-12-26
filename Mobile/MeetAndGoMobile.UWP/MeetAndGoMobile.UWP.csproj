@@ -99,6 +99,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\ExtendedButtonRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -145,6 +146,10 @@
     <PackageReference Include="Prism.Unity.Forms" Version="7.1.0.431" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MeetAndGoMobile.Infrastructure\MeetAndGoMobile.Infrastructure.csproj">
+      <Project>{34E05337-1EAE-4E99-ACD4-98DFA8F733AC}</Project>
+      <Name>MeetAndGoMobile.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeetAndGoMobile\MeetAndGoMobile.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>MeetAndGoMobile</Name>

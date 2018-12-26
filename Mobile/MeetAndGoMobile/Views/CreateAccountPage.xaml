@@ -16,63 +16,62 @@
         <ResourceDictionary Source="/Styles/LoginPageStyles.xaml" />
     </ContentPage.Resources>
 
-    <ScrollView>
-        <StackLayout Margin="0,0,0,10" HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
+    <StackLayout Margin="0,0,0,10" HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-                <Grid HeightRequest="280">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="mg_pin.png" VerticalOptions="End" />
-                    <Label Grid.Row="1" Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
-                </Grid>
+        <Grid Style="{StaticResource LogoContainerStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="mg_pin.png" VerticalOptions="End" />
+            <Label Grid.Row="1" Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
+        </Grid>
 
-                <StackLayout>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <StackLayout>
 
-                    <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation YourName}" />
+                <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation YourName}" />
 
-                    <Entry Style="{StaticResource EntryStyle}" Text="{Binding YourName}">
-                        <Entry.Effects>
-                            <effects:SimplifyEntryEffect />
-                        </Entry.Effects>
-                    </Entry>
+                <Entry Style="{StaticResource EntryStyle}" Text="{Binding YourName}">
+                    <Entry.Effects>
+                        <effects:SimplifyEntryEffect />
+                    </Entry.Effects>
+                </Entry>
 
-                    <Label
-                        Margin="0,10,0,0"
-                        Style="{StaticResource EntryLabelInfoStyle}"
-                        Text="{extensions:Translation CreatePassword}" />
+                <Label 
+                    Style="{StaticResource EntryLabelInfoStyle}"
+                    Text="{extensions:Translation CreatePassword}" />
 
-                    <Entry
-                        IsPassword="True"
-                        Style="{StaticResource EntryStyle}"
-                        Text="{Binding Password}">
-                        <Entry.Effects>
-                            <effects:SimplifyEntryEffect />
-                        </Entry.Effects>
-                    </Entry>
+                <Entry
+                    IsPassword="True"
+                    Style="{StaticResource EntryStyle}"
+                    Text="{Binding Password}">
+                    <Entry.Effects>
+                        <effects:SimplifyEntryEffect />
+                    </Entry.Effects>
+                </Entry>
 
-                    <Label
-                        Margin="0,10,0,0"
-                        Style="{StaticResource EntryLabelInfoStyle}"
-                        Text="{extensions:Translation ConfirmPassword}" />
+                <Label
+                    Style="{StaticResource EntryLabelInfoStyle}"
+                    Text="{extensions:Translation ConfirmPassword}" />
 
-                    <Entry
-                        IsPassword="True"
-                        Style="{StaticResource EntryStyle}"
-                        Text="{Binding ConfirmedPassword}">
-                        <Entry.Effects>
-                            <effects:SimplifyEntryEffect />
-                        </Entry.Effects>
-                    </Entry>
+                <Entry
+                    IsPassword="True"
+                    Style="{StaticResource EntryStyle}"
+                    Text="{Binding ConfirmedPassword}">
+                    <Entry.Effects>
+                        <effects:SimplifyEntryEffect />
+                    </Entry.Effects>
+                </Entry>
 
-                    <controls:ExtendedButton
-                        Margin="0,30,0,0"
-                        Command="{Binding CreateAccountCommand}"
-                        Style="{StaticResource ButtonGreenStyle}"
-                        Text="{extensions:Translation CreateAccount}" />
-                </StackLayout>
-
+                <controls:ExtendedButton
+                    Margin="0,30,0,2"
+                    Command="{Binding CreateAccountCommand}"
+                    Style="{StaticResource ButtonGreenStyle}"
+                    Text="{extensions:Translation CreateAccount}" />
             </StackLayout>
-    </ScrollView>
+        </ScrollView>
+
+    </StackLayout>
+
 </ContentPage>

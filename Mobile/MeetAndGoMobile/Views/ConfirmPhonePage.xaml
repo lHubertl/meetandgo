@@ -19,7 +19,7 @@
 
     <StackLayout Margin="0,0,0,10" HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-        <Grid HeightRequest="280">
+        <Grid Style="{StaticResource LogoContainerStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />

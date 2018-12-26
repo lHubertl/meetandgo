@@ -30,14 +30,14 @@ namespace MeetAndGoMobile.ViewModels
             set => SetProperty(ref _userImageSource, value);
         }
 
-        private int _memberRating = 1;
+        private int _memberRating = 0;
         public int MemberRating
         {
             get => _memberRating;
             set => SetProperty(ref _memberRating, value);
         }
 
-        private int _organizerRating = 1;
+        private int _organizerRating = 0;
         public int OrganizerRating
         {
             get => _organizerRating;

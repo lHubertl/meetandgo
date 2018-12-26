@@ -18,7 +18,7 @@
 
     <StackLayout HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-        <Grid HeightRequest="280">
+        <Grid Style="{StaticResource LogoContainerStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -46,7 +46,6 @@
 
 
             <Label
-                Margin="0,10,0,0"
                 Style="{StaticResource EntryLabelInfoStyle}"
                 Text="{extensions:Translation EnterPassword}" />
 

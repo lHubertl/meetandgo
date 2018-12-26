@@ -9,6 +9,13 @@
 
     <x:Double x:Key="ContentWidth">200</x:Double>
 
+    <!-- Logo Container Style -->
+
+    <Style x:Key="LogoContainerStyle" TargetType="StackLayout">
+        <Setter Property="HeightRequest" Value="280" />
+        <Setter Property="MinimumHeightRequest" Value="100" />
+    </Style>
+
     <!--  Label Logo style  -->
 
     <Style x:Key="LabelLogoStyle" TargetType="Label">
@@ -36,6 +43,8 @@
         <Setter Property="TextColor" Value="{x:Static constants:Colors.Gray}" />
         <Setter Property="FontSize" Value="{x:Static constants:FontSize.Large}" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="VerticalTextAlignment" Value="End" />
     </Style>
 
     <!--  Entry style  -->
