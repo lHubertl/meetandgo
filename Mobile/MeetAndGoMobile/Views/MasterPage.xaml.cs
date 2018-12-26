@@ -42,10 +42,18 @@ namespace MeetAndGoMobile.Views
                     {
                         IsPresented = false;
 
+                        var newPageName = tappedEventArgs.Parameter.ToString();
+
+                        if (string.Equals(newPageName, navigationPage.CurrentPage.GetType().Name))
+                        {
+                            // No need to navigate to the same page stack twice
+                            return;
+                        }
+
                         DependencyService.Get<IStatusBarController>()?.SetVisibility(true);
 
                         // TODO: CHECK NAVIGATION TO PAGE A THEN PAGE A + 1 THEN PAGE B THEN GO BACK
-                        viewModelBase.NavigateAsync(tappedEventArgs.Parameter.ToString());
+                        viewModelBase.NavigateAsync(newPageName);
                     }
                 }
             }

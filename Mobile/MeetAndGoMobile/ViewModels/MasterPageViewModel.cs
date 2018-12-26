@@ -1,13 +1,11 @@
 ﻿using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
-using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
 using Prism.Ioc;
 using Prism.Navigation;
 using System.Linq;
 using System.Threading;
-using System.Windows.Input;
 using Xamarin.Essentials;
 
 namespace MeetAndGoMobile.ViewModels
