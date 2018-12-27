@@ -20,6 +20,11 @@ namespace MeetAndGoMobile.Infrastructure.Constants
         public static readonly Color Green = Color.FromHex("#09EE73");
 
         /// <summary>
+        /// 7 194 115
+        /// </summary>
+        public static readonly Color DarkGreen = Color.FromHex("#07C273");
+
+        /// <summary>
         /// 134 134 134
         /// </summary>
         public static readonly Color Gray = Color.FromHex("#868686");
@@ -28,6 +33,11 @@ namespace MeetAndGoMobile.Infrastructure.Constants
         /// 91 91 91
         /// </summary>
         public static readonly Color DarkGray = Color.FromHex("#5B5B5B");
+
+        /// <summary>
+        /// 98 98 98
+        /// </summary>
+        public static readonly Color DarkLightGray = Color.FromHex("#626262");
 
         /// <summary>
         /// 171 171 171

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using ImageCircle.Forms.Plugin.UWP;
 
 namespace MeetAndGoMobile.UWP
 {
@@ -42,7 +44,13 @@ namespace MeetAndGoMobile.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+                var rendererAssemblies = new[]
+                {
+                    typeof(ImageCircleRenderer).GetTypeInfo().Assembly
+                };
+
+                Xamarin.Forms.Forms.Init(e, rendererAssemblies);
+                ImageCircleRenderer.Init();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

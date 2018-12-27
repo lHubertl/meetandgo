@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using ImageCircle.Forms.Plugin.Droid;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
 using Prism;
 using Prism.Ioc;
@@ -36,6 +37,7 @@ namespace MeetAndGoMobile.Droid
 
             Xamarin.Essentials.Platform.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            ImageCircleRenderer.Init();
 
             Xamarin.Forms.DependencyService.Register<IStatusBarController>();
 

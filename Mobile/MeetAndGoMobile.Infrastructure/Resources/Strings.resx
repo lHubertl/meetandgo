@@ -243,4 +243,16 @@
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="BirthdayDate" xml:space="preserve">
+    <value>Birthday Date</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

@@ -79,6 +79,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Birthday Date.
+        /// </summary>
+        public static string BirthdayDate {
+            get {
+                return ResourceManager.GetString("BirthdayDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By signing up You agree to out.
         /// </summary>
         public static string BySigningYourAgree {
@@ -165,6 +174,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string E_ServerError {
             get {
                 return ResourceManager.GetString("E_ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
@@ -268,6 +286,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This feature currently is not implemented.
         /// </summary>
         public static string NotImplemented {
@@ -291,6 +318,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string Payments {
             get {
                 return ResourceManager.GetString("Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal Information.
+        /// </summary>
+        public static string PersonalInformation {
+            get {
+                return ResourceManager.GetString("PersonalInformation", resourceCulture);
             }
         }
         

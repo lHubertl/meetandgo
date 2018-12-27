@@ -16,11 +16,28 @@
         <Setter Property="Margin">
             <Setter.Value>
                 <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="Android" Value="0, 0, 16, 0" />
-                    <On Platform="UWP" Value="0, 0, 16, 0" />
+                    <On Platform="Android, UWP" Value="0, 0, 16, 0" />
                 </OnPlatform>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!--  Entry Label Info style  -->
+
+    <Style x:Key="EntryLabelInfoStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{x:Static constants:Colors.Gray}" />
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.Large}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="HeightRequest" Value="56" />
+        <Setter Property="VerticalTextAlignment" Value="End" />
+    </Style>
+
+    <!--  Entry style  -->
+
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
 </ResourceDictionary>

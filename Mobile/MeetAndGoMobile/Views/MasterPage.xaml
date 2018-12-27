@@ -9,6 +9,7 @@
                   xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
                   xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
                   xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
+                  xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
                   x:Class="MeetAndGoMobile.Views.MasterPage">
 
     <MasterDetailPage.Master>
@@ -35,13 +36,18 @@
                 
                 <!-- User Info  -->
 
-                <StackLayout HeightRequest="60" VerticalOptions="Center" Orientation="Horizontal" Spacing="20">
+                <StackLayout 
+                    InputTransparent="False"
+                    HeightRequest="80" 
+                    VerticalOptions="Center" 
+                    Orientation="Horizontal"
+                    Spacing="20">
                     
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="PersonalInfoPage" />
                     </StackLayout.GestureRecognizers>
-                    
-                    <Image WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
+
+                    <abstractions:CircleImage WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
 
                     <Label Style="{StaticResource MenuItem}" VerticalOptions="Center"  Text="{Binding UserName}"/>
 

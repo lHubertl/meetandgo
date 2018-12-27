@@ -195,6 +195,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>3.0.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.0.0</Version>
     </PackageReference>
@@ -233,6 +236,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\small_empty_star%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pen%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pen%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
