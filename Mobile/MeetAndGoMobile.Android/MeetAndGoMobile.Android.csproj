@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="DependencyServices\PicturePickerService.cs" />
     <Compile Include="DependencyServices\StatusBarController.cs" />
+    <Compile Include="Effects\SimplifyDatePickerEffect.cs" />
     <Compile Include="Effects\SimplifyEntryEffect.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\ExtendedButtonRenderer.cs" />

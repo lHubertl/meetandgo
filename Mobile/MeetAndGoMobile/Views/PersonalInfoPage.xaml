@@ -106,7 +106,18 @@
 
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation BirthdayDate}" />
 
-            <DatePicker Format="MMMM dd, yyyy" Date="{Binding BirthdayDate}" />
+            <DatePicker
+                Format="MMMM dd, yyyy"
+                Date="{Binding BirthdayDate}"
+                TextColor="White" 
+                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                FontSize="{x:Static constants:FontSize.ExtraLarge}">
+
+                <DatePicker.Effects>
+                    <effects:SimplifyDatePickerEffect />
+                </DatePicker.Effects>
+
+            </DatePicker>
 
 
         </StackLayout>

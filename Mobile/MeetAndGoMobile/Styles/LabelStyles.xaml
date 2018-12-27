@@ -36,6 +36,7 @@
 
     <Style x:Key="EntryStyle" TargetType="Entry">
         <Setter Property="TextColor" Value="White" />
+        <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}"/>
         <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>

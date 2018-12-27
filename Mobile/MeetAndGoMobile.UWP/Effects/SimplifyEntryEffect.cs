@@ -32,7 +32,6 @@ namespace MeetAndGoMobile.UWP.Effects
 
                 textBox.FontFamily = fontFamily;
                 textBox.FontSize = fontSize;
-
             }
         }
         

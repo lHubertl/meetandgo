@@ -3,11 +3,10 @@ using MeetAndGoMobile.Droid.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ResolutionGroupName(nameof(MeetAndGoMobile))]
-[assembly: ExportEffect(typeof(SimplifyEntryEffect), nameof(SimplifyEntryEffect))]
+[assembly: ExportEffect(typeof(SimplifyDatePickerEffect), nameof(SimplifyDatePickerEffect))]
 namespace MeetAndGoMobile.Droid.Effects
 {
-    public class SimplifyEntryEffect : PlatformEffect
+    public class SimplifyDatePickerEffect : PlatformEffect
     {
         protected override void OnAttached()
         {

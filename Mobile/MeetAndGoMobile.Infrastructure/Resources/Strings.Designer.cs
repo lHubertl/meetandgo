@@ -340,6 +340,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Picture.
+        /// </summary>
+        public static string SelectPicture {
+            get {
+                return ResourceManager.GetString("SelectPicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Android.Content;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
+using MeetAndGoMobile.Infrastructure.Resources;
 
 namespace MeetAndGoMobile.Droid.DependencyServices
 {
@@ -16,7 +17,7 @@ namespace MeetAndGoMobile.Droid.DependencyServices
 
             // Start the picture-picker activity (resumes in MainActivity.cs)
             MainActivity.CurrentActivity.StartActivityForResult(
-                Intent.CreateChooser(intent, "Select Picture"),
+                Intent.CreateChooser(intent, Strings.SelectPicture),
                 MainActivity.PickImageId);
 
             // Save the TaskCompletionSource object as a MainActivity property
