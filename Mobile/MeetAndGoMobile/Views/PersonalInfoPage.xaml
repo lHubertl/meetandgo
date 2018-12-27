@@ -41,6 +41,9 @@
                     WidthRequest="72"
                     HorizontalOptions="Center"
                     VerticalOptions="End">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PickImageCommand}" />
+                    </Grid.GestureRecognizers>
 
                     <abstractions:CircleImage
                         HeightRequest="50" 

@@ -3,9 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Infrastructure.DependencyServices;
 using MeetAndGoMobile.Services;
 using Prism.Ioc;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace MeetAndGoMobile.ViewModels
 {
@@ -43,6 +45,8 @@ namespace MeetAndGoMobile.ViewModels
 
         public ICommand SaveChangesCommand => new SingleExecutionCommand(ExecuteSaveChangesCommand);
 
+        public ICommand PickImageCommand => new SingleExecutionCommand(ExecutePickImageCommand);
+        
         public PersonalInfoPageViewModel(
             INavigationService navigationService, 
             IContainerProvider container,
@@ -69,6 +73,13 @@ namespace MeetAndGoMobile.ViewModels
         private async Task ExecuteSaveChangesCommand()
         {
 
+        }
+
+        private async Task ExecutePickImageCommand()
+        {
+            var stream = await DependencyService.Get<IPicturePicker>().GetImageStreamAsync();
+            
+            //TODO: 
         }
     }
 }

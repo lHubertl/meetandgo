@@ -1,9 +1,13 @@
-﻿using Android.App;
+﻿using System.IO;
+using System.Threading.Tasks;
+using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using ImageCircle.Forms.Plugin.Droid;
+using MeetAndGoMobile.Droid.DependencyServices;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
 using Prism;
 using Prism.Ioc;
@@ -20,7 +24,7 @@ namespace MeetAndGoMobile.Droid
 
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        public static Activity CurrentActivity;
+        public static MainActivity CurrentActivity;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -40,10 +44,37 @@ namespace MeetAndGoMobile.Droid
             ImageCircleRenderer.Init();
 
             Xamarin.Forms.DependencyService.Register<IStatusBarController>();
+            Xamarin.Forms.DependencyService.Register<IPicturePicker, PicturePickerService>();
 
             LoadApplication(new App(new AndroidInitializer()));
 
             CurrentActivity = this;
+        }
+
+        // Field, property, and method for Picture Picker
+        public static readonly int PickImageId = 1000;
+
+        public TaskCompletionSource<Stream> PickImageTaskCompletionSource { set; get; }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
+        {
+            base.OnActivityResult(requestCode, resultCode, intent);
+
+            if (requestCode == PickImageId)
+            {
+                if (resultCode == Result.Ok && intent != null)
+                {
+                    Android.Net.Uri uri = intent.Data;
+                    var stream = ContentResolver.OpenInputStream(uri);
+
+                    // Set the Stream as the completion of the Task
+                    PickImageTaskCompletionSource.SetResult(stream);
+                }
+                else
+                {
+                    PickImageTaskCompletionSource.SetResult(null);
+                }
+            }
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

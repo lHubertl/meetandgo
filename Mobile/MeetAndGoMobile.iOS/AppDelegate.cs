@@ -1,5 +1,7 @@
 ﻿using Foundation;
 using ImageCircle.Forms.Plugin.iOS;
+using MeetAndGoMobile.iOS.DependencyServices;
+using MeetAndGoMobile.Infrastructure.DependencyServices;
 using Prism;
 using Prism.Ioc;
 using UIKit;
@@ -24,6 +26,8 @@ namespace MeetAndGoMobile.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
             ImageCircleRenderer.Init();
+
+            Xamarin.Forms.DependencyService.Register<IPicturePicker, PicturePickerService>();
 
             return base.FinishedLaunching(app, options);
         }
