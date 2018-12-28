@@ -13,7 +13,7 @@ namespace MeetAndGoApi.Infrastructure.Dal
             CreateMapForGuidAndString();
             CreateMapForUserModelAndApplicationUser();
             CreateMapForMemberModelAndApplicationUser();
-            CreateMapForPointModelAndPoindDto();
+            CreateMapForPointModelAndPointDto();
             CreateMapForCommentModelAndCommentDto();
             CreateMapForVoteModelAndVoteDto();
             CreateMapForEventModelAndEventDto();
@@ -49,7 +49,7 @@ namespace MeetAndGoApi.Infrastructure.Dal
                     dto => dto.MapFrom(src => src.EventUsers.Select(x => x.ApplicationUser).ToList()));
         }
 
-        private void CreateMapForPointModelAndPoindDto()
+        private void CreateMapForPointModelAndPointDto()
         {
             CreateMap<PointModel, PointDto>();
             CreateMap<PointDto, PointModel>();
@@ -78,7 +78,8 @@ namespace MeetAndGoApi.Infrastructure.Dal
             CreateMap<UserModel, ApplicationUser>()
                 .ForMember(dto => dto.VoteDtos, model => model.MapFrom(src => src.Votes));
             CreateMap<ApplicationUser, UserModel>()
-                .ForMember(model => model.Votes, dto => dto.MapFrom(src => src.VoteDtos));
+                .ForMember(model => model.Votes, dto => dto.MapFrom(src => src.VoteDtos))
+                .ForMember(model => model.CompressedPhotoUrl, dto => dto.MapFrom(src => src.FileDto.Path));
         }
 
         private void CreateMapForMemberModelAndApplicationUser()

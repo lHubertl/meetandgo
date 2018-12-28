@@ -9,5 +9,6 @@ namespace MeetAndGoApi.Infrastructure.Contracts.Repository
     {
         Task<IResponseData<ApplicationUser>> GetAppUserAsync(string id);
         Task<IResponseData<UserModel>> GetUserModelAsync(string id);
+        Task<IResponse> SetUserPhotoAsync(string userId, string name, string path);
     }
 }

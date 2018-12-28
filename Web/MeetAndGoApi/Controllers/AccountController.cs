@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -15,6 +16,8 @@ using MeetAndGoApi.Infrastructure.Contracts.Service;
 using MeetAndGoApi.Infrastructure.Dto;
 using MeetAndGoApi.Infrastructure.Resources;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +35,7 @@ namespace MeetAndGoApi.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IStringLocalizer<Strings> _localizer;
+        private readonly IHostingEnvironment _appEnvironment;
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly ILogger _logger;
@@ -40,6 +44,7 @@ namespace MeetAndGoApi.Controllers
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
             IStringLocalizer<Strings> localizer,
+            IHostingEnvironment appEnvironment,
             ILogger<AccountController> logger,
             IConfiguration configuration,
             IUserService userService)
@@ -50,6 +55,7 @@ namespace MeetAndGoApi.Controllers
             _localizer = localizer;
             _configuration = configuration;
             _userService = userService;
+            _appEnvironment = appEnvironment;
         }
 
         #region Api implementation
@@ -199,6 +205,62 @@ namespace MeetAndGoApi.Controllers
         {
             var userId = User.CurrentUserId();
             return _userService.GetUserModelAsync(userId);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IResponse> UpdateUserModel(UserModel model)
+        {
+            if (model is null)
+            {
+                return new ResponseData<string>(ResponseCode.RequestError, _localizer.GetString(Strings.ParameterCanNotBeNull));
+            }
+
+            var validator = ValidationManager.Create()
+                .Validate(() => model.FirstName?.Length > 0, _localizer.GetString(Strings.FirstName))
+                .ValidateEmail(model.Email, _localizer.GetString(Strings.InvalidEmailFormat));
+
+            if (!validator.IsValid)
+            {
+                return new ResponseData<string>(ResponseCode.RequestError, validator.ToString());
+            }
+            
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            currentUser.FirstName = model.FirstName;
+            currentUser.LastName = model.LastName;
+            currentUser.Email = model.Email;
+            currentUser.DateOfBirth = model.DateOfBirth;
+
+            var result = await _userManager.UpdateAsync(currentUser);
+
+            if (!result.Succeeded)
+            {
+                return new Response(ResponseCode.RequestError, result.ToString());
+            }
+
+            return new Response();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IResponse> UploadProfilePhoto(IFormFile file)
+        {
+            if (file is null)
+            {
+                return new Response(ResponseCode.ParameterIsNull, _localizer.GetString(Strings.ParameterCanNotBeNull));
+            }
+
+            var userId = User.CurrentUserId();
+            
+            var path = $"{_appEnvironment.WebRootPath}/Files/{userId}";
+
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            return await _userService.SetUserPhotoAsync(userId, file.Name, path);
         }
 
         #endregion

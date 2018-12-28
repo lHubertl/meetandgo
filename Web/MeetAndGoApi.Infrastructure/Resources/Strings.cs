@@ -29,5 +29,6 @@ namespace MeetAndGoApi.Infrastructure.Resources
         DirectionPointless,
         UserNotFound,
         NameCanNotBeEmpty,
+        InvalidEmailFormat
     }
 }

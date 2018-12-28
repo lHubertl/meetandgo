@@ -12,6 +12,7 @@
         Exception,
         Unknown,
         JsonFail,
-        InvalidCredentials
+        InvalidCredentials,
+        NotImplemented
     }
 }

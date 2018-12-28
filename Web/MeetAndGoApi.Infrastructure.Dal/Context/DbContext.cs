@@ -13,6 +13,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Context
         public DbSet<EventDto> Events { get; set; }
         public DbSet<PointDto> Points { get; set; }
         public DbSet<VoteDto> Votes { get; set; }
+        public DbSet<FileDto> Files { get; set; }
 
         #endregion
 
@@ -71,6 +72,13 @@ namespace MeetAndGoApi.Infrastructure.Dal.Context
                 .HasOne(pt => pt.ApplicationUser)
                 .WithMany(t => t.EventUsers)
                 .HasForeignKey(pt => pt.ApplicationUserId);
+
+            // ApplicationUser - File One-to-One
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(pt => pt.FileDto)
+                .WithOne(p => p.ApplicationUser)
+                .HasForeignKey<FileDto>(pt => pt.ApplicationUserId);
         }
 
         #endregion

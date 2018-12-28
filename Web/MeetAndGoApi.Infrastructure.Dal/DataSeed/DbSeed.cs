@@ -93,6 +93,17 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             context.SaveChanges();
 
             #endregion
+
+            #region MyRegion
+
+            user1 = context.Users.FirstOrDefault();
+
+            var file = GetMockedFile();
+            file.ApplicationUser = user1;
+            context.Files.Add(file);
+            context.SaveChanges();
+
+            #endregion
         }
 
         #region Get Mocked data
@@ -169,6 +180,17 @@ namespace MeetAndGoApi.Infrastructure.Dal.DataSeed
             return new EventUser
             {
                 EventUserId = Guid.NewGuid()
+            };
+        }
+
+        private FileDto GetMockedFile()
+        {
+            return new FileDto
+            {
+                FileDtoId = Guid.NewGuid(),
+                Name = "Photo",
+                Path =
+                    "https://scontent.flwo1-1.fna.fbcdn.net/v/t1.0-9/40042014_2032196270206068_4734283304386166784_n.jpg?_nc_cat=100&_nc_ht=scontent.flwo1-1.fna&oh=31e093ff4718c7c5064dfb45b8f18c7a&oe=5C8B9EBE"
             };
         }
 

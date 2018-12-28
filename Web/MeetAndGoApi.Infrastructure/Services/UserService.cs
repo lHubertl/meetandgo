@@ -28,5 +28,10 @@ namespace MeetAndGoApi.Infrastructure.Services
         {
             return _userRepository.GetUserModelAsync(userId);
         }
+
+        public Task<IResponse> SetUserPhotoAsync(string userId, string name, string path)
+        {
+            return _userRepository.SetUserPhotoAsync(userId, name, path);
+        }
     }
 }

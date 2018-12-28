@@ -132,6 +132,9 @@
   <data name="FirstName" xml:space="preserve">
     <value>First name can not be empty</value>
   </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name can not be empty</value>
   </data>

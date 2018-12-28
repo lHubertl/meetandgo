@@ -85,6 +85,20 @@ namespace MeetAndGo.Shared.Managers
             return Validate(() => Regex.IsMatch(value, mask), error);
         }
 
+        public ValidationManager ValidateEmail(string value, string error)
+        {
+            if (value is null)
+            {
+                Errors.Add(error);
+                IsValid = false;
+                return this;
+            }
+
+            // Only six digits
+            var mask = @"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$";
+            return Validate(() => Regex.IsMatch(value, mask), error);
+        }
+
         public override string ToString()
         {
             if (Errors == null)
