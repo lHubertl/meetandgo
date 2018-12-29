@@ -30,51 +30,55 @@
 
     </NavigationPage.TitleView>
 
-    <ContentPage.Content>
-        <StackLayout WidthRequest="300" HorizontalOptions="Center">
+    <Grid HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-            <ContentView HeightRequest="112">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1.5*" />
+        </Grid.RowDefinitions>
 
-                <Grid 
-                    MinimumHeightRequest="50"
-                    HeightRequest="72" 
-                    WidthRequest="72"
-                    HorizontalOptions="Center"
-                    VerticalOptions="End">
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding PickImageCommand}" />
-                    </Grid.GestureRecognizers>
+        <Grid
+            Margin="0, 8, 0, 0"
+            Grid.Row="0"
+            MinimumHeightRequest="80"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding PickImageCommand}" />
+            </Grid.GestureRecognizers>
 
-                    <abstractions:CircleImage
-                        HeightRequest="50"
-                        Aspect="AspectFit"
-                        Grid.Row="0" 
-                        Source="{Binding ProfileImageSource}" />
+            <abstractions:CircleImage
+                Aspect="AspectFill"
+                HeightRequest="80"
+                WidthRequest="80"
+                Grid.Row="0" 
+                Source="{Binding ProfileImageSource}" />
 
-                    <Frame 
-                        HasShadow="False"
-                        BackgroundColor="{x:Static constants:Colors.DarkGreen}" 
-                        HeightRequest="24" 
-                        WidthRequest="24"
-                        VerticalOptions="End"
-                        HorizontalOptions="End"
-                        Padding="0"
-                        CornerRadius="12">
+            <Frame 
+                HasShadow="False"
+                BackgroundColor="{x:Static constants:Colors.DarkGreen}" 
+                HeightRequest="24" 
+                WidthRequest="24"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Padding="0"
+                CornerRadius="12">
 
-                        <Image Source="pen.png" VerticalOptions="Center" HorizontalOptions="Center" />
-                    </Frame>
-                </Grid>
+                <Image Source="pen.png" VerticalOptions="Center" HorizontalOptions="Center" />
+            </Frame>
+        </Grid>
 
-            </ContentView>
 
-            <Label 
-                HeightRequest="56"
-                VerticalTextAlignment="End" 
+        <StackLayout Spacing="0" Grid.Row="1">
+
+            <Label
+                VerticalTextAlignment="Start" 
                 HorizontalTextAlignment="Center"
                 Text="{extensions:Translation PersonalInformation}"
                 FontFamily="{x:Static constants:FontFamily.NunitoRegular}" 
                 TextColor="{x:Static constants:Colors.DarkLightGray}" 
                 FontSize="{x:Static constants:FontSize.ExtraLarge}" />
+        
 
             <!--  Name  -->
 
@@ -120,8 +124,8 @@
 
             </DatePicker>
 
-
         </StackLayout>
-    </ContentPage.Content>
+
+    </Grid>
 
 </ContentPage>

@@ -7,13 +7,11 @@
     xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure">
 
-    <x:Double x:Key="ContentWidth">200</x:Double>
-
     <!-- Logo Container Style -->
 
     <Style x:Key="LogoContainerStyle" TargetType="StackLayout">
-        <Setter Property="HeightRequest" Value="280" />
-        <Setter Property="MinimumHeightRequest" Value="100" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="Margin" Value="0, 0, 0, 20" />
     </Style>
 
     <!--  Label Logo style  -->

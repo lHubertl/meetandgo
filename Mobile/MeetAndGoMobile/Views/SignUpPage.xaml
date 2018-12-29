@@ -16,18 +16,20 @@
         <ResourceDictionary Source="/Styles/LabelStyles.xaml" />
     </ContentPage.Resources>
 
-    <StackLayout HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
+    <Grid HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-        <Grid Style="{StaticResource LogoContainerStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Image Grid.Row="0" Source="mg_pin.png" VerticalOptions="End" />
-            <Label Grid.Row="1" Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
-        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.4*" />
+        </Grid.RowDefinitions>
 
-        <StackLayout>
+        <StackLayout Grid.Row="0" Style="{StaticResource LogoContainerStyle}">
+            <Image Source="mg_pin.png" VerticalOptions="End" />
+            <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
+        </StackLayout>
+
+        <StackLayout Spacing="0" Grid.Row="1">
             
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EntryYourPhoneNumber}" />
 
@@ -72,17 +74,17 @@
 
             </Label>
 
-
         </StackLayout>
 
         <!--  Sign In  -->
 
         <Label 
-            HeightRequest="100"
+            Grid.Row="2"
+            Margin="0, 20, 0, 0"
             VerticalTextAlignment="Start"
             FontSize="{x:Static constants:FontSize.Large}"
             HorizontalTextAlignment="Center"
-            VerticalOptions="EndAndExpand">
+            VerticalOptions="Start">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{extensions:Translation AlreadyHaveAccount}" TextColor="{x:Static constants:Colors.DarkGray}" />
@@ -97,6 +99,6 @@
 
         </Label>
 
-    </StackLayout>
+    </Grid>
 
 </ContentPage>

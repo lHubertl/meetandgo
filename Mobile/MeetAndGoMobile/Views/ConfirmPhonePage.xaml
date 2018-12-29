@@ -18,18 +18,19 @@
         <ResourceDictionary Source="/Styles/LabelStyles.xaml" />
     </ContentPage.Resources>
 
-    <StackLayout Margin="0,0,0,10" HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
+    <Grid HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
-        <Grid Style="{StaticResource LogoContainerStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Image Grid.Row="0" Source="mg_pin.png" VerticalOptions="End" />
-            <Label Grid.Row="1" Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
-        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="1.4*" />
+        </Grid.RowDefinitions>
 
-        <StackLayout>
+        <StackLayout Grid.Row="0" Style="{StaticResource LogoContainerStyle}">
+            <Image Source="mg_pin.png" VerticalOptions="End" />
+            <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
+        </StackLayout>
+
+        <StackLayout Spacing="0" Grid.Row="1">
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EnterConfirmationCode}" />
 
             <Entry
@@ -54,6 +55,6 @@
                 Text="{extensions:Translation Continue}" />
         </StackLayout>
 
-    </StackLayout>
+    </Grid>
 
 </ContentPage>
