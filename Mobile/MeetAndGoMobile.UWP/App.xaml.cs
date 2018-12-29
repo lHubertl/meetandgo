@@ -6,8 +6,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using ImageCircle.Forms.Plugin.UWP;
-using MeetAndGoMobile.Infrastructure.DependencyServices;
-using MeetAndGoMobile.UWP.DependencyServices;
 
 namespace MeetAndGoMobile.UWP
 {
@@ -53,8 +51,6 @@ namespace MeetAndGoMobile.UWP
 
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
                 ImageCircleRenderer.Init();
-
-                Xamarin.Forms.DependencyService.Register<IPicturePicker, PicturePickerService>();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

@@ -9,10 +9,8 @@ using MeetAndGoMobile.Views;
 using Xamarin.Forms.Xaml;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
-using MeetAndGoMobile.Services.FakeServices;
 using Plugin.Multilingual;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MeetAndGoMobile
@@ -57,16 +55,8 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
-
-            // TODO: Rework it before release
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                containerRegistry.Register<IAccountService, FakeAccountService>();
-            }
-            else
-            {
-                containerRegistry.Register<IAccountService, AccountService>();
-            }
+            
+            containerRegistry.Register<IAccountService, AccountService>();
 
             containerRegistry.RegisterSingleton<IDataRepository, DataRepository>();
             containerRegistry.RegisterSingleton<IMasterPageService, MasterPageService>();

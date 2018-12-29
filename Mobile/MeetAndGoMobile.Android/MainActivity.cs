@@ -7,11 +7,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using ImageCircle.Forms.Plugin.Droid;
-using MeetAndGoMobile.Droid.DependencyServices;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 
+[assembly: UsesFeature("android.hardware.camera", Required = false)]
+[assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
 namespace MeetAndGoMobile.Droid
 {
     [Activity(
@@ -40,11 +42,12 @@ namespace MeetAndGoMobile.Droid
             base.OnCreate(bundle);
 
             Xamarin.Essentials.Platform.Init(this, bundle);
+            CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
             ImageCircleRenderer.Init();
 
             Xamarin.Forms.DependencyService.Register<IStatusBarController>();
-            Xamarin.Forms.DependencyService.Register<IPicturePicker, PicturePickerService>();
 
             LoadApplication(new App(new AndroidInitializer()));
 
@@ -81,6 +84,7 @@ namespace MeetAndGoMobile.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

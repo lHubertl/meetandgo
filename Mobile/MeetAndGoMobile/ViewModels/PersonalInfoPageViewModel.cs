@@ -1,24 +1,27 @@
-﻿using System;
+﻿using MeetAndGo.Shared.BusinessLogic.Responses;
+using MeetAndGo.Shared.Managers;
+using MeetAndGo.Shared.Models;
+using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Infrastructure.Resources;
+using MeetAndGoMobile.Services;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Prism.Ioc;
+using Prism.Navigation;
+using Prism.Services;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MeetAndGo.Shared.BusinessLogic.Responses;
-using MeetAndGo.Shared.Managers;
-using MeetAndGo.Shared.Models;
-using MeetAndGoMobile.Infrastructure.Commands;
-using MeetAndGoMobile.Infrastructure.DependencyServices;
-using MeetAndGoMobile.Infrastructure.Resources;
-using MeetAndGoMobile.Services;
-using Prism.Ioc;
-using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace MeetAndGoMobile.ViewModels
 {
     public class PersonalInfoPageViewModel : ViewModelBase
     {
+        private readonly IPageDialogService _pageDialogService;
         private readonly IAccountService _accountService;
         private MemoryStream _imageStream;
         private string _imageName;
@@ -56,21 +59,23 @@ namespace MeetAndGoMobile.ViewModels
         public ICommand SaveChangesCommand => new SingleExecutionCommand(ExecuteSaveChangesCommand);
 
         public ICommand PickImageCommand => new SingleExecutionCommand(ExecutePickImageCommand);
-        
+
         public PersonalInfoPageViewModel(
-            INavigationService navigationService, 
+            INavigationService navigationService,
             IContainerProvider container,
-            IAccountService accountService)
+            IAccountService accountService,
+            IPageDialogService pageDialogService)
             : base(navigationService, container)
         {
             _accountService = accountService;
+            _pageDialogService = pageDialogService;
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
 
-            var userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
+            UserModel userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
             if (userModel != null)
             {
                 if (!string.IsNullOrEmpty(userModel.CompressedPhotoUrl))
@@ -104,7 +109,7 @@ namespace MeetAndGoMobile.ViewModels
                 DateOfBirth = BirthdayDate
             };
 
-            var uploadImageTask = PerformDataRequestAsync(async() =>
+            var uploadImageTask = PerformDataRequestAsync(async () =>
             {
                 if (_imageStream != null)
                 {
@@ -130,30 +135,79 @@ namespace MeetAndGoMobile.ViewModels
 
         private async Task ExecutePickImageCommand()
         {
-            var imageFile = await DependencyService.Get<IPicturePicker>().PickImageAsync();
-
-            if (imageFile.stream != null)
+            if (!CrossMedia.IsSupported)
             {
-                var memoryStream = new MemoryStream();
-                await imageFile.stream.CopyToAsync(memoryStream);
-                memoryStream.Position = 0;
-                ProfileImageSource = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
-
-                _imageStream = memoryStream;
-                _imageFormat = imageFile.format;
-                _imageName = imageFile.name;
+                await UserNotificationAsync(Strings.NotSupported, Strings.Error);
+                return;
             }
+
+            var mediaFile = await PickMediaFile();
+            
+            if (mediaFile == null)
+            {
+                // User canceled
+                return;
+            }
+
+            var fileNameAndType = mediaFile.Path.Split('/').LastOrDefault()?.Split('.');
+            var fileName = fileNameAndType?.FirstOrDefault();
+            var fileType = fileNameAndType?.Length > 1 ? fileNameAndType.LastOrDefault() : default(string);
+
+            MemoryStream memoryStream = new MemoryStream();
+            await mediaFile.GetStream().CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+            ProfileImageSource = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
+
+            _imageStream = memoryStream;
+            _imageFormat = fileType;
+            _imageName = fileName;
+        }
+
+        private async Task<MediaFile> PickMediaFile()
+        {
+            var mediaFileTask = new Task<MediaFile>(() => null);
+
+            var cameraOptions = new StoreCameraMediaOptions
+            {
+                DefaultCamera = CameraDevice.Front,
+                AllowCropping = true
+            };
+
+            var storageOptions = new PickMediaOptions
+            {
+                CompressionQuality = 70
+            };
+
+            var cameraAction = ActionSheetButton.CreateButton(
+                Strings.Camera,
+                () => mediaFileTask = CrossMedia.Current.TakePhotoAsync(cameraOptions));
+
+            var storageAction = ActionSheetButton.CreateButton(Strings.Storage,
+                () => mediaFileTask = CrossMedia.Current.PickPhotoAsync(storageOptions));
+
+            await _pageDialogService.DisplayActionSheetAsync(Strings.PickImageOption, cameraAction, storageAction);
+
+            try
+            {
+                return await mediaFileTask;
+            }
+            catch (Exception e)
+            {
+                await UserNotificationAsync(e.Message, Strings.Error);
+            }
+
+            return null;
         }
 
         private void SetProfileImageFromUri(string uri)
         {
-            var uriImageSource = new UriImageSource
+            UriImageSource uriImageSource = new UriImageSource
             {
                 Uri = new Uri(uri),
                 CacheValidity = TimeSpan.Zero,
                 CachingEnabled = false
             };
-            
+
             ProfileImageSource = new StreamImageSource { Stream = async token => await uriImageSource.GetStreamAsync(token) };
         }
     }

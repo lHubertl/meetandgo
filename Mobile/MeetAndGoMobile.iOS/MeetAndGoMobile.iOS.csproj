@@ -88,7 +88,6 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DependencyServices\PicturePickerService.cs" />
     <Compile Include="Effects\SimplifyDatePickerEffect.cs" />
     <Compile Include="Effects\SimplifyEntryEffect.cs" />
     <Compile Include="Main.cs" />
@@ -197,6 +196,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
       <Version>3.0.0.5</Version>
     </PackageReference>

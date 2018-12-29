@@ -90,7 +90,7 @@ namespace MeetAndGoMobile.Services
 
             var httpContent = new MultipartFormDataContent
             {
-                {new StreamContent(new MemoryStream(stream.ToArray())), "file", userName + type}
+                {new StreamContent(new MemoryStream(stream.ToArray())), "file", $"{userName}.{type}"}
             };
             
             var result = await PostAsync(new Uri(WebApiConstants.AccountUploadProfilePhoto), token, headers, httpContent);
