@@ -99,7 +99,9 @@
 
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation Email}" />
 
-            <Entry Style="{StaticResource EntryStyle}" Text="{Binding Email}">
+            <Entry Keyboard="Email"
+                   Style="{StaticResource EntryStyle}" 
+                   Text="{Binding Email}">
 
                 <Entry.Effects>
                     <effects:SimplifyEntryEffect />

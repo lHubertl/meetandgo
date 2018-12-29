@@ -73,6 +73,7 @@
     <Compile Include="DependencyServices\StatusBarController.cs" />
     <Compile Include="Effects\SimplifyDatePickerEffect.cs" />
     <Compile Include="Effects\SimplifyEntryEffect.cs" />
+    <Compile Include="Effects\SimplifyPickerEffect.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\ExtendedButtonRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

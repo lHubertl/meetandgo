@@ -62,6 +62,7 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterSingleton<IMasterPageService, MasterPageService>();
 
             containerRegistry.RegisterInstance(Container);
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
         }
 
         private async Task<bool> CheckIfTokenExist()

@@ -4,7 +4,7 @@
              xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
              x:Class="MeetAndGoMobile.Styles.LabelStyles">
 
-  <x:Double x:Key="ContentWidth">250</x:Double>
+  <x:Double x:Key="ContentWidth">200</x:Double>
 
   <Style TargetType="Label" x:Key="NavBarLabel">
         <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />

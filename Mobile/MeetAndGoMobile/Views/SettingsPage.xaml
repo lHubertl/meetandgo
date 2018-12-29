@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+             xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+             xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
+             xmlns:behaviors="clr-namespace:MeetAndGoMobile.Infrastructure.Behaviors;assembly=MeetAndGoMobile.Infrastructure"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="MeetAndGoMobile.Views.SettingsPage"
+             NavigationPage.HasNavigationBar="True"
+             BackgroundColor="{x:Static constants:Colors.BgrBrown}">
+  
+    <ContentPage.Resources>
+        <ResourceDictionary Source="/Styles/LabelStyles.xaml" />
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+
+        <Label TextColor="{x:Static constants:Colors.LiteGreen}" 
+               Style="{StaticResource NavBarMarginOnPlatformLabel}" 
+               Text="{extensions:Translation SaveChanges}"
+               HorizontalOptions="End">
+
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SaveChangesCommand}" />
+            </Label.GestureRecognizers>
+
+        </Label>
+
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+        <FlexLayout AlignItems="Center" 
+                    AlignContent="Start"
+                    Wrap="Wrap"
+                    JustifyContent="SpaceAround"
+                    Margin="40, 0">
+
+            <Label 
+                FlexLayout.Basis="50%"
+                Style="{StaticResource EntryLabelInfoStyle}" 
+                Text="{extensions:Translation Language}" />
+
+            <Label
+                FlexLayout.Basis="50%"
+                Margin="20,0,0,0"
+                Style="{StaticResource EntryLabelInfoStyle}" 
+                Text="{extensions:Translation Currency}" />
+
+            <Picker FlexLayout.Basis="50%"
+                    Margin="0,0,20,0"
+                    ItemsSource="{Binding Languages}" 
+                    SelectedItem="{Binding SelectedLanguage}">
+                <Picker.Effects>
+                    <effects:SimplifyPickerEffect />
+                </Picker.Effects>
+            </Picker>
+
+            <Picker FlexLayout.Basis="50%"
+                    Margin="20,0,0,0"
+                    ItemsSource="{Binding Currencies}" 
+                    SelectedItem="{Binding SelectedCurrency}">
+                <Picker.Effects>
+                    <effects:SimplifyPickerEffect />
+                </Picker.Effects>
+            </Picker>
+
+            <StackLayout FlexLayout.Basis="100%" 
+                         HeightRequest="80"
+                         Spacing="10"
+                         Orientation="Horizontal">
+                <Switch VerticalOptions="Center" IsToggled="{Binding PushNotificationTurnedOn}" />
+                <Label
+                    FlexLayout.Basis="80%"
+                    VerticalTextAlignment="Center"
+                    Style="{StaticResource EntryLabelInfoStyle}" 
+                    Text="{extensions:Translation TurnOnPushNotifications}" />
+            </StackLayout>
+
+            
+
+            <Label
+                FlexLayout.Basis="100%"
+                HorizontalTextAlignment="Center"
+                Text="{extensions:Translation AccountInformation}"
+                FontFamily="{x:Static constants:FontFamily.NunitoRegular}" 
+                TextColor="{x:Static constants:Colors.DarkLightGray}" 
+                FontSize="{x:Static constants:FontSize.ExtraLarge}" />
+
+            <!--  Phone Number  -->
+
+            <Label 
+                FlexLayout.Basis="100%"
+                HeightRequest="40"
+                Style="{StaticResource EntryLabelInfoStyle}" 
+                Text="{extensions:Translation PhoneNumber}" />
+
+            <Entry FlexLayout.Basis="100%"
+                   Keyboard="Telephone"
+                   Style="{StaticResource EntryStyle}" 
+                   Text="{Binding PhoneNumber}">
+
+                <Entry.Effects>
+                    <effects:SimplifyEntryEffect />
+                </Entry.Effects>
+
+                <Entry.Behaviors>
+                    <behaviors:EntryMaskBehaviour Mask="+___ ____ __ ___" />
+                </Entry.Behaviors>
+
+            </Entry>
+
+            <!--  New Password  -->
+
+            <Label  FlexLayout.Basis="100%"
+                    HeightRequest="40"
+                    Style="{StaticResource EntryLabelInfoStyle}" 
+                    Text="{extensions:Translation NewPassword}" />
+
+            <Entry FlexLayout.Basis="100%"
+                   IsPassword="True" 
+                   Style="{StaticResource EntryStyle}"
+                   Text="{Binding NewPassword}">
+
+                <Entry.Effects>
+                    <effects:SimplifyEntryEffect />
+                </Entry.Effects>
+
+            </Entry>
+
+            <!--  Confirm Password  -->
+
+            <Label FlexLayout.Basis="100%"
+                   HeightRequest="40" 
+                   Style="{StaticResource EntryLabelInfoStyle}" 
+                   Text="{extensions:Translation ConfirmPassword}" />
+
+            <Entry FlexLayout.Basis="100%"
+                   IsPassword="True"
+                   Style="{StaticResource EntryStyle}"
+                   Text="{Binding ConfirmPassword}">
+
+                <Entry.Effects>
+                    <effects:SimplifyEntryEffect />
+                </Entry.Effects>
+
+            </Entry>
+
+        </FlexLayout>
+    </ScrollView>
+
+</ContentPage>
