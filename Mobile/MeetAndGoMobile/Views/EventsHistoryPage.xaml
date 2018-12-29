@@ -21,6 +21,7 @@
                     <Frame Margin="16, 8"
                            CornerRadius="4"
                            Padding="20"
+                           HasShadow="False"
                            BackgroundColor="White">
                        
                         <Grid>
@@ -50,6 +51,7 @@
                             <!--  Addresses  -->
                             <Image Grid.Row="1"
                                    Grid.Column="0"
+                                   HorizontalOptions="Center"
                                    Source="small_star.png" />
 
                             <Label 
@@ -73,6 +75,7 @@
 
                             <!--  Time  -->
                             <Image Grid.Row="3"
+                                   HorizontalOptions="Center"
                                    Grid.Column="0"
                                    Source="small_star.png" />
 
@@ -82,27 +85,25 @@
                                 TextColor="Black"
                                 FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
                                 FontSize="{x:Static constants:FontSize.Large}"
-                                Text="{Binding {Binding StartTime, StringFormat='{0:hh:mm tt}'}}"/>
+                                Text="{Binding StartTime, StringFormat='{0:hh:mm tt}'}"/>
 
 
                             <!--  Payment  -->
-                            <StackLayout  Grid.Row="3"
-                                          Grid.Column="1"
-                                          HorizontalOptions="End"
-                                          Spacing="0">
-                                <Image Source="small_star.png" Margin="0,0,10,0" />
+                            <StackLayout Grid.Row="3"
+                                         Grid.Column="1"
+                                         HorizontalOptions="End"
+                                         Orientation="Horizontal"
+                                         Spacing="10">
 
-                                <Label 
-                                    TextColor="Black"
-                                    FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
-                                    FontSize="{x:Static constants:FontSize.Large}"
-                                    Text="{Binding {Binding StartTime, StringFormat='{0:hh:mm tt}'}}"/>
+                                <Image Source="small_star.png"/>
 
-                                <Label>
+                                <Label TextColor="Black"
+                                       FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                       FontSize="{x:Static constants:FontSize.Large}">
                                     <Label.FormattedText>
                                         <FormattedString>
-                                            <Span Text="{Binding CurrencyCode, Converter={StaticResource CurrencyToSymbolConverter}}" />
-                                            <Span Text="{Binding TotalPrice, StringFormat='{0:N2}'}" />
+                                            <Span Text="{Binding Path=CurrencyCode, Mode=OneWay, Converter={StaticResource CurrencyToSymbolConverter}}" />
+                                            <Span Text="{Binding Path=TotalPrice, Mode=OneWay, StringFormat='{0:N2}'}" />
                                         </FormattedString>
                                     </Label.FormattedText>
                                 </Label>
@@ -115,12 +116,6 @@
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
-
-        <ListView.HeaderTemplate>
-            <DataTemplate>
-                <ViewCell Height="32" />
-            </DataTemplate>
-        </ListView.HeaderTemplate>
 
     </ListView>
   
