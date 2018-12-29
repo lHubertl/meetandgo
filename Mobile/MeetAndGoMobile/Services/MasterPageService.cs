@@ -4,18 +4,19 @@ namespace MeetAndGoMobile.Services
 {
     internal class MasterPageService : IMasterPageService
     {
-        private event Action ToggleListener;
-        public void ToggleMaster()
+        private event Action<ToggleActions> ToggleListener;
+        
+        public void ToggleMaster(ToggleActions toggleAction)
         {
-            ToggleListener?.Invoke();
+            ToggleListener?.Invoke(toggleAction);
         }
 
-        public void SubscribeToggleListener(Action listener)
+        public void Subscribe(Action<ToggleActions> listener)
         {
             ToggleListener += listener;
         }
 
-        public void UnsubscribeToggleListener(Action listener)
+        public void Unsubscribe(Action<ToggleActions> listener)
         {
             ToggleListener -= listener;
         }

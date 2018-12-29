@@ -46,7 +46,8 @@
                     </Grid.GestureRecognizers>
 
                     <abstractions:CircleImage
-                        HeightRequest="50" 
+                        HeightRequest="50"
+                        Aspect="AspectFit"
                         Grid.Row="0" 
                         Source="{Binding ProfileImageSource}" />
 

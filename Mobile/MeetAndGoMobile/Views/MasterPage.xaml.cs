@@ -22,14 +22,14 @@ namespace MeetAndGoMobile.Views
         {
             base.OnAppearing();
 
-            _masterPageService.SubscribeToggleListener(ToggleMaster);
+            _masterPageService.Subscribe(ToggleMaster);
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            _masterPageService.UnsubscribeToggleListener(ToggleMaster);
+            _masterPageService.Unsubscribe(ToggleMaster);
         }
 
         private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
@@ -59,9 +59,12 @@ namespace MeetAndGoMobile.Views
             }
         }
 
-        private void ToggleMaster()
+        private void ToggleMaster(ToggleActions action)
         {
-            IsPresented = !IsPresented;
+            if (action == ToggleActions.ToggleMenu)
+            {
+                IsPresented = !IsPresented;
+            }
         }
     }
 }

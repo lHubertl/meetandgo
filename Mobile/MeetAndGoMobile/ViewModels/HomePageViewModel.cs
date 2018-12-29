@@ -10,7 +10,7 @@ namespace MeetAndGoMobile.ViewModels
 	{
         private readonly IMasterPageService _masterPageService;
 
-        public ICommand ToggleMasterCommand => new Command(() => _masterPageService.ToggleMaster());
+        public ICommand ToggleMasterCommand => new Command(() => _masterPageService.ToggleMaster(ToggleActions.ToggleMenu));
 
         public HomePageViewModel(INavigationService navigationService, IContainerProvider container, IMasterPageService masterPageService) 
             : base(navigationService, container)

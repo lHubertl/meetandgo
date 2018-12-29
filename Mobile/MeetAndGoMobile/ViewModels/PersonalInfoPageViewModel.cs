@@ -22,7 +22,9 @@ namespace MeetAndGoMobile.ViewModels
     public class PersonalInfoPageViewModel : ViewModelBase
     {
         private readonly IPageDialogService _pageDialogService;
+        private readonly IMasterPageService _masterPageService;
         private readonly IAccountService _accountService;
+
         private MemoryStream _imageStream;
         private string _imageName;
         private string _imageFormat;
@@ -64,18 +66,20 @@ namespace MeetAndGoMobile.ViewModels
             INavigationService navigationService,
             IContainerProvider container,
             IAccountService accountService,
-            IPageDialogService pageDialogService)
+            IPageDialogService pageDialogService,
+            IMasterPageService masterPageService)
             : base(navigationService, container)
         {
             _accountService = accountService;
             _pageDialogService = pageDialogService;
+            _masterPageService = masterPageService;
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
 
-            UserModel userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
+            var userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
             if (userModel != null)
             {
                 if (!string.IsNullOrEmpty(userModel.CompressedPhotoUrl))
@@ -129,6 +133,7 @@ namespace MeetAndGoMobile.ViewModels
             var success = await Task.WhenAll(updateUserInfoTask, uploadImageTask);
             if (success.All(x => x))
             {
+                _masterPageService.ToggleMaster(ToggleActions.UserUpdated);
                 await NavigationService.GoBackAsync();
             }
         }
@@ -153,7 +158,7 @@ namespace MeetAndGoMobile.ViewModels
             var fileName = fileNameAndType?.FirstOrDefault();
             var fileType = fileNameAndType?.Length > 1 ? fileNameAndType.LastOrDefault() : default(string);
 
-            MemoryStream memoryStream = new MemoryStream();
+            var memoryStream = new MemoryStream();
             await mediaFile.GetStream().CopyToAsync(memoryStream);
             memoryStream.Position = 0;
             ProfileImageSource = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
@@ -165,7 +170,7 @@ namespace MeetAndGoMobile.ViewModels
 
         private async Task<MediaFile> PickMediaFile()
         {
-            var mediaFileTask = new Task<MediaFile>(() => null);
+            Task<MediaFile> mediaFileTask = null;
 
             var cameraOptions = new StoreCameraMediaOptions
             {
@@ -189,7 +194,10 @@ namespace MeetAndGoMobile.ViewModels
 
             try
             {
-                return await mediaFileTask;
+                if (mediaFileTask != null)
+                {
+                    return await mediaFileTask;
+                }
             }
             catch (Exception e)
             {
@@ -201,7 +209,7 @@ namespace MeetAndGoMobile.ViewModels
 
         private void SetProfileImageFromUri(string uri)
         {
-            UriImageSource uriImageSource = new UriImageSource
+            var uriImageSource = new UriImageSource
             {
                 Uri = new Uri(uri),
                 CacheValidity = TimeSpan.Zero,

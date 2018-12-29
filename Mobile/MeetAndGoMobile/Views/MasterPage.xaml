@@ -47,7 +47,7 @@
                         <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="PersonalInfoPage" />
                     </StackLayout.GestureRecognizers>
 
-                    <abstractions:CircleImage WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
+                    <abstractions:CircleImage Aspect="AspectFit" WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
 
                     <Label Style="{StaticResource MenuItem}" VerticalOptions="Center"  Text="{Binding UserName}"/>
 

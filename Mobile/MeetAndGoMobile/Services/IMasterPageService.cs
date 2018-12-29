@@ -4,8 +4,15 @@ namespace MeetAndGoMobile.Services
 {
     public interface IMasterPageService
     {
-        void ToggleMaster();
-        void SubscribeToggleListener(Action listener);
-        void UnsubscribeToggleListener(Action listener);
+        void ToggleMaster(ToggleActions toggleAction);
+
+        void Subscribe(Action<ToggleActions> listener);
+        void Unsubscribe(Action<ToggleActions> listener);
+    }
+
+    public enum ToggleActions
+    {
+        ToggleMenu,
+        UserUpdated
     }
 }

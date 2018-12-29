@@ -1,4 +1,5 @@
-﻿using MeetAndGo.Shared.Enums;
+﻿using System;
+using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
@@ -6,14 +7,16 @@ using Prism.Ioc;
 using Prism.Navigation;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace MeetAndGoMobile.ViewModels
 {
     public class MasterPageViewModel : ViewModelBase
     {
+        private readonly IMasterPageService _masterPageService;
         private readonly IAccountService _accountService;
-
         public string Version => $"v{VersionTracking.CurrentVersion}";
 
         private string _userName;
@@ -23,8 +26,8 @@ namespace MeetAndGoMobile.ViewModels
             set => SetProperty(ref _userName, value);
         }
 
-        private string _userImageSource;
-        public string UserImageSource
+        private ImageSource _userImageSource;
+        public ImageSource UserImageSource
         {
             get => _userImageSource;
             set => SetProperty(ref _userImageSource, value);
@@ -54,23 +57,37 @@ namespace MeetAndGoMobile.ViewModels
         public MasterPageViewModel(
             INavigationService navigationService, 
             IContainerProvider container,
-            IAccountService accountService) : base(navigationService, container)
+            IAccountService accountService,
+            IMasterPageService masterPageService) : base(navigationService, container)
         {
             _accountService = accountService;
+            _masterPageService = masterPageService;
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             base.OnNavigatingTo(parameters);
-            
-            var userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
 
-            if (userModel != null)
+            _masterPageService.Subscribe(ToggleListener);
+
+            await UpdateUserModelAsync();
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+
+            _masterPageService.Unsubscribe(ToggleListener);
+        }
+
+        private async void ToggleListener(ToggleActions action)
+        {
+            if (action == ToggleActions.UserUpdated)
             {
-                SetUpUserInfo(userModel);
+                await UpdateUserModelAsync();
             }
         }
-        
+
         private void SetUpUserInfo(UserModel userModel)
         {
             if(userModel is null)
@@ -79,7 +96,11 @@ namespace MeetAndGoMobile.ViewModels
             }
 
             UserName = string.Join(" ", userModel.FirstName, userModel.LastName);
-            UserImageSource = userModel.CompressedPhotoUrl;
+
+            if (!string.IsNullOrEmpty(userModel.CompressedPhotoUrl))
+            {
+                SetProfileImageFromUri(userModel.CompressedPhotoUrl);
+            }
             
             // TODO: TEST THIS CASE BECAUSE SERVER CAN NOT UPDATE THIS FIELDS
             MemberRating = (int)userModel.MemberRating;
@@ -88,6 +109,28 @@ namespace MeetAndGoMobile.ViewModels
             var asOrganizerVoteCount = userModel.Votes.Count(x => x.RatingType == UserStatus.Organizer);
             var eventsText = asOrganizerVoteCount == 1 ? Strings.L_event : Strings.L_events;
             OrganizerVotesText = $"({asOrganizerVoteCount} {eventsText})";
+        }
+
+        private void SetProfileImageFromUri(string uri)
+        {
+            var uriImageSource = new UriImageSource
+            {
+                Uri = new Uri(uri),
+                CacheValidity = TimeSpan.Zero,
+                CachingEnabled = false
+            };
+
+            UserImageSource = new StreamImageSource { Stream = async token => await uriImageSource.GetStreamAsync(token) };
+        }
+
+        private async Task UpdateUserModelAsync()
+        {
+            var userModel = await PerformDataRequestAsync(() => _accountService.GetUserModelAsync(CancellationToken.None));
+
+            if (userModel != null)
+            {
+                SetUpUserInfo(userModel);
+            }
         }
     }
 }
