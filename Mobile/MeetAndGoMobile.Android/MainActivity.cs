@@ -32,13 +32,7 @@ namespace MeetAndGoMobile.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
-            {
-                // Full screen with visible status bar
-                Window.AddFlags(WindowManagerFlags.LayoutNoLimits);
-            }
-
+            
             base.OnCreate(bundle);
 
             Xamarin.Essentials.Platform.Init(this, bundle);

@@ -30,26 +30,27 @@
 
     </NavigationPage.TitleView>
 
-    <ScrollView>
+    <ScrollView Padding="30">
         <FlexLayout AlignItems="Center" 
                     AlignContent="Start"
                     Wrap="Wrap"
-                    JustifyContent="SpaceAround"
-                    Margin="40, 0">
+                    JustifyContent="SpaceAround">
 
             <Label 
+                HeightRequest="-1"
                 FlexLayout.Basis="50%"
                 Style="{StaticResource EntryLabelInfoStyle}" 
                 Text="{extensions:Translation Language}" />
 
             <Label
+                HeightRequest="-1"
                 FlexLayout.Basis="50%"
-                Margin="20,0,0,0"
+                Margin="15,0,0,0"
                 Style="{StaticResource EntryLabelInfoStyle}" 
                 Text="{extensions:Translation Currency}" />
 
             <Picker FlexLayout.Basis="50%"
-                    Margin="0,0,20,0"
+                    Margin="0,0,15,0"
                     ItemsSource="{Binding Languages}" 
                     SelectedItem="{Binding SelectedLanguage}">
                 <Picker.Effects>
@@ -58,7 +59,7 @@
             </Picker>
 
             <Picker FlexLayout.Basis="50%"
-                    Margin="20,0,0,0"
+                    Margin="15,0,0,0"
                     ItemsSource="{Binding Currencies}" 
                     SelectedItem="{Binding SelectedCurrency}">
                 <Picker.Effects>
@@ -77,8 +78,6 @@
                     Style="{StaticResource EntryLabelInfoStyle}" 
                     Text="{extensions:Translation TurnOnPushNotifications}" />
             </StackLayout>
-
-            
 
             <Label
                 FlexLayout.Basis="100%"

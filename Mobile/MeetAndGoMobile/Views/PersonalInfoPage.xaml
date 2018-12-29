@@ -30,11 +30,11 @@
 
     </NavigationPage.TitleView>
 
-    <Grid HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
+    <Grid Margin="30">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="1.6*" />
         </Grid.RowDefinitions>
 
         <Grid
@@ -68,7 +68,6 @@
             </Frame>
         </Grid>
 
-
         <StackLayout Spacing="0" Grid.Row="1">
 
             <Label
@@ -79,7 +78,6 @@
                 TextColor="{x:Static constants:Colors.DarkLightGray}" 
                 FontSize="{x:Static constants:FontSize.ExtraLarge}" />
         
-
             <!--  Name  -->
 
             <Label 
