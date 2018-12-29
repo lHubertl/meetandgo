@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+             xmlns:converters="clr-namespace:MeetAndGoMobile.Converters;assembly=MeetAndGoMobile"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="MeetAndGoMobile.Views.EventsHistoryPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstOrLastCollectionItemConverter x:Key="FirstOrLastCollectionItemConverter" />
+            <converters:CurrencyToSymbolConverter x:Key="CurrencyToSymbolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ListView ItemsSource="{Binding Events}" SelectionMode="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Frame Margin="16, 8"
+                           CornerRadius="4"
+                           Padding="20"
+                           BackgroundColor="White">
+                       
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  Date  -->
+                            <Label 
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   HeightRequest="40"
+                                   VerticalTextAlignment="Start"
+                                   TextColor="{x:Static constants:Colors.LiteGray}"
+                                   FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                   FontSize="{x:Static constants:FontSize.XxLarge}"
+                                   Text="{Binding StartTime, StringFormat='{0:MMM d, yyyy}'}"/>
+
+                            <!--  Addresses  -->
+                            <Image Grid.Row="1"
+                                   Grid.Column="0"
+                                   Source="small_star.png" />
+
+                            <Label 
+                                BindingContext="{Binding Direction, Converter={StaticResource FirstOrLastCollectionItemConverter}, ConverterParameter='first'}"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                                Text="{Binding Name}"/>
+
+                            <Label 
+                                BindingContext="{Binding Direction, Converter={StaticResource FirstOrLastCollectionItemConverter}, ConverterParameter='last'}"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                                Text="{Binding Name}"/>
+
+
+                            <!--  Time  -->
+                            <Image Grid.Row="3"
+                                   Grid.Column="0"
+                                   Source="small_star.png" />
+
+                            <Label 
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                TextColor="Black"
+                                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                FontSize="{x:Static constants:FontSize.Large}"
+                                Text="{Binding {Binding StartTime, StringFormat='{0:hh:mm tt}'}}"/>
+
+
+                            <!--  Payment  -->
+                            <StackLayout  Grid.Row="3"
+                                          Grid.Column="1"
+                                          HorizontalOptions="End"
+                                          Spacing="0">
+                                <Image Source="small_star.png" Margin="0,0,10,0" />
+
+                                <Label 
+                                    TextColor="Black"
+                                    FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                    FontSize="{x:Static constants:FontSize.Large}"
+                                    Text="{Binding {Binding StartTime, StringFormat='{0:hh:mm tt}'}}"/>
+
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding CurrencyCode, Converter={StaticResource CurrencyToSymbolConverter}}" />
+                                            <Span Text="{Binding TotalPrice, StringFormat='{0:N2}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                            </StackLayout>
+
+                        </Grid>
+
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        <ListView.HeaderTemplate>
+            <DataTemplate>
+                <ViewCell Height="32" />
+            </DataTemplate>
+        </ListView.HeaderTemplate>
+
+    </ListView>
+  
+</ContentPage>

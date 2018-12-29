@@ -49,8 +49,10 @@ namespace MeetAndGoMobile
         {
             containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
+            containerRegistry.RegisterForNavigation<EventsHistoryPage, EventsHistoryPageViewModel>();
             containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
             containerRegistry.RegisterForNavigation<PersonalInfoPage, PersonalInfoPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<MasterPage, MasterPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
@@ -62,7 +64,7 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterSingleton<IMasterPageService, MasterPageService>();
 
             containerRegistry.RegisterInstance(Container);
-            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+            
         }
 
         private async Task<bool> CheckIfTokenExist()

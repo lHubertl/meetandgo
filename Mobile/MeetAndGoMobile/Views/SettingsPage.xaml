@@ -7,6 +7,7 @@
              xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
              xmlns:behaviors="clr-namespace:MeetAndGoMobile.Infrastructure.Behaviors;assembly=MeetAndGoMobile.Infrastructure"
              prism:ViewModelLocator.AutowireViewModel="True"
+             Padding="30"
              x:Class="MeetAndGoMobile.Views.SettingsPage"
              NavigationPage.HasNavigationBar="True"
              BackgroundColor="{x:Static constants:Colors.BgrBrown}">
@@ -30,7 +31,7 @@
 
     </NavigationPage.TitleView>
 
-    <ScrollView Padding="30">
+    <ScrollView>
         <FlexLayout AlignItems="Center" 
                     AlignContent="Start"
                     Wrap="Wrap"
