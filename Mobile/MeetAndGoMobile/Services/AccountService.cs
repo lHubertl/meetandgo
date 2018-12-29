@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -36,7 +37,7 @@ namespace MeetAndGoMobile.Services
 
             if (result.Success)
             {
-                return GetResponseFromJson<IResponse>(result.Data);
+                return GetResponseFromJson(result.Data);
             }
 
             return new Response(result.Code, result.Message);
@@ -53,7 +54,7 @@ namespace MeetAndGoMobile.Services
 
             if (result.Success)
             {
-                return GetResponseFromJson<IResponse>(result.Data);
+                return GetResponseFromJson(result.Data);
             }
 
             return new Response(result.Code, result.Message);
@@ -67,7 +68,7 @@ namespace MeetAndGoMobile.Services
                 { WebApiConstants.Authorization, $"Bearer {authToken}" }
             };
 
-            var result = await GetAsync(new Uri(WebApiConstants.AccountUserModel), headers);
+            var result = await GetAsync(new Uri(WebApiConstants.AccountUserModel), token, headers);
 
             if (result.Success)
             {
@@ -75,6 +76,52 @@ namespace MeetAndGoMobile.Services
             }
 
             return new ResponseData<UserModel>(result.Code, result.Message);
+        }
+
+        public async Task<IResponse> UploadUserPhotoAsync(string userName, string fullName, string type, MemoryStream stream, CancellationToken token)
+        {
+            var authToken = _dataRepository.Get<string>(DataType.Token);
+            var headers = new Dictionary<string, object>
+            {
+                { WebApiConstants.Authorization, $"Bearer {authToken}" }
+            };
+
+            stream.Position = 0;
+
+            var httpContent = new MultipartFormDataContent
+            {
+                {new StreamContent(new MemoryStream(stream.ToArray())), "file", userName + type}
+            };
+            
+            var result = await PostAsync(new Uri(WebApiConstants.AccountUploadProfilePhoto), token, headers, httpContent);
+            if (result.Success)
+            {
+                return GetResponseFromJson(result.Data);
+            }
+
+            return new Response(result.Code, result.Message);
+        }
+
+        public async Task<IResponse> UpdateUserInfoAsync(UserModel model, CancellationToken token)
+        {
+            var authToken = _dataRepository.Get<string>(DataType.Token);
+            var headers = new Dictionary<string, object>
+            {
+                { WebApiConstants.Authorization, $"Bearer {authToken}" }
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+            var content = new StringContent(json,
+                Encoding.UTF8,
+                WebApiConstants.ContentTypeJson);
+
+            var result = await PostAsync(new Uri(WebApiConstants.AccountUpdateUserModel), token, headers, content);
+            if (result.Success)
+            {
+                return GetResponseFromJson(result.Data);
+            }
+
+            return new Response(result.Code, result.Message);
         }
 
         public async Task<IResponseData<string>> RegisterAsync(RegisterModel model, CancellationToken token)

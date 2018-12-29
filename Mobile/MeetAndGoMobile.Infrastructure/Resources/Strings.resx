@@ -258,4 +258,7 @@
   <data name="SelectPicture" xml:space="preserve">
     <value>Select Picture</value>
   </data>
+  <data name="V_Email" xml:space="preserve">
+    <value>Email is invalid</value>
+  </data>
 </root>

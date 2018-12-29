@@ -3,14 +3,13 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
 
 namespace MeetAndGoMobile.UWP.DependencyServices
 {
     public class PicturePickerService : IPicturePicker
     {
-        public async Task<Stream> GetImageStreamAsync()
+        public async Task<(Stream stream, string name, string format)> PickImageAsync()
         {
             // Create and initialize the FileOpenPicker
             var openPicker = new FileOpenPicker
@@ -28,11 +27,11 @@ namespace MeetAndGoMobile.UWP.DependencyServices
 
             if (storageFile == null)
             {
-                return null;
+                return (null, null, null);
             }
 
-            IRandomAccessStreamWithContentType raStream = await storageFile.OpenReadAsync();
-            return raStream.AsStreamForRead();
+            var raStream = await storageFile.OpenReadAsync();
+            return (stream: raStream.AsStreamForRead(), name: storageFile.DisplayName, format: storageFile.FileType);
         }
     }
 }

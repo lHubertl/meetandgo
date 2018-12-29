@@ -8,7 +8,7 @@ namespace MeetAndGoMobile.Droid.DependencyServices
 {
     public class PicturePickerService : IPicturePicker
     {
-        public Task<Stream> GetImageStreamAsync()
+        public Task<(Stream stream, string name, string format)> PickImageAsync()
         {
             // Define the Intent for getting images
             Intent intent = new Intent();
@@ -16,12 +16,10 @@ namespace MeetAndGoMobile.Droid.DependencyServices
             intent.SetAction(Intent.ActionGetContent);
 
             // Start the picture-picker activity (resumes in MainActivity.cs)
-            MainActivity.CurrentActivity.StartActivityForResult(
-                Intent.CreateChooser(intent, Strings.SelectPicture),
-                MainActivity.PickImageId);
+            MainActivity.CurrentActivity.StartActivityForResult(Intent.CreateChooser(intent, Strings.SelectPicture), MainActivity.PickImageId);
 
             // Save the TaskCompletionSource object as a MainActivity property
-            MainActivity.CurrentActivity.PickImageTaskCompletionSource = new TaskCompletionSource<Stream>();
+            MainActivity.CurrentActivity.PickImageTaskCompletionSource = new TaskCompletionSource<(Stream stream, string name, string format)>();
 
             // Return Task object
             return MainActivity.CurrentActivity.PickImageTaskCompletionSource.Task;

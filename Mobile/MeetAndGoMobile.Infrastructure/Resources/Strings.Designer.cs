@@ -439,6 +439,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is invalid.
+        /// </summary>
+        public static string V_Email {
+            get {
+                return ResourceManager.GetString("V_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is not valid.
         /// </summary>
         public static string V_Password {

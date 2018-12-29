@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
@@ -38,6 +39,16 @@ namespace MeetAndGoMobile.Services.FakeServices
             };
 
             return new ResponseData<UserModel>(userModel);
+        }
+
+        public async Task<IResponse> UploadUserPhotoAsync(string userName, string name, string type, MemoryStream stream, CancellationToken token)
+        {
+            return new Response();
+        }
+
+        public async Task<IResponse> UpdateUserInfoAsync(UserModel model, CancellationToken token)
+        {
+            return new Response();
         }
 
         public async Task<IResponseData<string>> RegisterAsync(RegisterModel model, CancellationToken token)

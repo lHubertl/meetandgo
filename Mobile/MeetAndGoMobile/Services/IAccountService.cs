@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Models;
@@ -13,5 +14,7 @@ namespace MeetAndGoMobile.Services
         Task<IResponseData<string>> RegisterAsync(RegisterModel model, CancellationToken token);
         Task<IResponseData<string>> SignInAsync(LoginModel model, CancellationToken token);
         Task<IResponseData<UserModel>> GetUserModelAsync(CancellationToken token);
+        Task<IResponse> UploadUserPhotoAsync(string userName, string name, string type, MemoryStream stream, CancellationToken token);
+        Task<IResponse> UpdateUserInfoAsync(UserModel model, CancellationToken token);
     }
 }

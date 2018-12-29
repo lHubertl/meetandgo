@@ -54,7 +54,7 @@ namespace MeetAndGoMobile.Droid
         // Field, property, and method for Picture Picker
         public static readonly int PickImageId = 1000;
 
-        public TaskCompletionSource<Stream> PickImageTaskCompletionSource { set; get; }
+        public TaskCompletionSource<(Stream stream, string name, string format)> PickImageTaskCompletionSource { set; get; }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
@@ -64,15 +64,16 @@ namespace MeetAndGoMobile.Droid
             {
                 if (resultCode == Result.Ok && intent != null)
                 {
-                    Android.Net.Uri uri = intent.Data;
+                    var uri = intent.Data;
                     var stream = ContentResolver.OpenInputStream(uri);
 
                     // Set the Stream as the completion of the Task
-                    PickImageTaskCompletionSource.SetResult(stream);
+                    // TODO: RETURN REAL FORMAT
+                    PickImageTaskCompletionSource.SetResult((stream: stream, name: "test", format: ".jpg"));
                 }
                 else
                 {
-                    PickImageTaskCompletionSource.SetResult(null);
+                    PickImageTaskCompletionSource.SetResult((null, null, null));
                 }
             }
         }

@@ -9,10 +9,10 @@ namespace MeetAndGoMobile.iOS.DependencyServices
 {
     public class PicturePickerService : IPicturePicker
     {
-        private TaskCompletionSource<Stream> _taskCompletionSource;
+        private TaskCompletionSource<(Stream stream, string name, string format)> _taskCompletionSource;
         private UIImagePickerController _imagePicker;
 
-        public Task<Stream> GetImageStreamAsync()
+        public Task<(Stream stream, string name, string format)> PickImageAsync()
         {
             // Create and define UIImagePickerController
             _imagePicker = new UIImagePickerController
@@ -31,9 +31,10 @@ namespace MeetAndGoMobile.iOS.DependencyServices
             viewController.PresentModalViewController(_imagePicker, true);
 
             // Return Task object
-            _taskCompletionSource = new TaskCompletionSource<Stream>();
+            _taskCompletionSource = new TaskCompletionSource<(Stream stream, string name, string format)>();
             return _taskCompletionSource.Task;
         }
+
         void OnImagePickerFinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs args)
         {
             UIImage image = args.EditedImage ?? args.OriginalImage;
@@ -47,12 +48,13 @@ namespace MeetAndGoMobile.iOS.DependencyServices
                 UnregisterEventHandlers();
 
                 // Set the Stream as the completion of the Task
-                _taskCompletionSource.SetResult(stream);
+                //TODO: CHECK AND FIX NAME AND TYPE
+                _taskCompletionSource.SetResult((stream, "Image", args.MediaType));
             }
             else
             {
                 UnregisterEventHandlers();
-                _taskCompletionSource.SetResult(null);
+                _taskCompletionSource.SetResult((null, null, null));
             }
             _imagePicker.DismissModalViewController(true);
         }
@@ -60,7 +62,7 @@ namespace MeetAndGoMobile.iOS.DependencyServices
         void OnImagePickerCancelled(object sender, EventArgs args)
         {
             UnregisterEventHandlers();
-            _taskCompletionSource.SetResult(null);
+            _taskCompletionSource.SetResult((null, null, null));
             _imagePicker.DismissModalViewController(true);
         }
 

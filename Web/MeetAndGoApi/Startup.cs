@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using AutoMapper;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
@@ -18,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MeetAndGoApi
@@ -58,6 +60,8 @@ namespace MeetAndGoApi
             ConfigureLocalization(app);
             app.UseHttpsRedirection();
             app.UseAuthentication();
+
+            ConfigureImages(app);
 
             app.UseMvc();
         }
@@ -156,7 +160,18 @@ namespace MeetAndGoApi
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+        }
 
+        private void ConfigureImages(IApplicationBuilder app)
+        {
+            app.UseStaticFiles();
+
+            app.UseFileServer(new FileServerOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Files")),
+                RequestPath = "/StaticFiles"
+            });
         }
 
         #endregion

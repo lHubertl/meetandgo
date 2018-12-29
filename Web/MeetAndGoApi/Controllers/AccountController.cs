@@ -201,10 +201,21 @@ namespace MeetAndGoApi.Controllers
 
         [HttpGet]
         [Authorize]
-        public Task<IResponseData<UserModel>> GetUserModel()
+        public async Task<IResponseData<UserModel>> GetUserModel()
         {
             var userId = User.CurrentUserId();
-            return _userService.GetUserModelAsync(userId);
+            var userResponse = await _userService.GetUserModelAsync(userId);
+
+            // This is for changing domain
+            var userModel = userResponse.Data;
+            if (userModel != null)
+            {
+                userModel.CompressedPhotoUrl = $"{Request.Scheme}://{Request.Host}{userModel.CompressedPhotoUrl}";
+            }
+
+            userResponse.Data = userModel;
+
+            return userResponse;
         }
 
         [HttpPost]
@@ -253,14 +264,15 @@ namespace MeetAndGoApi.Controllers
 
             var userId = User.CurrentUserId();
             
-            var path = $"{_appEnvironment.WebRootPath}/Files/{userId}";
+            var path = $"{_appEnvironment.ContentRootPath}\\Files\\Images\\{file.FileName}";
+            var webPath = $"/StaticFiles/Images/{file.FileName}";
 
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
             }
 
-            return await _userService.SetUserPhotoAsync(userId, file.Name, path);
+            return await _userService.SetUserPhotoAsync(userId, file.FileName, webPath);
         }
 
         #endregion

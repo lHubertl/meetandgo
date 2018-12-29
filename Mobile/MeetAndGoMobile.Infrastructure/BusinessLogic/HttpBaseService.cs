@@ -163,11 +163,11 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
             }
         }
 
-        protected IResponse GetResponseFromJson<T>(string json)
+        protected IResponse GetResponseFromJson(string json)
         {
             if (string.IsNullOrEmpty(json))
             {
-                return new ResponseData<T>(ResponseCode.JsonFail, Strings.E_JsonCanNotBeEmpy);
+                return new Response(ResponseCode.JsonFail, Strings.E_JsonCanNotBeEmpy);
             }
 
             try
