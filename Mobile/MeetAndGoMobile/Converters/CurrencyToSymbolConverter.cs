@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using MeetAndGo.Shared.Tools;
 using Xamarin.Forms;
 
 namespace MeetAndGoMobile.Converters
@@ -10,7 +11,10 @@ namespace MeetAndGoMobile.Converters
         {
             if (value is string currency)
             {
-                // TODO:
+                if (CurrencyTools.TryGetCurrencySymbol(currency, out var symbol))
+                {
+                    return symbol;
+                }
             }
 
             return value;

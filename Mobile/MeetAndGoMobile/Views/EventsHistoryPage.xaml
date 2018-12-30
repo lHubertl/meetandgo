@@ -5,6 +5,7 @@
              xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
              xmlns:converters="clr-namespace:MeetAndGoMobile.Converters;assembly=MeetAndGoMobile"
              prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{x:Static constants:Colors.BgrBrown}"
              x:Class="MeetAndGoMobile.Views.EventsHistoryPage">
     
     <ContentPage.Resources>
@@ -14,11 +15,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ListView ItemsSource="{Binding Events}" SelectionMode="None">
+    <ListView ItemsSource="{Binding Events}" 
+              SelectionMode="None"
+              HorizontalOptions="Center"
+              WidthRequest="350">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <Frame Margin="16, 8"
+                    <Frame Margin="16, 16, 16, 0" 
                            CornerRadius="4"
                            Padding="20"
                            HasShadow="False"
