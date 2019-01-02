@@ -22,6 +22,7 @@ namespace MeetAndGoMobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsGoogleMaps.Init("AIzaSyC9RRNVv9hnrGRSgS601vHdalIXophtd_g");
             LoadApplication(new App(new iOSInitializer()));
             ImageCircleRenderer.Init();
 

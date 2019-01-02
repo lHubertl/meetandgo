@@ -36,7 +36,6 @@ namespace MeetAndGoMobile
 
             if (await CheckIfTokenExist())
             {
-                // TODO: TO MAP PAGE
                 await NavigationService.NavigateAsync($"{nameof(MasterPage)}/{nameof(CustomNavigationPage)}/{nameof(HomePage)}");
             }
             else

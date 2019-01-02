@@ -3,10 +3,19 @@
     x:Class="MeetAndGoMobile.Views.HomePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
-    <Grid>
-        <Button Text="toggle" WidthRequest="70" HeightRequest="30" Command="{Binding ToggleMasterCommand}"></Button>
-    </Grid>
+
+    <RelativeLayout>
+
+        <maps:Map x:Name="MapControl"
+                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
+                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}">
+
+        </maps:Map>
+
+    </RelativeLayout>
+
 </ContentPage>

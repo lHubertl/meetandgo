@@ -46,11 +46,13 @@ namespace MeetAndGoMobile.UWP
 
                 var rendererAssemblies = new[]
                 {
-                    typeof(ImageCircleRenderer).GetTypeInfo().Assembly
+                    typeof(ImageCircleRenderer).GetTypeInfo().Assembly,
+                    typeof(Xamarin.Forms.GoogleMaps.UWP.MapRenderer).GetTypeInfo().Assembly
                 };
 
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
                 ImageCircleRenderer.Init();
+                Xamarin.FormsGoogleMaps.Init("K3fLWWpQxIACcA0Xgnro~gxOxf_zFLnlhEluB4a4RXQ~ApllW_ynMXfaQYMAUi5RjhDJ7aWvWiXQBdtjwMWufH0op2whyW_MfxS8Knju_vtu");
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

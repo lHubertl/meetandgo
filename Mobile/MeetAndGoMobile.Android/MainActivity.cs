@@ -38,6 +38,7 @@ namespace MeetAndGoMobile.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
             CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            Xamarin.FormsGoogleMaps.Init(this, bundle);
 
             ImageCircleRenderer.Init();
 

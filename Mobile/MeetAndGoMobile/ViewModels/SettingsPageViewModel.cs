@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Infrastructure.Resources;
 using Prism.Ioc;
 using Prism.Navigation;
 
@@ -75,7 +76,7 @@ namespace MeetAndGoMobile.ViewModels
 
         private async Task ExecuteSaveChangesCommand()
         {
-
+            await UserNotificationAsync(Strings.NotImplemented, Strings.Error);
         }
     }
 }
