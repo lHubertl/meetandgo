@@ -291,4 +291,7 @@
   <data name="PhoneNumber" xml:space="preserve">
     <value>Phone Number</value>
   </data>
+  <data name="CurrentlyNoEvents" xml:space="preserve">
+    <value>Currently you have not participate any events</value>
+  </data>
 </root>

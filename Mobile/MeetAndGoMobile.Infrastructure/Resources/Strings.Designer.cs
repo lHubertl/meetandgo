@@ -160,6 +160,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currently you have not participate any events.
+        /// </summary>
+        public static string CurrentlyNoEvents {
+            get {
+                return ResourceManager.GetString("CurrentlyNoEvents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not have an Account?.
         /// </summary>
         public static string DoNotHaveAccount {
