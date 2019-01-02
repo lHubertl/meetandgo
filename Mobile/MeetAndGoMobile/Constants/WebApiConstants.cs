@@ -14,6 +14,8 @@
         internal static readonly string AccountUploadProfilePhoto = $"{Url}/account/UploadProfilePhoto";
         internal static readonly string AccountUpdateUserModel = $"{Url}/account/UpdateUserModel";
 
+        internal static readonly string EventHistory = $"{Url}/event/geteventshistory";
+
         internal static readonly string ContentTypeJson = "application/json";
         internal static readonly string Authorization = "Authorization";
     }

@@ -59,6 +59,7 @@ namespace MeetAndGoMobile
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
             
             containerRegistry.Register<IAccountService, AccountService>();
+            containerRegistry.Register<IEventService, EventService>();
 
             containerRegistry.RegisterSingleton<IDataRepository, DataRepository>();
             containerRegistry.RegisterSingleton<IMasterPageService, MasterPageService>();

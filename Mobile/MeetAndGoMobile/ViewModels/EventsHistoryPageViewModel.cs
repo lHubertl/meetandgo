@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading;
 using MeetAndGo.Shared.Models;
+using MeetAndGoMobile.Services;
 using Prism.Ioc;
 using Prism.Navigation;
 
@@ -8,6 +9,8 @@ namespace MeetAndGoMobile.ViewModels
 {
     public class EventsHistoryPageViewModel : ViewModelBase
     {
+        private readonly IEventService _eventService;
+
         private List<EventModel> _events;
         public List<EventModel> Events
         {
@@ -15,23 +18,24 @@ namespace MeetAndGoMobile.ViewModels
             set => SetProperty(ref _events, value);
         }
 
-        public EventsHistoryPageViewModel(INavigationService navigationService, IContainerProvider container) : base(navigationService, container)
+        public EventsHistoryPageViewModel(
+            INavigationService navigationService, 
+            IContainerProvider container,
+            IEventService eventService) : base(navigationService, container)
         {
-            Events = new List<EventModel>
-            {
-                new EventModel
-                {
-                    Name = "asds",
-                    TotalPrice = 20,
-                    CurrencyCode = "USD",
-                    Direction = new List<PointModel>
-                    {
-                        new PointModel { Name = "home"},
-                        new PointModel { Name = "work"}
-                    },
-                    StartTime = DateTimeOffset.Now
-                }
-            };
+            _eventService = eventService;
+        }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            IsBusy = true;
+
+            var eventModels = await PerformDataRequestAsync(() => _eventService.GetEventsHistoryAsync(CancellationToken.None));
+            Events = eventModels;
+
+            IsBusy = false;
         }
     }
 }

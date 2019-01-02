@@ -2,9 +2,9 @@
 {
     public enum EventStates
     {
-        Formation,
-        Activated,
-        Canceled,
-        CarriedOut
+        Formation = 0,
+        Activated = 1,
+        Canceled = 2,
+        CarriedOut = 3
     }
 }
