@@ -7,10 +7,9 @@ using MeetAndGo.Shared.Models;
 using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Contracts.Service;
 using MeetAndGoApi.Infrastructure.Resources;
-using MeetAndGoApi.Infrastructure.Services;
 using Microsoft.Extensions.Localization;
 
-namespace MeetAndGoApi.Infrastructure.Domain.Services
+namespace MeetAndGoApi.Infrastructure.Services
 {
     public class EventService : BaseService, IEventService
     {
@@ -59,6 +58,16 @@ namespace MeetAndGoApi.Infrastructure.Domain.Services
             }
 
             return await _repository.ReadAsync(directions);
+        }
+
+        public async Task<IResponseData<IEnumerable<EventModel>>> ReadParticipatedEventsAsync(string userId)
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return new ResponseData<IEnumerable<EventModel>>(ResponseCode.ParameterIsNull, Localizer.GetString(Strings.ParameterCanNotBeNull)); 
+            }
+
+            return await _repository.ReadParticipatedEventsAsync(userId);
         }
     }
 }

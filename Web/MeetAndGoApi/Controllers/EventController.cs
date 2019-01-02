@@ -52,6 +52,12 @@ namespace MeetAndGoApi.Controllers
         {
             return _service.CreateAsync(eventModel, User.CurrentUserId());
         }
+
+        [HttpGet]
+        public Task<IResponseData<IEnumerable<EventModel>>> GetEventsHistory()
+        {
+            return _service.ReadParticipatedEventsAsync(User.CurrentUserId());
+        }
         
         #endregion
     }

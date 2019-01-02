@@ -7,7 +7,6 @@ using MeetAndGoApi.Infrastructure.Contracts.Repository;
 using MeetAndGoApi.Infrastructure.Contracts.Service;
 using MeetAndGoApi.Infrastructure.Dal;
 using MeetAndGoApi.Infrastructure.Dal.Repositories;
-using MeetAndGoApi.Infrastructure.Domain.Services;
 using MeetAndGoApi.Infrastructure.Dto;
 using MeetAndGoApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

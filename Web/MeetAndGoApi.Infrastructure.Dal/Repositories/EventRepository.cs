@@ -89,14 +89,28 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
                 .Where(eventDto => IsNear(eventDto.PointDtos, directions));
 
             var eventModels = _mapper.Map<List<EventModel>>(eventDtos);
-            return new ResponseData<IEnumerable<EventModel>>(eventModels, ResponseCode.Ok);
+            return new ResponseData<IEnumerable<EventModel>>(eventModels);
+        }
+
+        public async Task<IResponseData<IEnumerable<EventModel>>> ReadParticipatedEventsAsync(string userId)
+        {
+            var participatedEvents = await _dbContext.Events
+                .Where(eventDto => eventDto.EventState == EventStates.Canceled || eventDto.EventState == EventStates.CarriedOut)
+                .Where(eventDto => eventDto.EventUsers.Any(userDto => userDto.ApplicationUserId == userId))
+                .Include(x => x.PointDtos)
+                .Include(x => x.EventUsers)
+                .ThenInclude(x => x.ApplicationUser)
+                .ToListAsync();
+
+            var eventModels = _mapper.Map<List<EventModel>>(participatedEvents);
+            return new ResponseData<IEnumerable<EventModel>>(eventModels);
         }
 
         #endregion
 
         #region Private methods
 
-        // TODO: need to impelemt finding only near 1 km events
+        // TODO: need to implement finding only near 1 km events
         private bool IsNear(IEnumerable<PointDto> eventPoints, IEnumerable<PointModel> requestPoints)
         {
             // Event and request should consist with more than one point 
