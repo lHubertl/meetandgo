@@ -294,4 +294,10 @@
   <data name="CurrentlyNoEvents" xml:space="preserve">
     <value>Currently you have not participate any events</value>
   </data>
+  <data name="EndLocation" xml:space="preserve">
+    <value>End Location</value>
+  </data>
+  <data name="StartLocation" xml:space="preserve">
+    <value>Start Location</value>
+  </data>
 </root>

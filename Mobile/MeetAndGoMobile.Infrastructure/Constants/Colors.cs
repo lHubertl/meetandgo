@@ -15,6 +15,11 @@ namespace MeetAndGoMobile.Infrastructure.Constants
         public static readonly Color StatusBarBrown = Color.FromHex("#2D2D2D");
 
         /// <summary>
+        /// 45 45 45
+        /// </summary>
+        public static readonly Color EntryTextBrown = Color.FromHex("#2D2D2D");
+
+        /// <summary>
         /// 9 238 115
         /// </summary>
         public static readonly Color Green = Color.FromHex("#09EE73");
@@ -53,5 +58,10 @@ namespace MeetAndGoMobile.Infrastructure.Constants
         /// 197 197 197
         /// </summary>
         public static readonly Color LiteGray = Color.FromHex("#C5C5C5");
+
+        /// <summary>
+        /// 129 129 129
+        /// </summary>
+        public static readonly Color PlaceholderGray = Color.FromHex("#818181");
     }
 }

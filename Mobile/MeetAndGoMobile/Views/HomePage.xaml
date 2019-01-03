@@ -6,18 +6,108 @@
     xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
     prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
 
     <RelativeLayout>
 
-        <maps:Map x:Name="mapControl"
+        <maps:Map x:Name="MapControl"
                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}">
         </maps:Map>
 
+        <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=0}" 
+              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.05, Constant=0}"
+              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.22, Constant=0}"
+              RowSpacing="16" 
+              HorizontalOptions="Fill"
+              VerticalOptions="Start">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        
+            <!--  Start Location Entry -->
 
-        <Button Text="☰"
+            <Frame Grid.Row="0" 
+                   Padding="16, 0"
+                   HasShadow="True"
+                   CornerRadius="4"
+                   BackgroundColor="White">
+
+                <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Fill"
+                         Spacing="20">
+
+                    <Image Source="location_gray.png">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding Source={x:Reference StartLocationEntry}, Path=IsFocused}"
+                                         Value="True">
+                                <Setter Property="Source" Value="small_star.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+
+                    <controls:ExtendedEntry
+                           x:Name="StartLocationEntry"
+                           Border="0"
+                           VerticalOptions="Center"
+                           HorizontalOptions="FillAndExpand"
+                           FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                           PlaceholderColor="{x:Static constants:Colors.PlaceholderGray}"
+                           TextColor="{x:Static constants:Colors.EntryTextBrown}"
+                           Placeholder="{extensions:Translation StartLocation}" />
+
+                </StackLayout>
+
+            </Frame>
+
+            <!--  End Location Entry -->
+
+            <Frame  Grid.Row="1"
+                    Padding="16, 0"
+                    HasShadow="True"
+                    CornerRadius="4"
+                    BackgroundColor="White">
+
+                <StackLayout Orientation="Horizontal"
+                     Spacing="20">
+
+                    <Image Source="location_gray.png">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding Source={x:Reference EndLocationEntry}, Path=IsFocused}"
+                                         Value="True">
+                                <Setter Property="Source" Value="location_green.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+
+                    <controls:ExtendedEntry
+                        Border="0"
+                        x:Name="EndLocationEntry"
+                        VerticalOptions="Center"
+                        HorizontalOptions="FillAndExpand"
+                        FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                        PlaceholderColor="{x:Static constants:Colors.PlaceholderGray}"
+                        TextColor="{x:Static constants:Colors.EntryTextBrown}"
+                        Placeholder="{extensions:Translation EndLocation}" />
+
+                </StackLayout>
+
+            </Frame>
+
+        </Grid>
+
+        <Button RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.03, Constant=20}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=20}"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                Text="☰"
                 TextColor="#B5F1D5"
                 Padding="0"
                 BackgroundColor="{x:Static constants:Colors.DarkGreen}"
@@ -25,13 +115,10 @@
                 WidthRequest="48"
                 HeightRequest="48"
                 FontSize="{x:Static constants:FontSize.XxLarge}"
-                Command="{Binding ToggleMasterCommand}"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=mapControl, Property=Width, Factor=0, Constant=20}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=mapControl, Property=Height, Factor=.07, Constant=0}">
+                Command="{Binding ToggleMasterCommand}">
 
         </Button>
 
-        
     </RelativeLayout>
 
 </ContentPage>

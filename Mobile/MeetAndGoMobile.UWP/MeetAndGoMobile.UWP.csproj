@@ -97,11 +97,13 @@
     <Compile Include="Effects\SimplifyDatePickerEffect.cs" />
     <Compile Include="Effects\SimplifyEntryEffect.cs" />
     <Compile Include="Effects\SimplifyPickerEffect.cs" />
+    <Compile Include="Extensions\PlatformExtensions.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\ExtendedButtonRenderer.cs" />
+    <Compile Include="Renderers\ExtendedEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

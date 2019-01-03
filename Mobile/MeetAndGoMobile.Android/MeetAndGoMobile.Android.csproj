@@ -82,8 +82,10 @@
     <Compile Include="Effects\SimplifyDatePickerEffect.cs" />
     <Compile Include="Effects\SimplifyEntryEffect.cs" />
     <Compile Include="Effects\SimplifyPickerEffect.cs" />
+    <Compile Include="Helpers\BorderDrawable.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\ExtendedButtonRenderer.cs" />
+    <Compile Include="Renderers\ExtendedEntryRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

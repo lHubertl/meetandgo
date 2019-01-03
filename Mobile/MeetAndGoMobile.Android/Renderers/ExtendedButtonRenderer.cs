@@ -9,7 +9,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace MeetAndGoMobile.Droid.Renderers
 {
-    public class ExtendedButtonRenderer : ButtonRenderer
+    internal class ExtendedButtonRenderer : ButtonRenderer
     {
         public ExtendedButtonRenderer(Context context) : base(context)
         {

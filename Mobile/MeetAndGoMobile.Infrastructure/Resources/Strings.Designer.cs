@@ -223,6 +223,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End Location.
+        /// </summary>
+        public static string EndLocation {
+            get {
+                return ResourceManager.GetString("EndLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Confirmation Code.
         /// </summary>
         public static string EnterConfirmationCode {
@@ -453,6 +462,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string SignUp {
             get {
                 return ResourceManager.GetString("SignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Location.
+        /// </summary>
+        public static string StartLocation {
+            get {
+                return ResourceManager.GetString("StartLocation", resourceCulture);
             }
         }
         

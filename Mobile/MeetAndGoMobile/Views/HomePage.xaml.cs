@@ -27,12 +27,12 @@ namespace MeetAndGoMobile.Views
 
         private async Task SetMyLocation()
         {
-            if (!mapControl.MyLocationEnabled)
+            if (!MapControl.MyLocationEnabled)
             {
-                mapControl.MyLocationEnabled = await CheckPermission();
+                MapControl.MyLocationEnabled = await CheckPermission();
             }
 
-            if (mapControl.MyLocationEnabled)
+            if (MapControl.MyLocationEnabled)
             {
                 await MoveCameraToUserPosition();
             }
@@ -74,7 +74,7 @@ namespace MeetAndGoMobile.Views
                     // For animate camera
                     // TODO: CONFIGURE THIS PARAMETER FOR COMFORTABLE ANIMATION
                     await Task.Delay(1000);
-                    await mapControl.AnimateCamera(CameraUpdateFactory.NewPositionZoom(new Position(location.Latitude, location.Longitude), 14d));
+                    await MapControl.AnimateCamera(CameraUpdateFactory.NewPositionZoom(new Position(location.Latitude, location.Longitude), 14d));
                 }
             }
             catch (FeatureNotSupportedException fnsEx)
