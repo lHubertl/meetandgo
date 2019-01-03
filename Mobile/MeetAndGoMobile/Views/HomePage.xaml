@@ -5,17 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
     prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
 
     <RelativeLayout>
 
-        <maps:Map x:Name="MapControl"
+        <maps:Map x:Name="mapControl"
                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}">
-
         </maps:Map>
 
+
+        <Button Text="☰"
+                TextColor="#B5F1D5"
+                Padding="0"
+                BackgroundColor="{x:Static constants:Colors.DarkGreen}"
+                CornerRadius="25"
+                WidthRequest="48"
+                HeightRequest="48"
+                FontSize="{x:Static constants:FontSize.XxLarge}"
+                Command="{Binding ToggleMasterCommand}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=mapControl, Property=Width, Factor=0, Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=mapControl, Property=Height, Factor=.07, Constant=0}">
+
+        </Button>
+
+        
     </RelativeLayout>
 
 </ContentPage>
