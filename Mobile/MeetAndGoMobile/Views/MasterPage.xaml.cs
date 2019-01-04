@@ -1,6 +1,6 @@
 ﻿using System;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
-using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Services.Contracts;
 using MeetAndGoMobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
