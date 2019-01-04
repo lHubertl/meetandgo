@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Services;
 using MeetAndGoMobile.UserControls.ViewModels;
 using Prism.Ioc;
@@ -35,7 +37,9 @@ namespace MeetAndGoMobile.ViewModels
         public ICommand SelectedStartLocationCommand => new Command<LocationUserControlViewModel>(ExecuteSelectedStartLocationCommand);
 
         public ICommand SelectedEndLocationCommand => new Command<LocationUserControlViewModel>(ExecuteSelectedEndLocationCommand);
-
+        
+        public ICommand CreateCommand => new SingleExecutionCommand(ExecuteCreateCommand);
+        public ICommand SearchCommand => new SingleExecutionCommand(ExecuteSearchCommand);
 
         public HomePageViewModel(INavigationService navigationService, IContainerProvider container, IMasterPageService masterPageService) 
             : base(navigationService, container)
@@ -86,6 +90,16 @@ namespace MeetAndGoMobile.ViewModels
         }
 
         private void ExecuteSelectedEndLocationCommand(LocationUserControlViewModel location)
+        {
+
+        }
+
+        private async Task ExecuteCreateCommand()
+        {
+
+        }
+
+        private async Task ExecuteSearchCommand()
         {
 
         }

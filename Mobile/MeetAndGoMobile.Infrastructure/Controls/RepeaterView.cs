@@ -153,7 +153,7 @@ namespace MeetAndGoMobile.Infrastructure.Controls
 
         public RepeaterView()
         {
-            _itemsStack.BindingContext = BindingContext;
+            _itemsStack.BindingContext = this;
             _itemsStack.SetBinding(PaddingProperty, nameof(ContainerPadding));
             
             if (AllowScroll)

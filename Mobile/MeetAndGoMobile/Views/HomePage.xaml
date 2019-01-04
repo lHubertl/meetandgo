@@ -18,41 +18,44 @@
                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}">
         </maps:Map>
 
-        <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=0}" 
-              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.05, Constant=0}"
-              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.22, Constant=0}"
+        <Button RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.85, Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.05, Constant=0}" 
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.425, Constant=0}" 
+                HeightRequest="48"
+                BackgroundColor="{x:Static constants:Colors.EntryTextBrown}"
+                CornerRadius="24"
+                Text="{extensions:Translation Create}"
+                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                TextColor="White"
+                Command="{Binding CreateCommand}"/>
+
+        <Button RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.85, Constant=0}"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.53, Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.425, Constant=0}" 
+                HeightRequest="48"
+                BackgroundColor="{x:Static constants:Colors.SearchButtonColor}"
+                CornerRadius="24"
+                Text="{extensions:Translation Search}"
+                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                TextColor="White"
+                Command="{Binding SearchCommand}"/>
+
+        <Grid RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.03, Constant=20}"
+              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.05, Constant=0}" 
+              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.9, Constant=0}" 
               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
-              RowSpacing="16" 
+              RowSpacing="20" 
               HorizontalOptions="Fill"
               VerticalOptions="Start">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!--  Start Location Entry -->
-
-
-            <userControls:SelectLocationUserControl
+            <Button 
                 Grid.Row="0"
-                VerticalOptions="Start"
-                Margin="0, 70, 0, 0"
-                Placeholder="{extensions:Translation EndLocation}"
-                SelectedLocationCommand="{Binding SelectedEndLocationCommand}"
-                Locations="{Binding EndLocations}"
-                TextChangedCommand="{Binding EndLocationTextChangedCommand}"/>
-
-            <userControls:SelectLocationUserControl
-                Grid.Row="0"
-                VerticalOptions="Start"
-                Placeholder="{extensions:Translation StartLocation}"
-                SelectedLocationCommand="{Binding SelectedStartLocationCommand}"
-                Locations="{Binding StartLocations}"
-                TextChangedCommand="{Binding StartLocationTextChangedCommand}"/>
-
-        </Grid>
-
-        <Button RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.03, Constant=20}"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0, Constant=20}"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 Text="☰"
@@ -63,9 +66,29 @@
                 WidthRequest="48"
                 HeightRequest="48"
                 FontSize="{x:Static constants:FontSize.XxLarge}"
-                Command="{Binding ToggleMasterCommand}">
+                Command="{Binding ToggleMasterCommand}" />
 
-        </Button>
+            <!--  Start Location Entry -->
+
+
+            <userControls:SelectLocationUserControl
+                Grid.Row="1"
+                VerticalOptions="Start"
+                Margin="0, 55, 0, 0"
+                Placeholder="{extensions:Translation EndLocation}"
+                SelectedLocationCommand="{Binding SelectedEndLocationCommand}"
+                Locations="{Binding EndLocations}"
+                TextChangedCommand="{Binding EndLocationTextChangedCommand}"/>
+
+            <userControls:SelectLocationUserControl
+                Grid.Row="1"
+                VerticalOptions="Start"
+                Placeholder="{extensions:Translation StartLocation}"
+                SelectedLocationCommand="{Binding SelectedStartLocationCommand}"
+                Locations="{Binding StartLocations}"
+                TextChangedCommand="{Binding StartLocationTextChangedCommand}"/>
+
+        </Grid>
 
     </RelativeLayout>
 

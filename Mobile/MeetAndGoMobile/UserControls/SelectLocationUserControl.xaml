@@ -27,8 +27,7 @@
 
     <controls:RepeaterView x:Name="LocationsView" 
                            Grid.Row="1"
-                           Padding="0, 5"
-                           Margin="0, -5, 0, 0"
+                           ContainerPadding="16, 5"
                            IsVisible="False"
                            BackgroundColor="White"
                            ItemsSource="{Binding Source={x:Reference Root}, Path=Locations}">
@@ -36,7 +35,7 @@
       <controls:RepeaterView.ItemTemplate>
 
         <DataTemplate>
-          <StackLayout Margin="16, 0" Spacing="8" Orientation="Horizontal">
+          <StackLayout Spacing="8" Orientation="Horizontal">
 
             <StackLayout.GestureRecognizers>
 
@@ -68,7 +67,7 @@
 
       <controls:RepeaterView.SeparatorTemplate>
         <DataTemplate>
-          <BoxView HeightRequest="1" Margin="16, 0" BackgroundColor="{x:Static constants:Colors.LightGray}" />
+          <BoxView HeightRequest="1" BackgroundColor="{x:Static constants:Colors.LightGray}" />
         </DataTemplate>
       </controls:RepeaterView.SeparatorTemplate>
 
