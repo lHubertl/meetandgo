@@ -7,7 +7,7 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
-    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:userControls="clr-namespace:MeetAndGoMobile.UserControls"
     prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
 
@@ -21,85 +21,33 @@
         <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9, Constant=0}" 
               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.05, Constant=0}"
               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.22, Constant=0}"
+              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
               RowSpacing="16" 
               HorizontalOptions="Fill"
               VerticalOptions="Start">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-        
+
             <!--  Start Location Entry -->
 
-            <Frame Grid.Row="0" 
-                   Padding="16, 0"
-                   HasShadow="True"
-                   CornerRadius="4"
-                   BackgroundColor="White">
 
-                <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Fill"
-                         Spacing="20">
+            <userControls:SelectLocationUserControl
+                Grid.Row="0"
+                VerticalOptions="Start"
+                Margin="0, 70, 0, 0"
+                Placeholder="{extensions:Translation EndLocation}"
+                SelectedLocationCommand="{Binding SelectedEndLocationCommand}"
+                Locations="{Binding EndLocations}"
+                TextChangedCommand="{Binding EndLocationTextChangedCommand}"/>
 
-                    <Image Source="location_gray.png">
-                        <Image.Triggers>
-                            <DataTrigger TargetType="Image"
-                                         Binding="{Binding Source={x:Reference StartLocationEntry}, Path=IsFocused}"
-                                         Value="True">
-                                <Setter Property="Source" Value="small_star.png" />
-                            </DataTrigger>
-                        </Image.Triggers>
-                    </Image>
-
-                    <controls:ExtendedEntry
-                           x:Name="StartLocationEntry"
-                           Border="0"
-                           VerticalOptions="Center"
-                           HorizontalOptions="FillAndExpand"
-                           FontSize="{x:Static constants:FontSize.ExtraLarge}"
-                           PlaceholderColor="{x:Static constants:Colors.PlaceholderGray}"
-                           TextColor="{x:Static constants:Colors.EntryTextBrown}"
-                           Placeholder="{extensions:Translation StartLocation}" />
-
-                </StackLayout>
-
-            </Frame>
-
-            <!--  End Location Entry -->
-
-            <Frame  Grid.Row="1"
-                    Padding="16, 0"
-                    HasShadow="True"
-                    CornerRadius="4"
-                    BackgroundColor="White">
-
-                <StackLayout Orientation="Horizontal"
-                     Spacing="20">
-
-                    <Image Source="location_gray.png">
-                        <Image.Triggers>
-                            <DataTrigger TargetType="Image"
-                                         Binding="{Binding Source={x:Reference EndLocationEntry}, Path=IsFocused}"
-                                         Value="True">
-                                <Setter Property="Source" Value="location_green.png" />
-                            </DataTrigger>
-                        </Image.Triggers>
-                    </Image>
-
-                    <controls:ExtendedEntry
-                        Border="0"
-                        x:Name="EndLocationEntry"
-                        VerticalOptions="Center"
-                        HorizontalOptions="FillAndExpand"
-                        FontSize="{x:Static constants:FontSize.ExtraLarge}"
-                        PlaceholderColor="{x:Static constants:Colors.PlaceholderGray}"
-                        TextColor="{x:Static constants:Colors.EntryTextBrown}"
-                        Placeholder="{extensions:Translation EndLocation}" />
-
-                </StackLayout>
-
-            </Frame>
+            <userControls:SelectLocationUserControl
+                Grid.Row="0"
+                VerticalOptions="Start"
+                Placeholder="{extensions:Translation StartLocation}"
+                SelectedLocationCommand="{Binding SelectedStartLocationCommand}"
+                Locations="{Binding StartLocations}"
+                TextChangedCommand="{Binding StartLocationTextChangedCommand}"/>
 
         </Grid>
 

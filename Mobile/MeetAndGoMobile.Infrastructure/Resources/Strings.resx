@@ -300,4 +300,10 @@
   <data name="StartLocation" xml:space="preserve">
     <value>Start Location</value>
   </data>
+  <data name="SavedPlaces" xml:space="preserve">
+    <value>Saved Places</value>
+  </data>
+  <data name="ShowOnMap" xml:space="preserve">
+    <value>Show on Map</value>
+  </data>
 </root>

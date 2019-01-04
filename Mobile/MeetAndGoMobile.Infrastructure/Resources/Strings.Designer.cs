@@ -430,6 +430,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saved Places.
+        /// </summary>
+        public static string SavedPlaces {
+            get {
+                return ResourceManager.GetString("SavedPlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Picture.
         /// </summary>
         public static string SelectPicture {
@@ -444,6 +453,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show on Map.
+        /// </summary>
+        public static string ShowOnMap {
+            get {
+                return ResourceManager.GetString("ShowOnMap", resourceCulture);
             }
         }
         

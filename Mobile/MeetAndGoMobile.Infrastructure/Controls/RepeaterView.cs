@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows.Input;
 using MeetAndGoMobile.Infrastructure.Constants;
 using MeetAndGoMobile.Infrastructure.Extensions;
@@ -13,9 +13,9 @@ namespace MeetAndGoMobile.Infrastructure.Controls
     public class RepeaterView : ContentView
     {
         private readonly StackLayout _itemsStack = new StackLayout { Spacing = 0 };
-        private ScrollView _scrollView;
         private ActivityIndicator _activityIndicator;
         private View _footerView;
+        private View _headerView;
         private View _emptySourceView;
 
         public static readonly BindableProperty ItemTemplateProperty =
@@ -86,7 +86,7 @@ namespace MeetAndGoMobile.Infrastructure.Controls
             typeof(Thickness),
             typeof(RepeaterView),
             new Thickness(0));
-
+        
         public ICollection ItemsSource
         {
             get => (ICollection)GetValue(ItemsSourceProperty);
@@ -153,16 +153,14 @@ namespace MeetAndGoMobile.Infrastructure.Controls
 
         public RepeaterView()
         {
-            VerticalOptions = LayoutOptions.FillAndExpand;
-
             _itemsStack.BindingContext = BindingContext;
             _itemsStack.SetBinding(PaddingProperty, nameof(ContainerPadding));
             
             if (AllowScroll)
             {
-                _scrollView = GetScrollView();
-                _scrollView.Content = _itemsStack;
-                Content = _scrollView;
+                var scrollView = GetScrollView();
+                scrollView.Content = _itemsStack;
+                Content = scrollView;
             }
             else
             {
@@ -191,8 +189,8 @@ namespace MeetAndGoMobile.Infrastructure.Controls
             var headerTemplate = control.HeaderTemplate;
             if (headerTemplate != null)
             {
-                var view = headerTemplate.GetViewFromTemplate(control.BindingContext);
-                repeater.Children.Add(view);
+                control._headerView = headerTemplate.GetViewFromTemplate(control.BindingContext);
+                repeater.Children.Add(control._headerView);
             }
 
             // Set Items
@@ -211,7 +209,7 @@ namespace MeetAndGoMobile.Infrastructure.Controls
 
                 if (dataTemplate != null)
                 {
-                    control.IntializeItemsContent(itemsSource, dataTemplate);
+                    control.InitializeItemsContent(itemsSource, dataTemplate);
                 }
 
                 // Set footer
@@ -248,7 +246,7 @@ namespace MeetAndGoMobile.Infrastructure.Controls
 
                     control._itemsStack.Children.Add(control.GetSeparator());
 
-                    control.IntializeItemsContent(e.NewItems, dataTemplate);
+                    control.InitializeItemsContent(e.NewItems, dataTemplate);
 
                     if (control._footerView != null)
                     {
@@ -256,8 +254,36 @@ namespace MeetAndGoMobile.Infrastructure.Controls
                     }
                 }
             }
-            else if (control.ItemsSource == null || control.ItemsSource.Count == 0)
+
+            else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
+                var content = control._itemsStack.Children;
+
+                var viewsToRemove = new List<View>();
+
+                for (int i = 0; i < content.Count; i++)
+                {
+                    if (e.OldItems.Contains(content[i].BindingContext))
+                    {
+                        viewsToRemove.Add(content[i]);
+                        if (control.ShowSeparator && i < content.Count - 1 )
+                        {
+                            viewsToRemove.Add(content[i + 1]);
+                        }
+                    }
+                }
+                viewsToRemove.ForEach(view => control._itemsStack.Children.Remove(view));
+                viewsToRemove.Clear();
+            }
+
+            else if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                control._itemsStack.Children.Clear();
+            }
+
+            if (control.ItemsSource == null || control.ItemsSource.Count == 0)
+            {
+                control.TryRemoveViewFromContent(control._headerView);
                 control.TryRemoveViewFromContent(control._footerView);
                 var view = control.GetEmptyItemSourceView();
                 if (view != null)
@@ -267,7 +293,7 @@ namespace MeetAndGoMobile.Infrastructure.Controls
             }
         }
 
-        private void IntializeItemsContent(IList list, DataTemplate template)
+        private void InitializeItemsContent(IList list, DataTemplate template)
         {
             for (int i = 0; i < list.Count; i++)
             {
