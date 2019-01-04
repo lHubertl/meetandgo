@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Models;
 
-namespace MeetAndGoMobile.Services
+namespace MeetAndGoMobile.Services.Contracts
 {
     public interface IEventService
     {

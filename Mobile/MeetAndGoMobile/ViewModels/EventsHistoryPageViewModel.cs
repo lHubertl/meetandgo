@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using MeetAndGo.Shared.Models;
-using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Services.Contracts;
 using Prism.Ioc;
 using Prism.Navigation;
 

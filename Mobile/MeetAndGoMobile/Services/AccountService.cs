@@ -12,6 +12,7 @@ using MeetAndGo.Shared.Models.Authorization;
 using MeetAndGoMobile.Constants;
 using MeetAndGoMobile.Infrastructure.BusinessLogic;
 using MeetAndGoMobile.Infrastructure.BusinessLogic.Repositories;
+using MeetAndGoMobile.Services.Contracts;
 using Newtonsoft.Json;
 
 namespace MeetAndGoMobile.Services

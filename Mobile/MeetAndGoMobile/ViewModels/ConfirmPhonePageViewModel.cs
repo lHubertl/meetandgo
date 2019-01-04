@@ -6,7 +6,7 @@ using MeetAndGo.Shared.Models.Authorization;
 using MeetAndGoMobile.Constants;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
-using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Services.Contracts;
 using MeetAndGoMobile.Views;
 using Prism.Ioc;
 using Prism.Navigation;

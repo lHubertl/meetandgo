@@ -2,12 +2,12 @@
 using MeetAndGo.Shared.Enums;
 using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Infrastructure.Resources;
-using MeetAndGoMobile.Services;
 using Prism.Ioc;
 using Prism.Navigation;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MeetAndGoMobile.Services.Contracts;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 

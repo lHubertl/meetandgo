@@ -7,6 +7,7 @@ using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Constants;
 using MeetAndGoMobile.Infrastructure.BusinessLogic;
 using MeetAndGoMobile.Infrastructure.BusinessLogic.Repositories;
+using MeetAndGoMobile.Services.Contracts;
 
 namespace MeetAndGoMobile.Services
 {

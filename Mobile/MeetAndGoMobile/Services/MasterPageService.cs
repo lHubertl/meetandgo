@@ -1,4 +1,5 @@
 ﻿using System;
+using MeetAndGoMobile.Services.Contracts;
 
 namespace MeetAndGoMobile.Services
 {

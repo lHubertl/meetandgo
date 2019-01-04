@@ -3,7 +3,6 @@ using MeetAndGo.Shared.Managers;
 using MeetAndGo.Shared.Models;
 using MeetAndGoMobile.Infrastructure.Commands;
 using MeetAndGoMobile.Infrastructure.Resources;
-using MeetAndGoMobile.Services;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Ioc;
@@ -15,6 +14,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MeetAndGoMobile.Services.Contracts;
 using Xamarin.Forms;
 
 namespace MeetAndGoMobile.ViewModels

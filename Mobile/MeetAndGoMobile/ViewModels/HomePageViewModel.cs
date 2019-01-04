@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MeetAndGoMobile.Infrastructure.Commands;
-using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Services.Contracts;
 using MeetAndGoMobile.UserControls.ViewModels;
 using Prism.Ioc;
 using Prism.Navigation;

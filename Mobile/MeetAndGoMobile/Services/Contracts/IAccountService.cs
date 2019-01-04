@@ -5,7 +5,7 @@ using MeetAndGo.Shared.BusinessLogic.Responses;
 using MeetAndGo.Shared.Models;
 using MeetAndGo.Shared.Models.Authorization;
 
-namespace MeetAndGoMobile.Services
+namespace MeetAndGoMobile.Services.Contracts
 {
     public interface IAccountService
     {

@@ -9,6 +9,7 @@ using MeetAndGoMobile.Views;
 using Xamarin.Forms.Xaml;
 using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
+using MeetAndGoMobile.Services.Contracts;
 using Plugin.Multilingual;
 using Xamarin.Essentials;
 
