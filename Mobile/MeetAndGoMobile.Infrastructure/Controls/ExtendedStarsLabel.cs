@@ -1,20 +1,22 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using MeetAndGoMobile.Infrastructure.Constants;
+using Xamarin.Forms;
 
 namespace MeetAndGoMobile.Infrastructure.Controls
 {
-    public class StarStaticControl : StackLayout
+    public class ExtendedStarsLabel : Label
     {
         public static readonly BindableProperty GradeProperty = BindableProperty.Create(
             nameof(Grade),
             typeof(int),
-            typeof(StarStaticControl),
+            typeof(ExtendedStarsLabel),
             1,
             propertyChanged: GradePropertyChanged);
 
         public static readonly BindableProperty MaxGradeProperty = BindableProperty.Create(
             nameof(MaxGrade),
             typeof(int),
-            typeof(StarStaticControl),
+            typeof(ExtendedStarsLabel),
             5,
             propertyChanged: GradePropertyChanged);
 
@@ -29,33 +31,31 @@ namespace MeetAndGoMobile.Infrastructure.Controls
             set => SetValue(MaxGradeProperty, value);
         }
 
-        public StarStaticControl()
+        public ExtendedStarsLabel()
         {
-            Orientation = StackOrientation.Horizontal;
-            Spacing = 5;
-            UpdateUi();
+            TextColor = Colors.StarColor;
+            UpdateContent();
         }
 
         private static void GradePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if(!(bindable is StarStaticControl control))
+            if(!(bindable is ExtendedStarsLabel control))
             {
                 return;
             }
 
-            control.UpdateUi();
+            control.UpdateContent();
         }
         
-        private void UpdateUi()
+        private void UpdateContent()
         {
-            Children.Clear();
+            const string star = "★ ";
+            const string emptyStar = "☆ ";
 
-            for (int i = 1; i <= MaxGrade; i++)
-            {
-                var imageSource = i <= Grade ? "small_star.png" : "small_empty_star.png";
-                var starImage = new Image { Source = imageSource };
-                Children.Add(starImage);
-            }
+            var text =
+                $"{string.Concat(Enumerable.Repeat(star, Grade))}{string.Concat(Enumerable.Repeat(emptyStar, MaxGrade - Grade))}";
+
+            Text = text;
         }
     }
 }

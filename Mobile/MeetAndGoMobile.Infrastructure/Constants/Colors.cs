@@ -73,5 +73,10 @@ namespace MeetAndGoMobile.Infrastructure.Constants
         /// 159 199 181
         /// </summary>
         public static readonly Color SearchButtonColor = Color.FromHex("#9FC7B5");
+
+        /// <summary>
+        /// 149 166 255
+        /// </summary>
+        public static readonly Color StarColor = Color.FromHex("#95A6FF");
     }
 }

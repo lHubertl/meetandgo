@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
-                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                  prism:ViewModelLocator.AutowireViewModel="True"
-                  MasterBehavior="Popover"
-                  IsGestureEnabled="True"
-                  BackgroundColor="{x:Static constants:Colors.StatusBarBrown}"
-                  xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
-                  xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
-                  xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
-                  xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-                  x:Class="MeetAndGoMobile.Views.MasterPage">
+<MasterDetailPage
+    x:Class="MeetAndGoMobile.Views.MasterPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{x:Static constants:Colors.StatusBarBrown}"
+    IsGestureEnabled="True"
+    MasterBehavior="Popover">
 
     <MasterDetailPage.Master>
         <ContentPage Title="{extensions:Translation MeetAndGo}" BackgroundColor="{x:Static constants:Colors.StatusBarBrown}">
             <ContentPage.Resources>
                 <ResourceDictionary>
-                    <Style TargetType="Label" x:Key="MenuItem">
+                    <Style x:Key="MenuItem" TargetType="Label">
                         <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
                         <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
                         <Setter Property="TextColor" Value="White" />
@@ -31,68 +32,83 @@
 
                 </ResourceDictionary>
             </ContentPage.Resources>
-            
-            <StackLayout Padding="16, 25, 16, 30" Spacing="0">
-                
-                <!-- User Info  -->
 
-                <StackLayout 
+            <StackLayout Padding="16,25,16,30" Spacing="0">
+
+                <!--  User Info  -->
+
+                <StackLayout
+                    HeightRequest="80"
                     InputTransparent="False"
-                    HeightRequest="80" 
-                    VerticalOptions="Center" 
                     Orientation="Horizontal"
-                    Spacing="20">
-                    
+                    Spacing="20"
+                    VerticalOptions="Center">
+
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="PersonalInfoPage" />
+                        <TapGestureRecognizer CommandParameter="PersonalInfoPage" Tapped="TapGestureRecognizer_OnTapped" />
                     </StackLayout.GestureRecognizers>
 
-                    <abstractions:CircleImage Aspect="AspectFill" WidthRequest="50" HeightRequest="50" Source="{Binding UserImageSource}" />
+                    <abstractions:CircleImage
+                        Aspect="AspectFill"
+                        HeightRequest="50"
+                        Source="{Binding UserImageSource}"
+                        WidthRequest="50" />
 
-                    <Label Style="{StaticResource MenuItem}" VerticalOptions="Center"  Text="{Binding UserName}"/>
+                    <Label
+                        Style="{StaticResource MenuItem}"
+                        Text="{Binding UserName}"
+                        VerticalOptions="Center" />
 
                 </StackLayout>
 
-                <!-- User Rating  -->
-                
-                <Grid HeightRequest="80" RowSpacing="5" HorizontalOptions="Start">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                    </Grid.RowDefinitions>
-                    <Grid.Resources>
+                <!--  User Rating  -->
+
+
+                <FlexLayout
+                    AlignContent="Start"
+                    AlignItems="Start"
+                    Direction="Row"
+                    HeightRequest="80"
+                    JustifyContent="SpaceAround"
+                    Wrap="Wrap">
+                    <FlexLayout.Resources>
                         <ResourceDictionary>
                             <Style TargetType="Label">
                                 <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
                                 <Setter Property="FontSize" Value="{x:Static constants:FontSize.Large}" />
+                                <Setter Property="HorizontalTextAlignment" Value="Start" />
                                 <Setter Property="TextColor" Value="White" />
                                 <Setter Property="Opacity" Value="0.4" />
                             </Style>
                         </ResourceDictionary>
-                    </Grid.Resources>
+                    </FlexLayout.Resources>
 
-                    <Label Text="{extensions:Translation Member}"  Grid.Row="0" Grid.Column="0" />
-                    <Label Text="{extensions:Translation Organizer}"  Grid.Row="1" Grid.Column="0" />
 
-                    <controls:StarStaticControl Grid.Row="0" Grid.Column="1" Grade="{Binding MemberRating}" />
-                    <controls:StarStaticControl Grid.Row="1" Grid.Column="1" Grade="{Binding OrganizerRating}" />
+                    <Label FlexLayout.Basis="30%" Text="{extensions:Translation Member}" />
 
-                    <Label HorizontalTextAlignment="Center" Text="{Binding OrganizerVotesText}" Grid.Row="1" Grid.Column="2" />
+                    <controls:ExtendedStarsLabel
+                        FlexLayout.Basis="70%"
+                        Grade="{Binding MemberRating}"
+                        Opacity="1" />
 
-                </Grid>
-                
+                    <Label FlexLayout.Basis="30%" Text="{extensions:Translation Organizer}" />
+
+                    <controls:ExtendedStarsLabel
+                        FlexLayout.Basis="35%"
+                        Grade="{Binding OrganizerRating}"
+                        Opacity="1" />
+
+                    <Label FlexLayout.Basis="35%" Text="{Binding OrganizerVotesText}" />
+
+                </FlexLayout>
+
                 <BoxView />
-                
+
                 <!--  Events History  -->
-                
+
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation EventsHistory}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="EventsHistoryPage" />
+                        <TapGestureRecognizer CommandParameter="EventsHistoryPage" Tapped="TapGestureRecognizer_OnTapped" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -102,7 +118,7 @@
 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Payment}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="PaymentPage" />
+                        <TapGestureRecognizer CommandParameter="PaymentPage" Tapped="TapGestureRecognizer_OnTapped" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -112,52 +128,56 @@
 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Settings}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="SettingsPage" />
+                        <TapGestureRecognizer CommandParameter="SettingsPage" Tapped="TapGestureRecognizer_OnTapped" />
                     </Label.GestureRecognizers>
                 </Label>
-                
+
                 <BoxView />
 
                 <!--  Help  -->
 
                 <Label Style="{StaticResource MenuItem}" Text="{extensions:Translation Help}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="HelpPage" />
+                        <TapGestureRecognizer CommandParameter="HelpPage" Tapped="TapGestureRecognizer_OnTapped" />
                     </Label.GestureRecognizers>
                 </Label>
 
                 <BoxView />
 
-                <!-- Legal -->
+                <!--  Legal  -->
 
-                <StackLayout Margin="0, 5, 0 ,0" VerticalOptions="EndAndExpand" HeightRequest="32" Orientation="Horizontal">
+                <StackLayout
+                    Margin="0,5,0,0"
+                    HeightRequest="32"
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
 
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" CommandParameter="LegacyPage" />
+                        <TapGestureRecognizer CommandParameter="LegacyPage" Tapped="TapGestureRecognizer_OnTapped" />
                     </StackLayout.GestureRecognizers>
 
-                    <Label 
-                        VerticalTextAlignment="Start"
-                        Style="{StaticResource MenuItem}" 
-                        HeightRequest="20" 
-                        Text="{extensions:Translation Legal}" />
+                    <Label
+                        HeightRequest="20"
+                        Style="{StaticResource MenuItem}"
+                        Text="{extensions:Translation Legal}"
+                        VerticalTextAlignment="Start" />
 
-                    <Label 
-                        VerticalTextAlignment="Start"
-                        Opacity="0.4" 
-                        Style="{StaticResource MenuItem}" 
-                        HorizontalOptions="EndAndExpand" 
-                        HeightRequest="30" 
-                        Text="{Binding Version}" />
+                    <Label
+                        HeightRequest="30"
+                        HorizontalOptions="EndAndExpand"
+                        Opacity="0.4"
+                        Style="{StaticResource MenuItem}"
+                        Text="{Binding Version}"
+                        VerticalTextAlignment="Start" />
 
                 </StackLayout>
 
-                <BoxView  />
+                <BoxView />
 
             </StackLayout>
-            
-            
+
+
         </ContentPage>
     </MasterDetailPage.Master>
-    
+
 </MasterDetailPage>
