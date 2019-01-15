@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MeetAndGoMobile.Infrastructure.Commands;
+using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Services.Contracts;
-using MeetAndGoMobile.UserControls.ViewModels;
+using MeetAndGoMobile.UserControls.SelectLocation;
 using Prism.Ioc;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -14,15 +15,15 @@ namespace MeetAndGoMobile.ViewModels
 	{
         private readonly IMasterPageService _masterPageService;
 
-        private ObservableCollection<LocationUserControlViewModel> _startLocations;
-        public ObservableCollection<LocationUserControlViewModel> StartLocations
+        private ObservableCollection<LocationList> _startLocations;
+        public ObservableCollection<LocationList> StartLocations
         {
             get => _startLocations;
             set => SetProperty(ref _startLocations, value);
         }
 
-        private ObservableCollection<LocationUserControlViewModel> _endLocations;
-        public ObservableCollection<LocationUserControlViewModel> EndLocations
+        private ObservableCollection<LocationList> _endLocations;
+        public ObservableCollection<LocationList> EndLocations
         {
             get => _endLocations;
             set => SetProperty(ref _endLocations, value);
@@ -34,9 +35,9 @@ namespace MeetAndGoMobile.ViewModels
 
         public ICommand EndLocationTextChangedCommand => new Command<string>(ExecuteEndLocationTextChangedCommand);
 
-        public ICommand SelectedStartLocationCommand => new Command<LocationUserControlViewModel>(ExecuteSelectedStartLocationCommand);
+        public ICommand SelectedStartLocationCommand => new Command<LocationViewModel>(ExecuteSelectedStartLocationCommand);
 
-        public ICommand SelectedEndLocationCommand => new Command<LocationUserControlViewModel>(ExecuteSelectedEndLocationCommand);
+        public ICommand SelectedEndLocationCommand => new Command<LocationViewModel>(ExecuteSelectedEndLocationCommand);
         
         public ICommand CreateCommand => new SingleExecutionCommand(ExecuteCreateCommand);
         public ICommand SearchCommand => new SingleExecutionCommand(ExecuteSearchCommand);
@@ -45,38 +46,48 @@ namespace MeetAndGoMobile.ViewModels
             : base(navigationService, container)
         {
             _masterPageService = masterPageService;
-            
-            StartLocations = new ObservableCollection<LocationUserControlViewModel>
-            {
-                new LocationUserControlViewModel
-                {
-                    ImageSource = "pen.png",
-                    PlaceName = "lol"
-                },
-                new LocationUserControlViewModel
-                {
-                    PlaceName = "lol"
-                }
-            };
 
-            EndLocations = new ObservableCollection<LocationUserControlViewModel>
+            StartLocations = new ObservableCollection<LocationList>
             {
-                new LocationUserControlViewModel
+                new LocationList("Saved Places", "pen.png")
                 {
-                    ImageSource = "pen.png",
-                    PlaceName = "lo222SDSDASDl"
+                    new LocationViewModel
+                    {
+                        ImageSource = "pen.png",
+                        Text = "lol"
+                    },
+                    new LocationViewModel
+                    {
+                        Text = "lol"
+                    }
                 },
-                new LocationUserControlViewModel
+                new LocationList("Shown on Map", "pen.png")
                 {
-                    ImageSource = "pen.png",
-                    PlaceName = "lo222l"
+                    new LocationViewModel
+                    {
+                        ImageSource = "pen.png",
+                        Text = "lol"
+                    },
+                    new LocationViewModel
+                    {
+                        Text = "lol2"
+                    },
+                    new LocationViewModel
+                    {
+                        Text = "lol 3"
+                    },
+                    new LocationViewModel
+                    {
+                        Text = "lol 4 "
+                    }
                 }
             };
         }
 
-        private void ExecuteStartLocationTextChangedCommand(string text)
+        private async void ExecuteStartLocationTextChangedCommand(string text)
         {
-
+            GoogleService test = new GoogleService();
+            var s = await test.NearbyAsync(40.741895, -73.989308);
         }
 
         private void ExecuteEndLocationTextChangedCommand(string text)
@@ -84,12 +95,12 @@ namespace MeetAndGoMobile.ViewModels
 
         }
 
-        private void ExecuteSelectedStartLocationCommand(LocationUserControlViewModel location)
+        private void ExecuteSelectedStartLocationCommand(LocationViewModel location)
         {
 
         }
 
-        private void ExecuteSelectedEndLocationCommand(LocationUserControlViewModel location)
+        private void ExecuteSelectedEndLocationCommand(LocationViewModel location)
         {
 
         }

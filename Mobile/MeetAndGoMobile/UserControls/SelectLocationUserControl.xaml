@@ -1,23 +1,25 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
-             xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
-             x:Class="MeetAndGoMobile.UserControls.SelectLocationUserControl"
-             RowSpacing="0"
-             x:Name="Root">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="MeetAndGoMobile.UserControls.SelectLocationUserControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:MeetAndGoMobile.Infrastructure.Behaviors;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
+    x:Name="Root"
+    RowSpacing="0">
 
-  <Grid.Resources>
-    <ResourceDictionary>
+    <Grid.Resources>
+        <ResourceDictionary>
 
-      <Style TargetType="Label">
-        <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
-        <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="HeightRequest" Value="48" />
-      </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="{x:Static constants:FontSize.ExtraLarge}" />
+                <Setter Property="FontFamily" Value="{x:Static constants:FontFamily.NunitoRegular}" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HeightRequest" Value="48" />
+            </Style>
 
-    </ResourceDictionary>
+        </ResourceDictionary>
     </Grid.Resources>
 
     <Grid.RowDefinitions>
@@ -25,59 +27,93 @@
         <RowDefinition Height="*" />
     </Grid.RowDefinitions>
 
-    <controls:RepeaterView x:Name="LocationsView" 
-                           Grid.Row="1"
-                           ContainerPadding="16, 5"
-                           IsVisible="False"
-                           BackgroundColor="White"
-                           ItemsSource="{Binding Source={x:Reference Root}, Path=Locations}">
 
-      <controls:RepeaterView.ItemTemplate>
+    <Frame
+        x:Name="ListViewPart"
+        Grid.Row="1"
+        Margin="0,-5,0,0"
+        Padding="0"
+        BackgroundColor="White"
+        CornerRadius="4"
+        IsVisible="False">
 
-        <DataTemplate>
-          <StackLayout Spacing="8" Orientation="Horizontal">
+        <ScrollView>
 
-            <StackLayout.GestureRecognizers>
+            <StackLayout BindableLayout.ItemsSource="{Binding Source={x:Reference Root}, Path=Locations}" Spacing="0">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
 
-                <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=SelectedLocationCommand}"
-                                    CommandParameter="{Binding .}"/>
-            </StackLayout.GestureRecognizers>
+                        <StackLayout Spacing="0">
 
-            <Image Source="{Binding ImageSource}"
-                   VerticalOptions="Center"
-                   IsVisible="True">
-                <Image.Triggers>
+                            <!--  Header  -->
 
-                  <DataTrigger TargetType="Image" 
-                               Binding="{Binding ImageSource}"
-                               Value="">
-                      <Setter Property="IsVisible" Value="False"></Setter>
-                  </DataTrigger>
+                            <BoxView BackgroundColor="{x:Static constants:Colors.LightGray}" HeightRequest="1" />
 
-                </Image.Triggers>
-            </Image>
+                            <StackLayout
+                                Padding="16,0"
+                                HeightRequest="48"
+                                Orientation="Horizontal"
+                                Spacing="16">
+                                <Image Source="{Binding ImageSource}" VerticalOptions="Center" />
+                                <Label
+                                    FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                    FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                                    Text="{Binding Title}"
+                                    TextColor="{x:Static constants:Colors.EntryTextBrown}"
+                                    VerticalTextAlignment="Center" />
+                            </StackLayout>
 
-            <Label TextColor="{x:Static constants:Colors.PlaceholderGray}"
-                   Text="{Binding PlaceName}"/>
+                            <!--  Template  -->
 
-          </StackLayout>
-        </DataTemplate>
+                            <StackLayout BindableLayout.ItemsSource="{Binding All}" Spacing="0">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
 
-      </controls:RepeaterView.ItemTemplate>
+                                        <StackLayout Padding="16,0" Spacing="0">
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=SelectedLocationCommand}" CommandParameter="{Binding .}" />
+                                            </StackLayout.GestureRecognizers>
 
-      <controls:RepeaterView.SeparatorTemplate>
-        <DataTemplate>
-          <BoxView HeightRequest="1" BackgroundColor="{x:Static constants:Colors.LightGray}" />
-        </DataTemplate>
-      </controls:RepeaterView.SeparatorTemplate>
+                                            <BoxView BackgroundColor="{x:Static constants:Colors.LightGray}" HeightRequest="1" />
 
-    </controls:RepeaterView>
+                                            <StackLayout
+                                                HeightRequest="48"
+                                                Orientation="Horizontal"
+                                                Spacing="16">
+
+                                                <Image Source="{Binding ImageSource}" VerticalOptions="Center">
+                                                    <Image.Behaviors>
+                                                        <behaviors:ImageInvisibleIfSourceEmptyBehavior />
+                                                    </Image.Behaviors>
+                                                </Image>
+                                                <Label
+                                                    FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                                                    FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                                                    Text="{Binding Text}"
+                                                    TextColor="{x:Static constants:Colors.PlaceholderGray}"
+                                                    VerticalTextAlignment="Center" />
+
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+
+                        </StackLayout>
+
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </StackLayout>
+
+        </ScrollView>
+    </Frame>
 
     <Frame
         Grid.Row="0"
-        HasShadow="True"
+        BackgroundColor="White"
         CornerRadius="4"
-        BackgroundColor="White">
+        HasShadow="True">
         <Frame.GestureRecognizers>
             <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" />
         </Frame.GestureRecognizers>
@@ -89,15 +125,17 @@
             </OnPlatform>
         </Frame.Padding>
 
-        <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="Fill"
-                     Spacing="20">
+        <StackLayout
+            HorizontalOptions="Fill"
+            Orientation="Horizontal"
+            Spacing="20">
 
             <Image Source="location_gray.png">
                 <Image.Triggers>
-                    <DataTrigger TargetType="Image"
-                                 Binding="{Binding Source={x:Reference LocationEntry}, Path=IsFocused}"
-                                 Value="True">
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference LocationEntry}, Path=IsFocused}"
+                        TargetType="Image"
+                        Value="True">
                         <Setter Property="Source" Value="location_green.png" />
                     </DataTrigger>
                 </Image.Triggers>
@@ -106,13 +144,13 @@
             <controls:ExtendedEntry
                 x:Name="LocationEntry"
                 Border="0"
-                VerticalOptions="Center"
-                HorizontalOptions="FillAndExpand"
                 FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
                 FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                HorizontalOptions="FillAndExpand"
+                Placeholder="{Binding Source={x:Reference Root}, Path=Placeholder}"
                 PlaceholderColor="{x:Static constants:Colors.PlaceholderGray}"
                 TextColor="{x:Static constants:Colors.EntryTextBrown}"
-                Placeholder="{Binding Source={x:Reference Root}, Path=Placeholder}" />
+                VerticalOptions="Center" />
 
         </StackLayout>
 

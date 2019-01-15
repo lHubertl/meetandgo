@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using MeetAndGoMobile.UserControls.ViewModels;
+using MeetAndGoMobile.UserControls.SelectLocation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,12 +21,12 @@ namespace MeetAndGoMobile.UserControls
 
         public static readonly BindableProperty SelectedLocationCommandProperty = BindableProperty.Create(
             nameof(SelectedLocationCommand),
-            typeof(Command<LocationUserControlViewModel>),
+            typeof(Command<LocationViewModel>),
             typeof(SelectLocationUserControl));
 
         public static readonly BindableProperty LocationsProperty = BindableProperty.Create(
             nameof(Locations),
-            typeof(ObservableCollection<LocationUserControlViewModel>),
+            typeof(ObservableCollection<LocationList>),
             typeof(SelectLocationUserControl));
         
         public string Placeholder
@@ -41,15 +41,15 @@ namespace MeetAndGoMobile.UserControls
             set => SetValue(TextChangedCommandProperty, value);
         }
 
-        public Command<LocationUserControlViewModel> SelectedLocationCommand
+        public Command<LocationViewModel> SelectedLocationCommand
         {
-            get => (Command<LocationUserControlViewModel>)GetValue(SelectedLocationCommandProperty);
+            get => (Command<LocationViewModel>)GetValue(SelectedLocationCommandProperty);
             set => SetValue(SelectedLocationCommandProperty, value);
         }
 
-        public ObservableCollection<LocationUserControlViewModel> Locations
+        public ObservableCollection<LocationList> Locations
         {
-            get => (ObservableCollection<LocationUserControlViewModel>)GetValue(LocationsProperty);
+            get => (ObservableCollection<LocationList>)GetValue(LocationsProperty);
             set => SetValue(LocationsProperty, value);
         }
         
@@ -58,8 +58,8 @@ namespace MeetAndGoMobile.UserControls
             InitializeComponent();
 
             LocationEntry.TextChanged += LocationEntryOnTextChanged;
-            LocationEntry.Unfocused += (sender, args) => { LocationsView.IsVisible = false; };
-            LocationEntry.Focused += (sender, args) => { LocationsView.IsVisible = true; };
+            LocationEntry.Unfocused += (sender, args) => { ListViewPart.IsVisible = false; };
+            LocationEntry.Focused += (sender, args) => { ListViewPart.IsVisible = true; };
         }
 
         private void LocationEntryOnTextChanged(object sender, TextChangedEventArgs e)
