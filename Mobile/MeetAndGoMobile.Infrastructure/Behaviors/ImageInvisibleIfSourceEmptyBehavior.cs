@@ -4,23 +4,24 @@ namespace MeetAndGoMobile.Infrastructure.Behaviors
 {
     public class ImageInvisibleIfSourceEmptyBehavior : Behavior<Image>
     {
-        protected override void OnAttachedTo(Image bindable)
+        protected override void OnAttachedTo(Image bind)
         {
-            base.OnAttachedTo(bindable);
+            base.OnAttachedTo(bind);
 
             // Perform setup
-            bindable.PropertyChanging += Bindable_PropertyChanging;
+            bind.PropertyChanged += Bind_PropertyChanged;
         }
 
-        protected override void OnDetachingFrom(Image bindable)
+
+        protected override void OnDetachingFrom(Image bind)
         {
-            base.OnDetachingFrom(bindable);
+            base.OnDetachingFrom(bind);
 
             // Perform clean up
-            bindable.PropertyChanging -= Bindable_PropertyChanging;
+            bind.PropertyChanged -= Bind_PropertyChanged;
         }
-
-        private void Bindable_PropertyChanging(object sender, PropertyChangingEventArgs e)
+        
+        private void Bind_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == Image.SourceProperty.PropertyName)
             {

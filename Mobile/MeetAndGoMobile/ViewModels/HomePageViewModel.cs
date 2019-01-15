@@ -47,38 +47,32 @@ namespace MeetAndGoMobile.ViewModels
         {
             _masterPageService = masterPageService;
 
-            StartLocations = new ObservableCollection<LocationList>
+            EndLocations = StartLocations = new ObservableCollection<LocationList>
             {
-                new LocationList("Saved Places", "pen.png")
+                new LocationList("Saved Places", "saved_place.png")
                 {
                     new LocationViewModel
                     {
-                        ImageSource = "pen.png",
-                        Text = "lol"
+                        ImageSource = "home.png",
+                        Text = "Home"
                     },
                     new LocationViewModel
                     {
-                        Text = "lol"
+                        ImageSource = "work.png",
+                        Text = "Work"
                     }
                 },
-                new LocationList("Shown on Map", "pen.png")
+                new LocationList("Shown on Map", "location_gray.png")
                 {
                     new LocationViewModel
                     {
-                        ImageSource = "pen.png",
-                        Text = "lol"
+                        ImageSource = "time.png",
+                        Text = "Park Street, 45 B"
                     },
                     new LocationViewModel
                     {
-                        Text = "lol2"
-                    },
-                    new LocationViewModel
-                    {
-                        Text = "lol 3"
-                    },
-                    new LocationViewModel
-                    {
-                        Text = "lol 4 "
+                        ImageSource = "time.png",
+                        Text = "Catherine's Square, 49/2"
                     }
                 }
             };
