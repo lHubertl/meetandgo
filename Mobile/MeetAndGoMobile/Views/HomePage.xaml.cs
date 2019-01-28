@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Google.Maps;
 using MeetAndGoMobile.Infrastructure.DependencyServices;
 using Plugin.Permissions.Abstractions;
 using Xamarin.Essentials;
@@ -71,10 +72,8 @@ namespace MeetAndGoMobile.Views
 
                 if (location != null)
                 {
-                    // For animate camera
-                    // TODO: CONFIGURE THIS PARAMETER FOR COMFORTABLE ANIMATION
-                    await Task.Delay(1000);
-                    await MapControl.AnimateCamera(CameraUpdateFactory.NewPositionZoom(new Position(location.Latitude, location.Longitude), 14d));
+                    MapControl.InitialCameraUpdate =
+                        CameraUpdateFactory.NewPositionZoom(new Position(location.Latitude, location.Longitude), 14d);
                 }
             }
             catch (FeatureNotSupportedException fnsEx)

@@ -303,13 +303,22 @@
   <data name="SavedPlaces" xml:space="preserve">
     <value>Saved Places</value>
   </data>
-  <data name="ShowOnMap" xml:space="preserve">
-    <value>Show on Map</value>
+  <data name="Recently" xml:space="preserve">
+    <value>Recently</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="CurrentLocation" xml:space="preserve">
+    <value>Current Location</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Work" xml:space="preserve">
+    <value>Work</value>
   </data>
 </root>

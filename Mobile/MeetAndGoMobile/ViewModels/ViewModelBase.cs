@@ -13,7 +13,7 @@ namespace MeetAndGoMobile.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected INavigationService NavigationService { get; }
+        public INavigationService NavigationService { get; }
         protected IPageDialogService DialogService { get; }
 
         private bool _isBusy;
@@ -27,11 +27,6 @@ namespace MeetAndGoMobile.ViewModels
         {
             NavigationService = navigationService;
             DialogService = container.Resolve<IPageDialogService>();
-        }
-
-        public Task NavigateAsync(string url, INavigationParameters parameters = null, bool useModalNavigation = false)
-        {
-            return NavigationService.NavigateAsync(url, parameters, useModalNavigation);
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)

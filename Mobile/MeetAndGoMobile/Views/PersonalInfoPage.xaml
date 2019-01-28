@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
-             xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
-             xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
-             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             NavigationPage.HasNavigationBar="True"
-             BackgroundColor="{x:Static constants:Colors.BgrBrown}"
-             x:Class="MeetAndGoMobile.Views.PersonalInfoPage">
+<ContentPage
+    x:Class="MeetAndGoMobile.Views.PersonalInfoPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{x:Static constants:Colors.BgrBrown}"
+    NavigationPage.HasNavigationBar="True">
 
     <ContentPage.Resources>
         <ResourceDictionary Source="/Styles/LabelStyles.xaml" />
@@ -17,10 +18,11 @@
 
     <NavigationPage.TitleView>
 
-        <Label TextColor="{x:Static constants:Colors.LiteGreen}" 
-                   Style="{StaticResource NavBarMarginOnPlatformLabel}" 
-                   Text="{extensions:Translation SaveChanges}"
-                   HorizontalOptions="End">
+        <Label
+            HorizontalOptions="End"
+            Style="{StaticResource NavBarMarginOnPlatformLabel}"
+            Text="{extensions:Translation SaveChanges}"
+            TextColor="{x:Static constants:Colors.LiteGreen}">
 
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SaveChangesCommand}" />
@@ -38,51 +40,54 @@
         </Grid.RowDefinitions>
 
         <Grid
-            Margin="0, 8, 0, 0"
             Grid.Row="0"
-            MinimumHeightRequest="80"
+            Margin="0,8,0,0"
             HorizontalOptions="Center"
+            MinimumHeightRequest="80"
             VerticalOptions="Center">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding PickImageCommand}" />
             </Grid.GestureRecognizers>
 
             <abstractions:CircleImage
+                Grid.Row="0"
                 Aspect="AspectFill"
                 HeightRequest="80"
-                WidthRequest="80"
-                Grid.Row="0" 
-                Source="{Binding ProfileImageSource}" />
+                Source="{Binding ProfileImageSource}"
+                WidthRequest="80" />
 
-            <Frame 
-                HasShadow="False"
-                BackgroundColor="{x:Static constants:Colors.DarkGreen}" 
-                HeightRequest="24" 
-                WidthRequest="24"
-                VerticalOptions="End"
-                HorizontalOptions="End"
+            <Frame
                 Padding="0"
-                CornerRadius="12">
+                BackgroundColor="{x:Static constants:Colors.DarkGreen}"
+                CornerRadius="12"
+                HasShadow="False"
+                HeightRequest="24"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                WidthRequest="24">
 
-                <Image Source="pen.png" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Image
+                    HorizontalOptions="Center"
+                    Source="pen.png"
+                    VerticalOptions="Center" />
             </Frame>
         </Grid>
 
-        <StackLayout Spacing="0" Grid.Row="1">
+        <StackLayout Grid.Row="1" Spacing="0">
 
             <Label
-                VerticalTextAlignment="Start" 
+                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                FontSize="{x:Static constants:FontSize.ExtraLarge}"
                 HorizontalTextAlignment="Center"
                 Text="{extensions:Translation PersonalInformation}"
-                FontFamily="{x:Static constants:FontFamily.NunitoRegular}" 
-                TextColor="{x:Static constants:Colors.DarkLightGray}" 
-                FontSize="{x:Static constants:FontSize.ExtraLarge}" />
-        
+                TextColor="{x:Static constants:Colors.DarkLightGray}"
+                VerticalTextAlignment="Start" />
+
             <!--  Name  -->
 
-            <Label 
-                HeightRequest="40" 
-                Style="{StaticResource EntryLabelInfoStyle}" 
+            <Label
+                HeightRequest="40"
+                Style="{StaticResource EntryLabelInfoStyle}"
                 Text="{extensions:Translation Name}" />
 
             <Entry Style="{StaticResource EntryStyle}" Text="{Binding Name}">
@@ -97,9 +102,10 @@
 
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation Email}" />
 
-            <Entry Keyboard="Email"
-                   Style="{StaticResource EntryStyle}" 
-                   Text="{Binding Email}">
+            <Entry
+                Keyboard="Email"
+                Style="{StaticResource EntryStyle}"
+                Text="{Binding Email}">
 
                 <Entry.Effects>
                     <effects:SimplifyEntryEffect />
@@ -112,11 +118,11 @@
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation BirthdayDate}" />
 
             <DatePicker
-                Format="MMMM dd, yyyy"
                 Date="{Binding BirthdayDate}"
-                TextColor="White" 
                 FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
-                FontSize="{x:Static constants:FontSize.ExtraLarge}">
+                FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                Format="MMMM dd, yyyy"
+                TextColor="White">
 
                 <DatePicker.Effects>
                     <effects:SimplifyDatePickerEffect />

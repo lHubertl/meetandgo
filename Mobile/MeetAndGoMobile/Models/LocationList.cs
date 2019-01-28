@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
-namespace MeetAndGoMobile.UserControls.SelectLocation
+namespace MeetAndGoMobile.Models
 {
     public class LocationList : ObservableCollection<LocationViewModel>
     {
@@ -12,9 +11,6 @@ namespace MeetAndGoMobile.UserControls.SelectLocation
         {
             Title = title;
             ImageSource = imageSource;
-            All = Items;
         }
-
-        public IList<LocationViewModel> All { get; }
     }
 }

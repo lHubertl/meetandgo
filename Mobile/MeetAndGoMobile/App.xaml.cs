@@ -11,12 +11,14 @@ using MeetAndGoMobile.Infrastructure.Resources;
 using MeetAndGoMobile.Services;
 using MeetAndGoMobile.Services.Contracts;
 using Plugin.Multilingual;
+using Prism.Plugin.Popups;
+using Prism.Unity;
 using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MeetAndGoMobile
 {
-    public partial class App
+    public partial class App : PrismApplication
     {
         /* 
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
@@ -47,7 +49,10 @@ namespace MeetAndGoMobile
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterPopupNavigationService();
+
             containerRegistry.RegisterForNavigation<CustomNavigationPage, CustomNavigationPageViewModel>();
+            containerRegistry.RegisterForNavigation<LocationsPopupPage, LocationsPopupPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAccountPage, CreateAccountPageViewModel>();
             containerRegistry.RegisterForNavigation<EventsHistoryPage, EventsHistoryPageViewModel>();
             containerRegistry.RegisterForNavigation<ConfirmPhonePage, ConfirmPhonePageViewModel>();
@@ -60,12 +65,12 @@ namespace MeetAndGoMobile
             
             containerRegistry.Register<IAccountService, AccountService>();
             containerRegistry.Register<IEventService, EventService>();
+            containerRegistry.Register<IGoogleService, GoogleService>();
 
             containerRegistry.RegisterSingleton<IDataRepository, DataRepository>();
             containerRegistry.RegisterSingleton<IMasterPageService, MasterPageService>();
 
             containerRegistry.RegisterInstance(Container);
-            
         }
 
         private async Task<bool> CheckIfTokenExist()

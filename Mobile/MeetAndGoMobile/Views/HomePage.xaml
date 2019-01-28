@@ -3,89 +3,188 @@
     x:Class="MeetAndGoMobile.Views.HomePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
+    xmlns:controls="clr-namespace:MeetAndGoMobile.Controls;assembly=MeetAndGoMobile"
     xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
-    xmlns:userControls="clr-namespace:MeetAndGoMobile.UserControls"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     NavigationPage.HasNavigationBar="False">
 
     <RelativeLayout>
 
-        <maps:Map x:Name="MapControl"
-                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
-                  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}" />
+        <controls:CustomMap
+            x:Name="MapControl"
+            MatchedPins="{Binding Pins}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Height,
+                                                                   Factor=1,
+                                                                   Constant=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=1,
+                                                                  Constant=0}" />
 
-        <Button RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.85, Constant=0}"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.05, Constant=0}" 
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.425, Constant=0}" 
-                HeightRequest="48"
-                BackgroundColor="{x:Static constants:Colors.EntryTextBrown}"
-                CornerRadius="24"
-                Text="{extensions:Translation Create}"
-                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
-                FontSize="{x:Static constants:FontSize.ExtraLarge}"
-                TextColor="White"
-                Command="{Binding CreateCommand}"/>
+        <Button
+            BackgroundColor="{x:Static constants:Colors.EntryTextBrown}"
+            Command="{Binding CreateCommand}"
+            CornerRadius="24"
+            FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+            FontSize="{x:Static constants:FontSize.ExtraLarge}"
+            HeightRequest="48"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=.425,
+                                                                  Constant=0}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Width,
+                                                              Factor=.05,
+                                                              Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Factor=.85,
+                                                              Constant=0}"
+            Text="{extensions:Translation Create}"
+            TextColor="White" />
 
-        <Button RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.85, Constant=0}"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.53, Constant=0}"
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.425, Constant=0}" 
-                HeightRequest="48"
-                BackgroundColor="{x:Static constants:Colors.SearchButtonColor}"
-                CornerRadius="24"
-                Text="{extensions:Translation Search}"
-                FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
-                FontSize="{x:Static constants:FontSize.ExtraLarge}"
-                TextColor="White"
-                Command="{Binding SearchCommand}"/>
+        <Button
+            BackgroundColor="{x:Static constants:Colors.SearchButtonColor}"
+            Command="{Binding SearchCommand}"
+            CornerRadius="24"
+            FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+            FontSize="{x:Static constants:FontSize.ExtraLarge}"
+            HeightRequest="48"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=.425,
+                                                                  Constant=0}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Width,
+                                                              Factor=.53,
+                                                              Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Factor=.85,
+                                                              Constant=0}"
+            Text="{extensions:Translation Search}"
+            TextColor="White" />
 
-        <Grid RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.03, Constant=20}"
-              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.05, Constant=0}" 
-              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.9, Constant=0}" 
-              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
-              RowSpacing="20" 
-              HorizontalOptions="Fill"
-              VerticalOptions="Start">
+        <Button
+            Padding="0"
+            BackgroundColor="{x:Static constants:Colors.DarkGreen}"
+            Command="{Binding ToggleMasterCommand}"
+            CornerRadius="25"
+            FontSize="{x:Static constants:FontSize.XxLarge}"
+            HeightRequest="48"
+            HorizontalOptions="Start"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Width,
+                                                              Factor=.05,
+                                                              Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Factor=.03,
+                                                              Constant=20}"
+            Text="☰"
+            TextColor="#B5F1D5"
+            VerticalOptions="Start"
+            WidthRequest="48" />
+
+        <Grid
+            HorizontalOptions="Fill"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Height,
+                                                                   Factor=1,
+                                                                   Constant=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=.9,
+                                                                  Constant=0}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Width,
+                                                              Factor=.05,
+                                                              Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Height,
+                                                              Factor=.12,
+                                                              Constant=20}"
+            RowSpacing="16"
+            VerticalOptions="Start">
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
-            <Button 
+            <!--  Location Entries  -->
+
+            <Frame
                 Grid.Row="0"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                Text="☰"
-                TextColor="#B5F1D5"
-                Padding="0"
-                BackgroundColor="{x:Static constants:Colors.DarkGreen}"
-                CornerRadius="25"
-                WidthRequest="48"
-                HeightRequest="48"
-                FontSize="{x:Static constants:FontSize.XxLarge}"
-                Command="{Binding ToggleMasterCommand}" />
+                BackgroundColor="White"
+                CornerRadius="4"
+                HasShadow="True"
+                VerticalOptions="Fill">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToLocation}" CommandParameter="start" />
+                </Frame.GestureRecognizers>
 
-            <!--  Start Location Entry -->
+                <Frame.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="UWP" Value="16, 8" />
+                        <On Platform="iOS, Android" Value="16, 0" />
+                    </OnPlatform>
+                </Frame.Padding>
 
+                <StackLayout
+                    HorizontalOptions="Fill"
+                    Orientation="Horizontal"
+                    Spacing="20">
 
-            <userControls:SelectLocationUserControl
+                    <Image Source="location_gray.png" />
+
+                    <Label
+                        FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                        FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                        Text="{Binding StartPoint.Name}"
+                        TextColor="{x:Static constants:Colors.EntryTextBrown}"
+                        VerticalOptions="Center" />
+
+                </StackLayout>
+
+            </Frame>
+
+            <Frame
                 Grid.Row="1"
-                VerticalOptions="Start"
-                Margin="0, 55, 0, 0"
-                Placeholder="{extensions:Translation EndLocation}"
-                SelectedLocationCommand="{Binding SelectedEndLocationCommand}"
-                Locations="{Binding EndLocations}"
-                TextChangedCommand="{Binding EndLocationTextChangedCommand}"/>
+                BackgroundColor="White"
+                CornerRadius="4"
+                HasShadow="True">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToLocation}" CommandParameter="end" />
+                </Frame.GestureRecognizers>
 
-            <userControls:SelectLocationUserControl
-                Grid.Row="1"
-                VerticalOptions="Start"
-                Placeholder="{extensions:Translation StartLocation}"
-                SelectedLocationCommand="{Binding SelectedStartLocationCommand}"
-                Locations="{Binding StartLocations}"
-                TextChangedCommand="{Binding StartLocationTextChangedCommand}"/>
+                <Frame.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="UWP" Value="16, 8" />
+                        <On Platform="iOS, Android" Value="16, 0" />
+                    </OnPlatform>
+                </Frame.Padding>
+
+                <StackLayout
+                    HorizontalOptions="Fill"
+                    Orientation="Horizontal"
+                    Spacing="20">
+
+                    <Image Source="location_gray.png" />
+
+                    <Label
+                        FontFamily="{x:Static constants:FontFamily.NunitoRegular}"
+                        FontSize="{x:Static constants:FontSize.ExtraLarge}"
+                        Text="{Binding EndPoint.Name}"
+                        TextColor="{x:Static constants:Colors.EntryTextBrown}"
+                        VerticalOptions="Center" />
+
+                </StackLayout>
+
+            </Frame>
 
         </Grid>
 

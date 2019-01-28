@@ -52,6 +52,7 @@
                         Aspect="AspectFill"
                         HeightRequest="50"
                         Source="{Binding UserImageSource}"
+                        VerticalOptions="Center"
                         WidthRequest="50" />
 
                     <Label
@@ -84,21 +85,21 @@
                     </FlexLayout.Resources>
 
 
-                    <Label FlexLayout.Basis="30%" Text="{extensions:Translation Member}" />
+                    <Label FlexLayout.Basis="35%" Text="{extensions:Translation Member}" />
 
                     <controls:ExtendedStarsLabel
-                        FlexLayout.Basis="70%"
+                        FlexLayout.Basis="65%"
                         Grade="{Binding MemberRating}"
                         Opacity="1" />
 
-                    <Label FlexLayout.Basis="30%" Text="{extensions:Translation Organizer}" />
+                    <Label FlexLayout.Basis="35%" Text="{extensions:Translation Organizer}" />
 
                     <controls:ExtendedStarsLabel
                         FlexLayout.Basis="35%"
                         Grade="{Binding OrganizerRating}"
                         Opacity="1" />
 
-                    <Label FlexLayout.Basis="35%" Text="{Binding OrganizerVotesText}" />
+                    <Label FlexLayout.Basis="30%" Text="{Binding OrganizerVotesText}" />
 
                 </FlexLayout>
 

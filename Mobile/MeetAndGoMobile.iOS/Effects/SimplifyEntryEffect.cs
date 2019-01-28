@@ -1,5 +1,4 @@
-﻿using System;
-using MeetAndGoMobile.iOS.Effects;
+﻿using MeetAndGoMobile.iOS.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -11,12 +10,12 @@ namespace MeetAndGoMobile.iOS.Effects
     {
         protected override void OnAttached()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void OnDetached()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

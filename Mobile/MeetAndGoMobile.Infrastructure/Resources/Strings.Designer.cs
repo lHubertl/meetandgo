@@ -169,6 +169,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Location.
+        /// </summary>
+        public static string CurrentLocation {
+            get {
+                return ResourceManager.GetString("CurrentLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currently you have not participate any events.
         /// </summary>
         public static string CurrentlyNoEvents {
@@ -291,6 +300,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
@@ -430,6 +448,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recently.
+        /// </summary>
+        public static string Recently {
+            get {
+                return ResourceManager.GetString("Recently", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         public static string SaveChanges {
@@ -471,15 +498,6 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show on Map.
-        /// </summary>
-        public static string ShowOnMap {
-            get {
-                return ResourceManager.GetString("ShowOnMap", resourceCulture);
             }
         }
         
@@ -633,6 +651,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         public static string Validation {
             get {
                 return ResourceManager.GetString("Validation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work.
+        /// </summary>
+        public static string Work {
+            get {
+                return ResourceManager.GetString("Work", resourceCulture);
             }
         }
         
