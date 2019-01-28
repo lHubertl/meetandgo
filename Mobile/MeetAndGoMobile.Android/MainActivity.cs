@@ -14,12 +14,13 @@ using Prism.Ioc;
 
 [assembly: UsesFeature("android.hardware.camera", Required = false)]
 [assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
+
 namespace MeetAndGoMobile.Droid
 {
     [Activity(
-        Label = "Meet & Go", 
-        Icon = "@mipmap/ic_launcher", 
-        Theme = "@style/MainTheme", 
+        Label = "Meet & Go",
+        Icon = "@mipmap/ic_launcher",
+        Theme = "@style/MainTheme",
         MainLauncher = true,
         WindowSoftInputMode = SoftInput.AdjustResize,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -32,9 +33,10 @@ namespace MeetAndGoMobile.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            
+
             base.OnCreate(bundle);
 
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
             CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
@@ -43,6 +45,7 @@ namespace MeetAndGoMobile.Droid
             ImageCircleRenderer.Init();
 
             Xamarin.Forms.DependencyService.Register<IStatusBarController>();
+            Xamarin.Forms.DependencyService.Register<IKeyboardController>();
 
             LoadApplication(new App(new AndroidInitializer()));
 
@@ -52,7 +55,11 @@ namespace MeetAndGoMobile.Droid
         // Field, property, and method for Picture Picker
         public static readonly int PickImageId = 1000;
 
-        public TaskCompletionSource<(Stream stream, string name, string format)> PickImageTaskCompletionSource { set; get; }
+        public TaskCompletionSource<(Stream stream, string name, string format)> PickImageTaskCompletionSource
+        {
+            set;
+            get;
+        }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
@@ -76,10 +83,24 @@ namespace MeetAndGoMobile.Droid
             }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        public override void OnBackPressed()
+        {
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                // Do something if there are some pages in the `PopupStack`
+            }
+            else
+            {
+                // Do something if there are not any pages in the `PopupStack`
+            }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+            [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions,
+                grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
@@ -93,4 +114,3 @@ namespace MeetAndGoMobile.Droid
         }
     }
 }
-

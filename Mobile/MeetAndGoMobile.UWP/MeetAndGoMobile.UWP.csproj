@@ -119,6 +119,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="scale-100\baseline_expand_more_black_36pt.png" />
     <Content Include="scale-100\home.png" />
     <Content Include="scale-100\location_gray.png" />
     <Content Include="scale-100\location_green.png" />
@@ -138,6 +139,7 @@
     <Content Include="scale-125\small_star.png" />
     <Content Include="scale-125\time.png" />
     <Content Include="scale-125\work.png" />
+    <Content Include="scale-150\baseline_expand_more_black_36.png" />
     <Content Include="scale-150\home.png" />
     <Content Include="scale-150\location_gray.png" />
     <Content Include="scale-150\location_green.png" />
@@ -156,6 +158,7 @@
     <Content Include="scale-175\small_star.png" />
     <Content Include="scale-175\time.png" />
     <Content Include="scale-175\work.png" />
+    <Content Include="scale-200\baseline_expand_more_black_36pt.png" />
     <Content Include="scale-200\home.png" />
     <Content Include="scale-200\location_gray.png" />
     <Content Include="scale-200\location_green.png" />
@@ -178,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.5.180</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>
