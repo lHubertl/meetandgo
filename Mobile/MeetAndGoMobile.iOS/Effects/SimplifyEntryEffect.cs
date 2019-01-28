@@ -10,7 +10,6 @@ namespace MeetAndGoMobile.iOS.Effects
     {
         protected override void OnAttached()
         {
-            //throw new NotImplementedException();
         }
 
         protected override void OnDetached()

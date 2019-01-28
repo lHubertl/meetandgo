@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:constants="clr-namespace:MeetAndGoMobile.Infrastructure.Constants;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:controls="clr-namespace:MeetAndGoMobile.Infrastructure.Controls;assembly=MeetAndGoMobile.Infrastructure"
-    xmlns:effects="clr-namespace:MeetAndGoMobile.Infrastructure.Effects;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:extensions="clr-namespace:MeetAndGoMobile.Infrastructure.Extensions;assembly=MeetAndGoMobile.Infrastructure"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
@@ -29,41 +28,25 @@
             <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
         </StackLayout>
 
-        <StackLayout Spacing="0" Grid.Row="1">
+        <StackLayout Grid.Row="1" Spacing="0">
 
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation YourName}" />
 
-            <Entry Style="{StaticResource EntryStyle}" Text="{Binding YourName}">
-                <Entry.Effects>
-                    <effects:SimplifyEntryEffect />
-                </Entry.Effects>
-            </Entry>
+            <controls:ExtendedEntry Style="{StaticResource EntryStyle}" Text="{Binding YourName}" />
 
-            <Label 
-                Style="{StaticResource EntryLabelInfoStyle}"
-                Text="{extensions:Translation CreatePassword}" />
+            <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation CreatePassword}" />
 
-            <Entry
+            <controls:ExtendedEntry
                 IsPassword="True"
                 Style="{StaticResource EntryStyle}"
-                Text="{Binding Password}">
-                <Entry.Effects>
-                    <effects:SimplifyEntryEffect />
-                </Entry.Effects>
-            </Entry>
+                Text="{Binding Password}" />
 
-            <Label
-                Style="{StaticResource EntryLabelInfoStyle}"
-                Text="{extensions:Translation ConfirmPassword}" />
+            <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation ConfirmPassword}" />
 
-            <Entry
+            <controls:ExtendedEntry
                 IsPassword="True"
                 Style="{StaticResource EntryStyle}"
-                Text="{Binding ConfirmedPassword}">
-                <Entry.Effects>
-                    <effects:SimplifyEntryEffect />
-                </Entry.Effects>
-            </Entry>
+                Text="{Binding ConfirmedPassword}" />
 
             <controls:ExtendedButton
                 Margin="0,30,0,2"

@@ -16,7 +16,7 @@
         <ResourceDictionary Source="/Styles/LoginPageStyles.xaml" />
         <ResourceDictionary Source="/Styles/LabelStyles.xaml" />
     </ContentPage.Resources>
-    
+
     <Grid HorizontalOptions="Center" WidthRequest="{StaticResource ContentWidth}">
 
         <Grid.RowDefinitions>
@@ -30,37 +30,28 @@
             <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
         </StackLayout>
 
-        <StackLayout Spacing="0" Grid.Row="1">
+        <StackLayout Grid.Row="1" Spacing="0">
 
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EntryYourPhoneNumber}" />
 
-            <Entry
+            <controls:ExtendedEntry
                 Margin="0"
                 Keyboard="Telephone"
                 Style="{StaticResource EntryStyle}"
                 Text="{Binding PhoneNumber}">
-                <Entry.Effects>
-                    <effects:SimplifyEntryEffect />
-                </Entry.Effects>
                 <Entry.Behaviors>
                     <behaviors:EntryMaskBehaviour Mask="+___ ____ __ ___" />
                 </Entry.Behaviors>
-            </Entry>
+            </controls:ExtendedEntry>
 
 
-            <Label
-                Style="{StaticResource EntryLabelInfoStyle}"
-                Text="{extensions:Translation EnterPassword}" />
+            <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EnterPassword}" />
 
-            <Entry
+            <controls:ExtendedEntry
                 Margin="0"
                 IsPassword="True"
                 Style="{StaticResource EntryStyle}"
-                Text="{Binding Password}">
-                <Entry.Effects>
-                    <effects:SimplifyEntryEffect />
-                </Entry.Effects>
-            </Entry>
+                Text="{Binding Password}" />
 
             <controls:ExtendedButton
                 Margin="0,30,0,0"
@@ -72,8 +63,8 @@
             <!--  Terms  -->
 
             <Label
-                HeightRequest="75"
                 FontSize="{x:Static constants:FontSize.Medium}"
+                HeightRequest="75"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center">
                 <Label.FormattedText>
@@ -97,11 +88,11 @@
 
         <Label
             Grid.Row="2"
-            Margin="0, 20, 0, 0"
-            VerticalTextAlignment="Start"
+            Margin="0,20,0,0"
             FontSize="{x:Static constants:FontSize.Large}"
             HorizontalTextAlignment="Center"
-            VerticalOptions="Start">
+            VerticalOptions="Start"
+            VerticalTextAlignment="Start">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{extensions:Translation DoNotHaveAccount}" TextColor="{x:Static constants:Colors.DarkGray}" />

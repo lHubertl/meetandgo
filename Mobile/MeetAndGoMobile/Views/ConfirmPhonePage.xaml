@@ -30,23 +30,20 @@
             <Label Style="{StaticResource LabelLogoStyle}" VerticalOptions="Start" />
         </StackLayout>
 
-        <StackLayout Spacing="0" Grid.Row="1">
+        <StackLayout Grid.Row="1" Spacing="0">
             <Label Style="{StaticResource EntryLabelInfoStyle}" Text="{extensions:Translation EnterConfirmationCode}" />
 
-            <Entry
+            <controls:ExtendedEntry
                 Margin="0"
                 Keyboard="Numeric"
                 Style="{StaticResource EntryStyle}"
                 Text="{Binding ConfirmationCode}">
-                <Entry.Effects>
-                    <effects:SimplifyEntryEffect />
-                </Entry.Effects>
 
                 <Entry.Behaviors>
                     <behaviors:EntryMaskBehaviour Mask="___ ___" />
                 </Entry.Behaviors>
 
-            </Entry>
+            </controls:ExtendedEntry>
 
             <controls:ExtendedButton
                 Margin="0,30,0,0"
