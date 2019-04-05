@@ -92,10 +92,13 @@ namespace MeetAndGoMobile.ViewModels
 	            {
 	                await SecureStorage.SetAsync(StringConstants.Token, token);
                 }
-	            catch (Exception)
+	            catch (Exception ex)
 	            {
                     // Possible that device doesn't support secure storage on device.
 	                // TODO: LOG IT
+
+                    // TODO: Rework it
+                    await UserNotificationAsync(ex.Message, Strings.Warning);
                 }
                 
                 await NavigationService.NavigateAsync(new Uri($"app:///{nameof(MasterPage)}/{nameof(CustomNavigationPage)}/{nameof(HomePage)}", UriKind.Absolute));

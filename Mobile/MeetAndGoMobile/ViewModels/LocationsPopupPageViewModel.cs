@@ -98,61 +98,61 @@ namespace MeetAndGoMobile.ViewModels
         {
             var lowerSearchText = SearchText.ToLower();
 
-            // Filter existing source
-            var savedToRemove = _saved.Where(x => !x.Name.ToLower().Contains(lowerSearchText)).ToList();
-            savedToRemove.ForEach(x => _saved.Remove(x));
-
-            var searchedToRemove = _searched.Where(x => !x.Name.Contains(lowerSearchText)).ToList();
-            searchedToRemove.ForEach(x => _searched.Remove(x));
-
-
-            // Get filtered base source
-            var filteredValues = _baseLocationViewModels.Where(x => x.Name.ToLower().Contains(lowerSearchText));
-
-            filteredValues.ForEach(item =>
+            if (lowerSearchText.Length < 3)
             {
-                if (item.Type == PointType.Home || item.Type == PointType.Saved || item.Type == PointType.Work)
+                // Filter existing source
+                var savedToRemove = _saved.Where(x => !x.Name.ToLower().Contains(lowerSearchText)).ToList();
+                savedToRemove.ForEach(x => _saved.Remove(x));
+
+                var searchedToRemove = _searched.Where(x => !x.Name.Contains(lowerSearchText)).ToList();
+                searchedToRemove.ForEach(x => _searched.Remove(x));
+
+
+                // Get filtered base source
+                var filteredValues = _baseLocationViewModels.Where(x => x.Name.ToLower().Contains(lowerSearchText));
+
+                filteredValues.ForEach(item =>
                 {
-                    var doesNotHaveThisItem = _saved.Any(x => !IsPointsEqual(item, x));
-                    if (doesNotHaveThisItem)
+                    if (item.Type == PointType.Home || item.Type == PointType.Saved || item.Type == PointType.Work)
                     {
-                        _saved.Add(item);
+                        var doesNotHaveThisItem = _saved.Any(x => !IsPointsEqual(item, x));
+                        if (doesNotHaveThisItem)
+                        {
+                            _saved.Add(item);
+                        }
                     }
-                }
-                else
-                {
-                    var doesNotHaveThisItem = _searched.Any(x => !IsPointsEqual(item, x));
-                    if (doesNotHaveThisItem)
+                    else
                     {
-                        _searched.Add(item);
+                        var doesNotHaveThisItem = _searched.Any(x => !IsPointsEqual(item, x));
+                        if (doesNotHaveThisItem)
+                        {
+                            _searched.Add(item);
+                        }
                     }
-                }
-            });
-
-            if (lowerSearchText?.Length < 3)
-            {
-                return;
-            }
-
-            if (_searchTokenSource.IsCancellationRequested)
-            {
-                _searchTokenSource = new CancellationTokenSource();
-            }
-
-            //TODO add task cancellation
-
-            var result = await _googleService.GetPointsByInputText(lowerSearchText, _currentLocation);
-            if (result.Success)
-            {
-                var locations = result.Data.Select(place => new LocationViewModel
-                {
-                    Lat = place.Lat,
-                    Long = place.Long,
-                    Name = place.Name,
-                    Type = place.Type
                 });
+            }
+            else
+            {
+                if (_searchTokenSource.IsCancellationRequested)
+                {
+                    _searchTokenSource = new CancellationTokenSource();
+                }
 
-                var ordered = locations.OrderBy(x => x.Name);
+                //TODO add task cancellation
+
+                var result = await _googleService.GetPointsByInputText(lowerSearchText, _currentLocation);
+                if (result.Success)
+                {
+                    var locations = result.Data.Select(place => new LocationViewModel
+                    {
+                        Lat = place.Lat,
+                        Long = place.Long,
+                        Name = place.Name,
+                        Type = place.Type
+                    });
+
+                    var ordered = locations.OrderBy(x => x.Name);
+                }
             }
         }
 

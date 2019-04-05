@@ -78,6 +78,7 @@ namespace MeetAndGoApi
 
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPointRepository, PointRepository>();
         }
 
         private void ConfigureDbContexts(IServiceCollection services)

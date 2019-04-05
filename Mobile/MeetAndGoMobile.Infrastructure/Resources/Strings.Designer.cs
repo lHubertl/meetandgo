@@ -655,6 +655,15 @@ namespace MeetAndGoMobile.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Work.
         /// </summary>
         public static string Work {

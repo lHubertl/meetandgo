@@ -164,7 +164,7 @@ namespace MeetAndGoMobile.ViewModels
         {
             try
             {
-                return await Geolocation.GetLastKnownLocationAsync();
+                return await Geolocation.GetLocationAsync(new GeolocationRequest());
             }
 
             catch (FeatureNotSupportedException fnsEx)

@@ -15,32 +15,28 @@ using Microsoft.Extensions.Logging;
 
 namespace MeetAndGoApi.Infrastructure.Dal.Repositories
 {
-    public class EventRepository : IEventRepository
+    public class EventRepository : BaseRepository, IEventRepository
     {
         #region Private fields
 
         private readonly IStringLocalizer<Strings> _localizer;
         private readonly IUserRepository _userRepository;
-        private readonly Context.DbContext _dbContext;
         private readonly ILogger _logger;
-        private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
         public EventRepository(
-            Context.DbContext dbContext, 
-            ILogger<EventRepository> logger, 
-            IMapper mapper, 
+            Context.DbContext dbContext,
+            ILogger<EventRepository> logger,
+            IMapper mapper,
             IStringLocalizer<Strings> localizer,
-            IUserRepository userRepository)
+            IUserRepository userRepository) : base(dbContext, mapper)
         {
             _userRepository = userRepository;
             _localizer = localizer;
-            _dbContext = dbContext;
             _logger = logger;
-            _mapper = mapper;
         }
 
         #endregion
@@ -61,12 +57,12 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
             }
 
             var user = userResult.Data;
-            var eventDto = _mapper.Map<EventDto>(model);
+            var eventDto = Mapper.Map<EventDto>(model);
 
             eventDto.EventUsers = new List<EventUser> {new EventUser {ApplicationUser = user, EventDto = eventDto } };
             
-            await _dbContext.Events.AddAsync(eventDto);
-            await _dbContext.SaveChangesAsync();
+            await DbContext.Events.AddAsync(eventDto);
+            await DbContext.SaveChangesAsync();
             return new Response(ResponseCode.Ok);
 
         }
@@ -77,7 +73,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
             // nearest event to point, this logic just return to us all active events
             // this is performance hit
             
-            var activeEventDtos = await _dbContext.Events
+            var activeEventDtos = await DbContext.Events
                 .Where(eventDto => eventDto.EventState == EventStates.Formation)
                 .Include(x => x.PointDtos)
                 .Include(x => x.CommentDtos)
@@ -88,13 +84,13 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
             var eventDtos = activeEventDtos
                 .Where(eventDto => IsNear(eventDto.PointDtos, directions));
 
-            var eventModels = _mapper.Map<List<EventModel>>(eventDtos);
+            var eventModels = Mapper.Map<List<EventModel>>(eventDtos);
             return new ResponseData<IEnumerable<EventModel>>(eventModels);
         }
 
         public async Task<IResponseData<IEnumerable<EventModel>>> ReadParticipatedEventsAsync(string userId)
         {
-            var participatedEvents = await _dbContext.Events
+            var participatedEvents = await DbContext.Events
                 .Where(eventDto => eventDto.EventState == EventStates.Canceled || eventDto.EventState == EventStates.CarriedOut)
                 .Where(eventDto => eventDto.EventUsers.Any(userDto => userDto.ApplicationUserId == userId))
                 .Include(x => x.PointDtos)
@@ -102,7 +98,7 @@ namespace MeetAndGoApi.Infrastructure.Dal.Repositories
                 .ThenInclude(x => x.ApplicationUser)
                 .ToListAsync();
 
-            var eventModels = _mapper.Map<List<EventModel>>(participatedEvents);
+            var eventModels = Mapper.Map<List<EventModel>>(participatedEvents);
             return new ResponseData<IEnumerable<EventModel>>(eventModels);
         }
 

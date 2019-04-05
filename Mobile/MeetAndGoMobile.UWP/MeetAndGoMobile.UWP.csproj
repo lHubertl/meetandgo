@@ -200,6 +200,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\MeetAndGo.Shared.csproj">
+      <Project>{1da778be-81a4-433c-9832-5f9ad7ca41b7}</Project>
+      <Name>MeetAndGo.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MeetAndGoMobile.Infrastructure\MeetAndGoMobile.Infrastructure.csproj">
       <Project>{34E05337-1EAE-4E99-ACD4-98DFA8F733AC}</Project>
       <Name>MeetAndGoMobile.Infrastructure</Name>

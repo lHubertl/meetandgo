@@ -195,7 +195,7 @@ namespace MeetAndGoMobile.Infrastructure.BusinessLogic
 
         private HttpClient CreateHttpClient(Dictionary<string, object> headers)
         {
-            var httpClient = new HttpClient();
+            var httpClient = new HttpClient {Timeout = TimeSpan.FromSeconds(10)};
             headers?.ForEach(x => httpClient.DefaultRequestHeaders.Add(x.Key, x.Value?.ToString()));
             return httpClient;
         }

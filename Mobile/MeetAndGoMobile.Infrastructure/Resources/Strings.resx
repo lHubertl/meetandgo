@@ -321,4 +321,7 @@
   <data name="Work" xml:space="preserve">
     <value>Work</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
 </root>
